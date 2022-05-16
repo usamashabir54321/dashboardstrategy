@@ -18,18 +18,18 @@ export default function Page () {
 	const [name,setName] = useState('');
 	const [email,setEmail] = useState('');
 	const [contact,setContact] = useState('');
+	const { auth_u } = adminReducerData;
 	const dispatch = useDispatch();
 	const userImgRef = useRef(null);
 	const [selectedImage, setSelectedImage] = useState();
 	useEffect(() => {
-		const { auth_u } = adminReducerData;
 		setMission(auth_u.mission);
 		setVision(auth_u.vision);
 		setCompany(auth_u.company);
 		setName(auth_u.name);
 		setEmail(auth_u.email);
 		setContact(auth_u.contact);
-	},[auth_u]);
+	},[]);
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		let data = new FormData();
