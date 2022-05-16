@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Page () {
 	return (
@@ -14,7 +15,7 @@ export default function Page () {
 					<div id="h_sec_2_data">
 						<div className="d_grid" style={{ gridTemplateColumns: 'auto auto' }}>
 							<div className="grid_item"><button className="btn btn_web m_t_20">Questionnaire Survey</button></div>
-							<div className="grid_item text_right"><img src="/assets/img/home/h_sec_2_barcode.png" id="bard_code_img" /></div>
+							<div className="grid_item text_right"><Image alt="Image" src="/assets/img/home/h_sec_2_barcode.png" id="bard_code_img" /></div>
 						</div>
 					</div>
 				</section>
@@ -26,7 +27,7 @@ export default function Page () {
 					</div>
 					<div id="chart_types">
 						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
-							<div className="grid_item"><div className="chart_img_wrap"><img src="/assets/img/home/charts/chart_1.png" /></div></div>
+							<div className="grid_item"><div className="chart_img_wrap"><Image alt="Image" src="/assets/img/home/charts/chart_1.png" /></div></div>
 							<div className="grid_item chart_txt_grid">
 								<div className="chart_txt_wrap">
 									<h2><b>Chart 1</b></h2><br />
@@ -41,10 +42,10 @@ export default function Page () {
 									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
 								</div>
 							</div>
-							<div className="grid_item text_center"><div className="chart_img_wrap"><img src="/assets/img/home/charts/chart_2.png" /></div></div>
+							<div className="grid_item text_center"><div className="chart_img_wrap"><Image alt="Image" src="/assets/img/home/charts/chart_2.png" /></div></div>
 						</div>
 						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
-							<div className="grid_item"><div className="chart_img_wrap"><img src="/assets/img/home/charts/chart_3.png" /></div></div>
+							<div className="grid_item"><div className="chart_img_wrap"><Image alt="Image" src="/assets/img/home/charts/chart_3.png" /></div></div>
 							<div className="grid_item chart_txt_grid">
 								<div className="chart_txt_wrap">
 									<h2><b>Chart 3</b></h2><br />
@@ -59,10 +60,10 @@ export default function Page () {
 									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
 								</div>
 							</div>
-							<div className="grid_item text_center"><div className="chart_img_wrap"><img src="/assets/img/home/charts/chart_4.png" /></div></div>
+							<div className="grid_item text_center"><div className="chart_img_wrap"><Image alt="Image" src="/assets/img/home/charts/chart_4.png" /></div></div>
 						</div>
 						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
-							<div className="grid_item"><div className="chart_img_wrap"><img src="/assets/img/home/charts/chart_5.png" /></div></div>
+							<div className="grid_item"><div className="chart_img_wrap"><Image alt="Image" src="/assets/img/home/charts/chart_5.png" /></div></div>
 							<div className="grid_item chart_txt_grid">
 								<div className="chart_txt_wrap">
 									<h2><b>Chart 5</b></h2><br />
@@ -77,10 +78,10 @@ export default function Page () {
 									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
 								</div>
 							</div>
-							<div className="grid_item text_center"><div className="chart_img_wrap"><img src="/assets/img/home/charts/chart_6.png" /></div></div>
+							<div className="grid_item text_center"><div className="chart_img_wrap"><Image alt="Image" src="/assets/img/home/charts/chart_6.png" /></div></div>
 						</div>
 						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
-							<div className="grid_item"><div className="chart_img_wrap"><img src="/assets/img/home/charts/chart_7.png" /></div></div>
+							<div className="grid_item"><div className="chart_img_wrap"><Image alt="Image" src="/assets/img/home/charts/chart_7.png" /></div></div>
 							<div className="grid_item chart_txt_grid">
 								<div className="chart_txt_wrap">
 									<h2><b>Chart 7</b></h2><br />
@@ -101,42 +102,42 @@ export default function Page () {
 						<div className="d_grid" style={{ gridTemplateColumns: '30.33% 30.33% 30.33%', gridGap: '4.33%', gridRowGap: '5.33%' }}>
 							<div className="grid_item">
 								<div className="card text_center">
-									<div className="card_img"><img src="/assets/img/home/services/service_1.png" /></div>
+									<div className="card_img"><Image alt="Image" src="/assets/img/home/services/service_1.png" /></div>
 									<h2 className="m_t_10"><b>STRATEGY HOUSE</b></h2><br />
 									<h5>Design your strategy house.</h5><br />
 								</div>
 							</div>
 							<div className="grid_item">
 								<div className="card text_center">
-									<div className="card_img"><img src="/assets/img/home/services/service_2.png" /></div>
+									<div className="card_img"><Image alt="Image" src="/assets/img/home/services/service_2.png" /></div>
 									<h2 className="m_t_10"><b>ORGANIZATION CHARTS</b></h2><br />
 									<h5>Convert your data to visible charts</h5><br />
 								</div>
 							</div>
 							<div className="grid_item">
 								<div className="card text_center">
-									<div className="card_img"><img src="/assets/img/home/services/service_3.png" /></div>
+									<div className="card_img"><Image alt="Image" src="/assets/img/home/services/service_3.png" /></div>
 									<h2 className="m_t_10"><b>SWOT & TOWS</b></h2><br />
 									<h5>Update your project milestone</h5><br />
 								</div>
 							</div>
 							<div className="grid_item">
 								<div className="card text_center">
-									<div className="card_img"><img src="/assets/img/home/services/service_4.png" /></div>
+									<div className="card_img"><Image alt="Image" src="/assets/img/home/services/service_4.png" /></div>
 									<h2 className="m_t_10"><b>PROJECTS ROADMAP</b></h2><br />
 									<h5>We will provide you with right tools for future</h5><br />
 								</div>
 							</div>
 							<div className="grid_item">
 								<div className="card text_center">
-									<div className="card_img"><img src="/assets/img/home/services/service_5.png" /></div>
+									<div className="card_img"><Image alt="Image" src="/assets/img/home/services/service_5.png" /></div>
 									<h2 className="m_t_10"><b>FUTURE FORSEIGHT</b></h2><br />
 									<h5>Work Force Planning</h5><br />
 								</div>
 							</div>
 							<div className="grid_item">
 								<div className="card text_center">
-									<div className="card_img"><img src="/assets/img/home/services/service_6.png" /></div>
+									<div className="card_img"><Image alt="Image" src="/assets/img/home/services/service_6.png" /></div>
 									<h2 className="m_t_10"><b>KPIs</b></h2><br />
 									<h5>We will help you to use best performance indicators</h5><br />
 								</div>
@@ -156,21 +157,21 @@ export default function Page () {
 						<div className="d_grid" style={{ gridTemplateColumns: '33.33% 33.33% 33.33%' }}>
 							<div className="grid_item">
 								<div className="card text_center">
-									<div className="card_img"><img src="/assets/img/home/user_defualt_img.png" /></div>
+									<div className="card_img"><Image alt="Image" src="/assets/img/home/user_defualt_img.png" /></div>
 									<h2 className="m_t_10"><b>Lorem Ipsum</b></h2>
 									<h4 className="m_t_10">Executive Director</h4>
 								</div>
 							</div>
 							<div className="grid_item">
 								<div className="card text_center">
-									<div className="card_img"><img src="/assets/img/home/user_defualt_img.png" /></div>
+									<div className="card_img"><Image alt="Image" src="/assets/img/home/user_defualt_img.png" /></div>
 									<h2 className="m_t_10"><b>Lorem Ipsum</b></h2>
 									<h4 className="m_t_10">C.E.O</h4>
 								</div>
 							</div>
 							<div className="grid_item">
 								<div className="card text_center">
-									<div className="card_img"><img src="/assets/img/home/user_defualt_img.png" /></div>
+									<div className="card_img"><Image alt="Image" src="/assets/img/home/user_defualt_img.png" /></div>
 									<h2 className="m_t_10"><b>Lorem Ipsum</b></h2>
 									<h4 className="m_t_10">Chief Operating Officer</h4>
 								</div>
@@ -191,21 +192,21 @@ export default function Page () {
 							<div className="d_grid" style={{ gridTemplateColumns: '33.33% 33.33% 33.33%' }}>
 								<div className="grid_item">
 									<div className="card text_center">
-										<div className="card_img"><img src="/assets/img/testimonial_one.png" /></div>
+										<div className="card_img"><Image alt="Image" src="/assets/img/testimonial_one.png" /></div>
 										<h2 className="m_t_10"><b>Lorem Ipsum</b></h2>
 										<p>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ip</p>
 									</div>
 								</div>
 								<div className="grid_item">
 									<div className="card text_center">
-										<div className="card_img"><img src="/assets/img/testimonial_two.png" /></div>
+										<div className="card_img"><Image alt="Image" src="/assets/img/testimonial_two.png" /></div>
 										<h2 className="m_t_10"><b>Lorem Ipsum</b></h2>
 										<p>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ip</p>
 									</div>
 								</div>
 								<div className="grid_item">
 									<div className="card text_center">
-										<div className="card_img"><img src="/assets/img/testimonial_one.png" /></div>
+										<div className="card_img"><Image alt="Image" src="/assets/img/testimonial_one.png" /></div>
 										<h2 className="m_t_10"><b>Lorem Ipsum</b></h2>
 										<p>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ip</p>
 									</div>

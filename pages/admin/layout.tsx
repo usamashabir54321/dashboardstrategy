@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import axios from 'axios'
 import { useState , useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
+import Image from 'next/image'
 import {setTheme} from '../../store/actions/themeActions'
 import {setAuthUser} from '../../store/actions/adminActions'
 import AdminFooter from './comp/AdminFooter.tsx'
@@ -32,7 +33,7 @@ export default function Layout ({children}) {
 					<div className="d_grid" style={{ gridTemplateColumns: '14% 86%' }}>
 						{/*SIDE BAR*/}
 						<div className="grid_item" id="d_menu_sidebar">
-							<div className="sidebar_logo text_center"><img src="/assets/img/logo.png" alt="logo" /></div>
+							<div className="sidebar_logo text_center"><Image src="/assets/img/logo.png" alt="logo" /></div>
 							<div className="sidebar_links">
 								<ul id="main_ul">
 									<li className={router.pathname == "/admin/dashboard" || router.pathname == "/admin/profile" ? "active" : ""}>
@@ -65,7 +66,7 @@ export default function Layout ({children}) {
 									</li>
 								</ul>
 							</div>
-							<div className="sidebar_logo text_center"><img src="/assets/img/logo.png" alt="logo" /></div>
+							<div className="sidebar_logo text_center"><Image src="/assets/img/logo.png" alt="logo" /></div>
 						</div>
 						{/*CHANGING PAGE CONTENT*/}
 						<div className="grid_item d_body">

@@ -6,11 +6,11 @@ import {useSelector, useDispatch} from 'react-redux'
 import {useState, useEffect, useRef} from 'react'
 import Validation from './comp/Validation'
 import {setAuthUser} from '../../store/actions/adminActions'
+import Image from 'next/image'
 import axios from 'axios'
 
 export default function Page () {
 	const adminReducerData = useSelector((state) => state.adminStore);
-	const { auth_u } = adminReducerData;
 	let [ alert, setAlert ] = useState('');
 	const [personalTab,setPersonalTab] = useState(false);
 	const [mission,setMission] = useState('');
@@ -23,13 +23,14 @@ export default function Page () {
 	const userImgRef = useRef(null);
 	const [selectedImage, setSelectedImage] = useState();
 	useEffect(() => {
+		const { auth_u } = adminReducerData;
 		setMission(auth_u.mission);
 		setVision(auth_u.vision);
 		setCompany(auth_u.company);
 		setName(auth_u.name);
 		setEmail(auth_u.email);
 		setContact(auth_u.contact);
-	},[]);
+	},[auth_u]);
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		let data = new FormData();
@@ -144,9 +145,9 @@ export default function Page () {
 							<div id="user_detials">
 								<div className="text_center m_t_10 cursor_pointer" id="u_h_img" onClick={() => userImgRef.current.click()}>
 									{
-										selectedImage ? <img src={URL.createObjectURL(selectedImage)} alt="image" /> :
-										auth_u.img_path ? <img src={axios.defaults.baseURL+auth_u.img_path} alt="image" /> :
-										<img src="/assets/img/profile_avatar.png" alt="image" />
+										selectedImage ? <Image src={URL.createObjectURL(selectedImage)} alt="image" /> :
+										auth_u.img_path ? <Image src={axios.defaults.baseURL+auth_u.img_path} alt="image" /> :
+										<Image src="/assets/img/profile_avatar.png" alt="image" />
 									}
 								</div>
 								<input type="file" accept="image/*" ref={userImgRef} style={{display: "none"}} onChange={imageChangeEvent}/>

@@ -5,13 +5,13 @@ import ChildStrategyPart from './ChildStrategyPart.tsx';
 export default function Part ({id}) {
 	const [dataArr,setDataArr] = useState([]);
 	useEffect(() => {
+		const getingData = () => {
+			axios.get('api/getById/get_strategy_childs/'+id).then(res => {
+				setDataArr(res.data);
+			});
+		};
 		getingData();
 	},[]);
-	const getingData = () => {
-		axios.get('api/getById/get_strategy_childs/'+id).then(res => {
-			setDataArr(res.data);
-		});
-	};
 	return (
 		<>
 			<ul>

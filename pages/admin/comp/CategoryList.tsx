@@ -15,13 +15,13 @@ export default function Comp ({tab,selectTabPage}) {
 	const [thisNameTitle,setThisNameTitle] = useState('');
 	const [nameId,setNameId] = useState('');
 	useEffect(() => {
+		const getingTabCats = () => {
+			axios.get('api/getById/get_pro_cats/'+tab).then(res => {
+				setCatsArr(res.data);
+			});
+		};
 		getingTabCats();
 	},[]);
-	const getingTabCats = () => {
-		axios.get('api/getById/get_pro_cats/'+tab).then(res => {
-			setCatsArr(res.data);
-		});
-	};
 	const handleSubmitCat = (e) => {
 		e.preventDefault();
 		let data = new FormData();

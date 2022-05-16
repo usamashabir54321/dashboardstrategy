@@ -8,13 +8,13 @@ export default function Comp ({nameId}) {
 	const [parent,setParent] = useState({});
 	const [updateText,setUpdateText] = useState('');
 	useEffect(() => {
+		const getingData = () => {
+			axios.get('api/getById/get_strategy_house/'+nameId).then(res => {
+				setDataArr(res.data);
+			});
+		};
 		getingData();
 	},[]);
-	const getingData = () => {
-		axios.get('api/getById/get_strategy_house/'+nameId).then(res => {
-			setDataArr(res.data);
-		});
-	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		let data = new FormData();

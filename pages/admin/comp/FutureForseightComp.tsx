@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import Image from 'next/image'
 
 export default function Comp ({nameId}) {
 	const [dataArr,setDataArr] = useState([]);
@@ -8,7 +9,7 @@ export default function Comp ({nameId}) {
 	const [allowEdit,setAllowEdit] = useState(false);
 	useEffect(() => {
 		getingData();
-	},[]);
+	},[nameId]);
 	const getingData = () => {
 		axios.get('api/getById/get_future_sights/'+nameId).then(res => {
 			setDataArr(res.data);
@@ -62,7 +63,7 @@ export default function Comp ({nameId}) {
 				         return (
 				         	<div className="grid_item cursor_pointer" key={idx} onClick={() => setItemIndx(idx)}>
 					         	<div className={`future_forsight_card card ${idx === itemIndx ? 'selected' : ''}`}>
-					         		<img src={axios.defaults.baseURL+obj.img_path} alt="image" />
+					         		<Image src={axios.defaults.baseURL+obj.img_path} alt="image" />
 					         		<br/><br/>
 					         		<h5 className="text_center">{obj.name}</h5>
 					         	</div>
@@ -110,7 +111,7 @@ export default function Comp ({nameId}) {
 					{
 						insertFormArr.map(function(obj, idx){
 					         return (
-					         	<div className="d_grid" style={{ gridTemplateColumns: '45% 45%' , gridGap: '10%' }}>
+					         	<div className="d_grid" key={idx} style={{ gridTemplateColumns: '45% 45%' , gridGap: '10%' }}>
 					         		<div className="grid_item">
 					         			<div className="input_m_div">
 					         				<label><b>Box {idx+1}</b></label>
