@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import Image from 'next/image'
 
 export default function Comp ({nameId}) {
 	const [dataArr,setDataArr] = useState([]);
@@ -63,7 +62,7 @@ export default function Comp ({nameId}) {
 				         return (
 				         	<div className="grid_item cursor_pointer" key={idx} onClick={() => setItemIndx(idx)}>
 					         	<div className={`future_forsight_card card ${idx === itemIndx ? 'selected' : ''}`}>
-					         		<Image src={axios.defaults.baseURL+obj.img_path} alt="image" />
+					         		<img src={axios.defaults.baseURL+obj.img_path} alt="image" />
 					         		<br/><br/>
 					         		<h5 className="text_center">{obj.name}</h5>
 					         	</div>

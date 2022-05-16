@@ -3,7 +3,6 @@ import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import Image from 'next/image'
 import Validation from './admin/comp/Validation'
 
 export default function Page () {
@@ -46,23 +45,23 @@ export default function Page () {
 			<div className="logins_page" id="main">
 				<div className="clearfix"></div>
 				<div className="form_container">
-					<div className="header text_center"><Image src="assets/img/logo.png" alt="logo" /></div>
+					<div className="header text_center"><img src="assets/img/logo.png" alt="logo" /></div>
 					<h3 className="form_title">Register</h3>
 					<form onSubmit={ ( e ) => handleSubmit( e ) } action="" method="post">
 						<div className="input_icons m_b_20">
-							<div className="icon"><Image src="assets/fonts/user_icon.png" alt="user icon" /></div>
+							<div className="icon"><img src="assets/fonts/user_icon.png" alt="user icon" /></div>
 							<input onInput={ ( e ) => setName( e.target.value ) } className="input_field" type="text" placeholder="Name" required minLength="3" maxLength="30" />
 						</div>
 						<div className="input_icons m_b_20">
-							<div className="icon"><Image src="assets/fonts/lock_icon.png" alt="locked lock icon" /></div>
+							<div className="icon"><img src="assets/fonts/lock_icon.png" alt="locked lock icon" /></div>
 							<input onInput={ ( e ) => setPassword( e.target.value ) } className="input_field" type="password" placeholder="Password" required minLength="5" maxLength="20" />
 						</div>
 						<div className="input_icons m_b_20">
-							<div className="icon"><Image src="assets/fonts/email_icon.png" alt="email icon" /></div>
+							<div className="icon"><img src="assets/fonts/email_icon.png" alt="email icon" /></div>
 							<input onInput={ ( e ) => setEmail( e.target.value ) } className="input_field" type="email" placeholder="Email" required minLength="6" maxLength="30" />
 						</div>
 						<div className="input_icons m_b_20">
-							<div className="icon"><Image src="assets/fonts/phone_icon.png" alt="phone icon" /></div>
+							<div className="icon"><img src="assets/fonts/phone_icon.png" alt="phone icon" /></div>
 							<input onInput={ ( e ) => setContact( e.target.value ) } className="input_field" type="tel" placeholder="Contact" required minLength="5" maxLength="20" />
 						</div>
 						<div className="input_icons m_b_8 m_t_10 text_right">

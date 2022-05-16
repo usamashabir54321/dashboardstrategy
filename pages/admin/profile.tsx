@@ -6,7 +6,6 @@ import {useSelector, useDispatch} from 'react-redux'
 import {useState, useEffect, useRef} from 'react'
 import Validation from './comp/Validation'
 import {setAuthUser} from '../../store/actions/adminActions'
-import Image from 'next/image'
 import axios from 'axios'
 
 export default function Page () {
@@ -145,9 +144,9 @@ export default function Page () {
 							<div id="user_detials">
 								<div className="text_center m_t_10 cursor_pointer" id="u_h_img" onClick={() => userImgRef.current.click()}>
 									{
-										selectedImage ? <Image src={URL.createObjectURL(selectedImage)} alt="image" /> :
-										auth_u.img_path ? <Image src={axios.defaults.baseURL+auth_u.img_path} alt="image" /> :
-										<Image src="/assets/img/profile_avatar.png" alt="image" />
+										selectedImage ? <img src={URL.createObjectURL(selectedImage)} alt="image" /> :
+										auth_u.img_path ? <img src={axios.defaults.baseURL+auth_u.img_path} alt="image" /> :
+										<img src="/assets/img/profile_avatar.png" alt="image" />
 									}
 								</div>
 								<input type="file" accept="image/*" ref={userImgRef} style={{display: "none"}} onChange={imageChangeEvent}/>

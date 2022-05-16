@@ -3,7 +3,6 @@ import { useRouter } from 'next/router'
 import { removeCookies } from 'cookies-next';
 import {useSelector, useDispatch} from 'react-redux'
 import {changeTheme} from '../../../store/actions/themeActions'
-import Image from 'next/image'
 import axios from 'axios'
 
 
@@ -36,8 +35,8 @@ export default function Comp ({pageTitle}) {
 								<h5>{auth_u.role}</h5>
 							</div>
 							{
-								auth_u.img_path ? <Image src={axios.defaults.baseURL+auth_u.img_path} alt="image" className="avatar" /> :
-								<Image src="/assets/img/admin_avatar.png" alt="image" className="avatar" />
+								auth_u.img_path ? <img src={axios.defaults.baseURL+auth_u.img_path} alt="image" className="avatar" /> :
+								<img src="/assets/img/admin_avatar.png" alt="image" className="avatar" />
 							}
 						</div>
 						: ''

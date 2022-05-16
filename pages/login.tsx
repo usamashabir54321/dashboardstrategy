@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import axios from 'axios'
 import { useState, useEffect } from 'react'
 import {useSelector} from 'react-redux'
-import Image from 'next/image'
 import { setCookies, getCookie } from 'cookies-next';
 import Validation from './admin/comp/Validation'
 
@@ -52,15 +51,15 @@ export default function Page () {
 				<div className="logins_page" id="main">
 					<div className="clearfix"></div>
 					<div className="form_container">
-						<div className="header text_center"><Image src="assets/img/logo.png" alt="logo" /></div>
+						<div className="header text_center"><img src="assets/img/logo.png" alt="logo" /></div>
 						<h3 className="form_title">Login</h3>
 						<form onSubmit={ ( e ) => handleSubmit( e ) } action="" method="post">
 							<div className="input_icons m_b_20">
-								<div className="icon"><Image src="assets/fonts/user_icon.png" alt="user icon" /></div>
+								<div className="icon"><img src="assets/fonts/user_icon.png" alt="user icon" /></div>
 								<input onInput={ ( e ) => setEmail( e.target.value ) } className="input_field" type="email" placeholder="Email" name="email" required minLength="10" maxLength="30" />
 							</div>
 							<div className="input_icons m_b_20">
-								<div className="icon"><Image src="assets/fonts/lock_icon.png" alt="locked lock icon" /></div>
+								<div className="icon"><img src="assets/fonts/lock_icon.png" alt="locked lock icon" /></div>
 								<input onInput={ ( e ) => setPassword( e.target.value ) } className="input_field" type="password" placeholder="Password" name="password" required minLength="5" maxLength="20" />
 							</div>
 							<br />
