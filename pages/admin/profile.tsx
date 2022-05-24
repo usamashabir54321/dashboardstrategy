@@ -1,5 +1,4 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import Layout from './layout.tsx'
 import AdminHeader from './comp/AdminHeader.tsx'
 import {useSelector, useDispatch} from 'react-redux'

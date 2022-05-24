@@ -1,11 +1,14 @@
 import Head from 'next/head'
-import Link from 'next/link'
 import { useState } from 'react'
 import Layout from './layout.tsx'
 import AdminHeader from './comp/AdminHeader.tsx'
 import CategoryList from './comp/CategoryList.tsx'
 import FutureForseightComp from './comp/FutureForseightComp.tsx'
 import StrategyHouseComp from './comp/StrategyHouseComp.tsx'
+import OrganChartComp from './comp/OrganChartComp.tsx'
+import SwotTowsComp from './comp/SwotTowsComp.tsx'
+import StakeholderComp from './comp/StakeholderComp.tsx'
+import KpisComp from './comp/KpisComp.tsx'
 
 export default function Page () {
 	const [pageTab,setPageTab] = useState('future_forseight');
@@ -15,13 +18,18 @@ export default function Page () {
 		setNameId('');setNameTabCom('');
 		setTimeout(() => { setNameId(id);setNameTabCom(tab); },300);
 	}
-	const project = () => {
-      switch(nameTabCom) {
-        case "future_forseight":   return <FutureForseightComp nameId={nameId} />;
-        case "strategy_house":   return <StrategyHouseComp nameId={nameId} />;
-        default:      return <h1>No project match</h1>
-      }
-    }
+	function project () {
+		switch(nameTabCom) {
+			case "future_forseight":   return <FutureForseightComp nameId={nameId} />;
+			case "strategy_house":   return <StrategyHouseComp nameId={nameId} />;
+			case "organization_chart":   return <OrganChartComp nameId={nameId} />;
+			case "swot":   return <SwotTowsComp nameId={nameId} tab={nameTabCom} />;
+			case "tows":   return <SwotTowsComp nameId={nameId} tab={nameTabCom} />;
+			case "stakeholders":   return <StakeholderComp nameId={nameId} />;
+			case "kpis":   return <KpisComp nameId={nameId} />;
+			default: return <div className="card m_t_25"><h1>No Project Match</h1></div>
+		}
+	}
 	return (
 		<>
 			<Head>
@@ -33,8 +41,8 @@ export default function Page () {
 			{/*PAGE BODY*/}
 			<div className="d_content">
 				<div className="d_grid gap_l_30 gap_s_20" style={{ gridTemplateColumns: '78% 20%' }}>
-					<div className="grid_item card m_t_25">
-						{nameId ? project() : ''}
+					<div className="grid_item">
+						{ nameId ? project() : ''}
 					</div>
 					{/*SIDE BAR TAB LINKS*/}
 					<div className="grid_item card m_t_25">

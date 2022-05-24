@@ -369,15 +369,6 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     border-radius: 12px;
     padding: 25px;
 }
-#strategy_tree .box_btn {
-    background: linear-gradient(180deg, #313131 0%, rgba(71, 71, 71, 0.88) 100%);
-    box-shadow: 0px 4px 8px 8px rgb(255 255 255 / 20%);
-    border-radius: 20px;
-    padding: 20px 30px;
-    display: inline-block;
-    font-weight: 600;
-    margin: 20px;
-}
 .dashboard_pages ul.list li {
     padding: 10px 30px;
     background: #0C94CD;
@@ -425,9 +416,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     background-color: unset;
     padding: 0px 0px 30px;
 }
-.dashboard_pages ul.list li.selected,.dashboard_pages .future_forsight_card.selected,#strategy_tree .box_btn.selected {border: 2px solid;}
-#strategy_tree .box_btn {cursor: pointer;}
-#strategy_tree ul {display: flex;text-align: center;}
+.dashboard_pages ul.list li.selected,.dashboard_pages .future_forsight_card.selected {border: 2px solid;}
 .dashboard_pages ul.list .input_m_div .btn_submit,.dashboard_pages ul.list .input_m_div .btn_cancel {
     width: unset;
     height: unset;
@@ -480,6 +469,21 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     margin-right: 15px;
     margin-top: 7px;
 }
+#swottowsdiv {
+    background: url(../img/swottows.png) center center no-repeat;
+    background-size: cover;
+}
+#swottowsdiv #swottowscat {
+    display: table-cell;
+    vertical-align: middle;
+    font-size: 15px;
+    text-align: center;
+}
+#swottowsdiv ul li {
+    padding: 30px 0px 31px 37px;
+    font-weight: 700;
+}
+#swottowsdiv .right ul li {color: black;padding-right: 25px;}
 			/*dark working*/
 .d_dark #u_g_info .dropdown_ul li button {
 	color: white;
@@ -670,7 +674,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     padding: 6% 10%;
     z-index: 2;
 }
-#home #sec_testimonail_side_img {
+#home .sec_testimonail_side_img {
     position: absolute;
     right: 0;
     z-index: 1;
@@ -720,8 +724,7 @@ div#testimonial_counter .card p{
 div#testimonial_counter {
     margin-top: 66px;
 }
-    /*GET IN TOUCH SECTION*/                                                                             
-
+    /*GET IN TOUCH SECTION*/
 #h_get_in_touch {
     background: url(/assets/img/home/h_sec_get_in_touch.png) center center no-repeat;
     background-size: cover;
@@ -774,46 +777,70 @@ div#testimonial_counter {
 /*media query */
 @media screen and (min-device-width: 300px) and (max-device-width: 768px) { 
     .d_grid {
-    display: inline;
+        display: inline;
+    }
+    #home img {
+        width: 100%;
+    }
+    div#home h1 {
+        line-height: 33px;
+        font-size: 26px !important;
+    }
+    div#services_content .grid_item {
+        margin: 30px auto;
+    }
+    div.sec_testimonail_side_img {
+        display: none;
+    }
+    section#h_sec_testimonials .card {
+        margin: unset !important;
+    }
+    section#h_sec_testimonials div#team_content .grid_item:nth-child(2) {
+        margin: unset !important;
+    }
+    section#h_sec_testimonials div#team_content .grid_item {
+        margin: 20px 0;
+    }
+    #h_sec_testimonials .card p {
+        padding: 10px;
+    }
+    .query_content {
+        padding: unset !important;
+    }
+    #h_get_in_touch h3 {
+        font-size: 32px;
+    }
+    #h_get_in_touch {
+        padding: unset !important;
+    }
+    .query_form {
+        padding: 19px;
+    }
 }
-#home img {
-    width: 100%;
+        /*ABOUT US PAGE*/
+#h_sec_about_us {
+    background: url(/assets/img/home/about_us_bg.png) no-repeat;
+    background-size: cover;
+    background-color: #474747;
 }
-div#home h1 {
-    line-height: 33px;
-    font-size: 26px !important;
+#h_sec_about_us .img_2 {
+    position: absolute;
+    margin-top: 8%;
+    margin-left: -7%;
 }
-div#services_content .grid_item {
-    margin: 30px auto;
+#mission_grid {
+    background: url(/assets/img/home/mission_bg.png) center center no-repeat;
+    background-size: cover;
+    height: 650px;
+    padding: 1.4% 9%;
 }
-div#sec_testimonail_side_img {
-    /* overflow: hidden; */
-    display: none;
+#mission_grid .mission_txt_div {
+    height: 60%;
+    display: table;
+    padding: 0 19%;
+    margin-top: 2%;
 }
-section#h_sec_testimonials .card {
-    margin: unset !important;
+#mission_grid .mission_txt_div h4 {
+    display: table-cell;
+    vertical-align: middle;
 }
-section#h_sec_testimonials div#team_content .grid_item:nth-child(2) {
-    margin: unset !important;
-}
-section#h_sec_testimonials div#team_content .grid_item {
-    margin: 20px 0;
-}
-#h_sec_testimonials .card p {
-    padding: 10px;
-}
-.query_content {
-    padding: unset !important;
-}
-#h_get_in_touch h3 {
-    font-size: 32px;
-}
-#h_get_in_touch {
-    padding: unset !important;
-}
-.query_form {
-    padding: 19px;
-}
-
-}
-    /*media query*/

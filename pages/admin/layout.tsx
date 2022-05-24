@@ -22,7 +22,7 @@ export default function Layout ({children}) {
 	    axios.get('api/user').then(res => {
 	    	if(res.data.id) dispatch(setAuthUser(res.data));
 	    	else router.push('/login');
-	    }).catch(err => {console.log('Un Authorization');});
+	    });
 	}, []);
 	return (
 		<>

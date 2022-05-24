@@ -97,12 +97,12 @@ export default function Comp ({tab,selectTabPage}) {
 		<>
 			{/*MAPPING CATS*/}
 			{
-				catsArr.map(function(obj, idx){
+				catsArr.map(function(obj1, idx1){
 			         return (
-			         	<li className={`catlist ${obj.id == catId ? 'selected' : ''}`} key={idx} onClick={(e) => selectCat(e,obj.id)}>
-			         		<span className="i_left edit_i" onClick={(e) => updateThisCat(e,idx)}></span>
-			         		<span className="i_left delete_i" onClick={(e) => handDeleteCat(e,obj.id)}></span>
-			         		<h5>{obj.name}</h5>
+			         	<li className={`catlist ${obj1.id == catId ? 'selected' : ''}`} key={obj1.name} onClick={(e) => selectCat(e,obj1.id)}>
+			         		<span className="i_left edit_i" onClick={(e) => updateThisCat(e,idx1)}></span>
+			         		<span className="i_left delete_i" onClick={(e) => handDeleteCat(e,obj1.id)}></span>
+			         		<h5>{obj1.name}</h5>
 			         	</li>
 			         )
 			    })
@@ -112,7 +112,7 @@ export default function Comp ({tab,selectTabPage}) {
 				!thisCatId ? '' :
 				<form onSubmit={ ( e ) => handleUpdateCat( e ) } action="" method="post">
 					<div className="input_m_div">
-						<input value={thisCatName} onChange={(e) => setThisCatName(e.target.value)} type="text" placeholder="Type Category Name" required minLength="3" maxLength="30" />
+						<input value={thisCatName} onChange={(e) => setThisCatName(e.target.value)} type="text" placeholder="Type Category Name" required minLength="3" maxLength="70" />
 					</div>
 					<div className="input_m_div text_right">
 						<button className="btn_submit cursor_pointer" type="submit"><small>Update</small></button>&nbsp;
@@ -125,7 +125,7 @@ export default function Comp ({tab,selectTabPage}) {
 				!addCat ? <li className="add_list"><button className="add_btn" title="Add Category" onClick={() => setAddCat(true)}>+</button></li> :
 				<form onSubmit={ ( e ) => handleSubmitCat( e ) } action="" method="post">
 					<div className="input_m_div">
-						<input onChange={(e) => setCatName(e.target.value)} type="text" placeholder="Type Category Name" required minLength="3" maxLength="30" />
+						<input onChange={(e) => setCatName(e.target.value)} type="text" placeholder="Type Category Name" required minLength="3" maxLength="70" />
 					</div>
 					<div className="input_m_div text_right">
 						<button className="btn_submit cursor_pointer" type="submit"><small>Save</small></button>&nbsp;
@@ -135,13 +135,18 @@ export default function Comp ({tab,selectTabPage}) {
 			}
 			{/*MAPPING CATS NAMES*/}
 			{
-				catNamesArr.map(function(obj, idx){
+				catNamesArr.map(function(obj2, idx2){
 			         return (
 			         	<>
-				         	<li className={`sublist ${obj.id == nameId ? 'selected' : ''}`} key={idx} onClick={(e) => selectName(e,obj.id)}>
-				         		<span className="i_left edit_i" onClick={(e) => updateThisName(e,idx)}></span>
-				         		<span className="i_left delete_i" onClick={(e) => handDeleteName(e,obj.id)}></span>
-				         		<h5>{obj.name}</h5>
+				         	<li className={`sublist ${obj2.id == nameId ? 'selected' : ''}`} key={obj2.name} onClick={(e) => selectName(e,obj2.id)}>
+				         		{
+				         			tab == "swot" || tab == "tows" ? '' :
+				         			<>
+				         				<span className="i_left edit_i" onClick={(e) => updateThisName(e,idx2)}>
+				         				</span><span className="i_left delete_i" onClick={(e) => handDeleteName(e,obj2.id)}></span>
+				         			</>
+				         		}
+				         		<h5>{obj2.name}</h5>
 				         	</li>
 				        </>
 			         )
@@ -152,7 +157,7 @@ export default function Comp ({tab,selectTabPage}) {
 				!thisNameId ? '' :
 				<form onSubmit={ ( e ) => handleUpdateName( e ) } action="" method="post">
 					<div className="input_m_div">
-						<input value={thisNameTitle} onChange={(e) => setThisNameTitle(e.target.value)} type="text" placeholder="Type Name Title" required minLength="3" maxLength="30" />
+						<input value={thisNameTitle} onChange={(e) => setThisNameTitle(e.target.value)} type="text" placeholder="Type Name Title" required minLength="3" maxLength="70" />
 					</div>
 					<div className="input_m_div text_right">
 						<button className="btn_submit cursor_pointer" type="submit"><small>Update</small></button>&nbsp;
@@ -165,7 +170,7 @@ export default function Comp ({tab,selectTabPage}) {
 				addCatNames ? 
 				<form onSubmit={ ( e ) => handleSubmitCatNames( e ) } action="" method="post">
 					<div className="input_m_div">
-						<input onChange={(e) => setNameTitle(e.target.value)} type="text" placeholder="Type Name Title" required minLength="3" maxLength="30" />
+						<input onChange={(e) => setNameTitle(e.target.value)} type="text" placeholder="Type Name Title" required minLength="3" maxLength="70" />
 					</div>
 					<div className="input_m_div text_right">
 						<button className="btn_submit cursor_pointer" type="submit"><small>Save</small></button>&nbsp;
@@ -173,7 +178,10 @@ export default function Comp ({tab,selectTabPage}) {
 					</div>
 				</form> : ''
 			}
-			{catId && !addCatNames ? <li className="add_list"><button className="add_btn" title="Add Names" onClick={() => setAddCatNames(true)}>+</button></li> : ''}
+			{
+				tab == "strategy_house" || tab == "swot" || tab == "tows" ? '' :
+				catId && !addCatNames ? <li className="add_list"><button className="add_btn" title="Add Names" onClick={() => setAddCatNames(true)}>+</button></li> : ''
+			}
 		</>
 	)
 }

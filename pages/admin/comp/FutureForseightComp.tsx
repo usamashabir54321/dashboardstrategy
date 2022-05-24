@@ -45,94 +45,96 @@ export default function Comp ({nameId}) {
 	};
 	return (
 		<>
-			{/*HEADER*/}
-			<div className="d_grid" style={{ gridTemplateColumns: '40% 60%' }}>
-				<div className="grid_item"><h2 className="text_blue">Future  Forseight</h2></div>
-				<div className="grid_item">
-					<div className="input_m_div text_right">
-						<button className="btn_submit cursor_pointer"><span className="download_i"></span> <small>Download Template File</small></button> &nbsp;&nbsp;&nbsp;
-						<button className="btn_submit cursor_pointer"><span className="file_i"></span> <small>Export</small></button>
+			<div className="card m_t_25">
+				{/*HEADER*/}
+				<div className="d_grid" style={{ gridTemplateColumns: '40% 60%' }}>
+					<div className="grid_item"><h2 className="text_blue">Future  Forseight</h2></div>
+					<div className="grid_item">
+						<div className="input_m_div text_right">
+							<button className="btn_submit cursor_pointer"><span className="download_i"></span> <small>Download Template File</small></button> &nbsp;&nbsp;&nbsp;
+							<button className="btn_submit cursor_pointer"><span className="file_i"></span> <small>Export</small></button>
+						</div>
 					</div>
 				</div>
-			</div>
-			{/*DATA ARRAY MAPPING*/}
-			<div className="d_grid m_t_30" style={{ gridTemplateColumns: '30% 30% 30%' , gap: '8% 4%', marginBottom: '8%' }}>
-				{
-					dataArr.map(function(obj, idx){
-				         return (
-				         	<div className="grid_item cursor_pointer" key={idx} onClick={() => setItemIndx(idx)}>
-					         	<div className={`future_forsight_card card ${idx === itemIndx ? 'selected' : ''}`}>
-					         		<img src={axios.defaults.baseURL+obj.img_path} alt="image" />
-					         		<br/><br/>
-					         		<h5 className="text_center">{obj.name}</h5>
-					         	</div>
-					        </div>
-				         )
-				    })
-				}
-			</div>
-			{
-				itemIndx === null ? '' :
-				<div className="input_m_div text_right m_t_30">
-					<button className="btn_cancel cursor_pointer" onClick={handDelete}><small>Delete Project</small></button>&nbsp;&nbsp;&nbsp;
-					<button className="btn_submit cursor_pointer" onClick={() => setAllowEdit(true)}><small>Edit Project</small></button>
-				</div>
-			}
-			{/*UPDATION MY PROJECT*/}
-			{
-				allowEdit ?
-				<div className="future_form">
-					<form onSubmit={ ( e ) => handleUpdate( e ) } action="" method="post" id="update_form" className="m_t_30">
-			         	<div className="d_grid" style={{ gridTemplateColumns: '45% 45%' , gridGap: '10%' }}>
-			         		<div className="grid_item">
-			         			<div className="input_m_div">
-			         				<label><b>Box Name</b></label>
-			         				<input type="text" name="box_name" className="box_name" required defaultValue={dataArr[itemIndx].name} minLength="3" placeholder="Text" />
-			         			</div>
-			         		</div>
-			         		<div className="grid_item">
-			         			<div className="input_m_div">
-			         				<label><b>Select New Image</b></label>
-			         				<input type="file" name="box_img" className="box_img" />
-			         			</div>
-			         		</div>
-			         	</div>
-						<div className="input_m_div text_right m_t_20">
-							<button className="btn_cancel cursor_pointer" onClick={() => setAllowEdit(false)}><small>Cancel</small></button>&nbsp;&nbsp;&nbsp;
-							<button className="btn_submit cursor_pointer"><small>Update</small></button>
-						</div>
-					</form>
-				</div> : ''
-			}
-			{/*FORM INSERTION*/}
-			<div className="future_form">
-				<form onSubmit={ ( e ) => handleSubmit( e ) } action="" method="post" id="insert_form" className="m_t_30">
+				{/*DATA ARRAY MAPPING*/}
+				<div className="d_grid m_t_30" style={{ gridTemplateColumns: '30% 30% 30%' , gap: '8% 4%', marginBottom: '8%' }}>
 					{
-						insertFormArr.map(function(obj, idx){
+						dataArr.map(function(obj, idx){
 					         return (
-					         	<div className="d_grid" key={idx} style={{ gridTemplateColumns: '45% 45%' , gridGap: '10%' }}>
-					         		<div className="grid_item">
-					         			<div className="input_m_div">
-					         				<label><b>Box {idx+1}</b></label>
-					         				<input type="text" name="box_name[]" className="box_name" required minLength="3" placeholder="Text" />
-					         			</div>
-					         		</div>
-					         		<div className="grid_item">
-					         			<div className="input_m_div">
-					         				<label><b>Image {idx+1}</b></label>
-					         				<input type="file" name="box_img[]" className="box_img" required />
-					         			</div>
-					         		</div>
-					         	</div>
+					         	<div className="grid_item cursor_pointer" key={idx} onClick={() => setItemIndx(idx)}>
+						         	<div className={`future_forsight_card card ${idx === itemIndx ? 'selected' : ''}`}>
+						         		<img src={axios.defaults.baseURL+obj.img_path} alt="image" />
+						         		<br/><br/>
+						         		<h5 className="text_center">{obj.name}</h5>
+						         	</div>
+						        </div>
 					         )
 					    })
 					}
-					<div className="input_m_div text_right m_t_20">
-						{ insertFormArr.length > 1 ? <button className="btn_submit cursor_pointer" onClick={() =>setInsertFormArr((oldVals) => oldVals.filter((_, i) => i !== oldVals.length - 1))} type="button"><span className="minus_i">-</span></button> : '' }&nbsp;&nbsp;&nbsp;
-						<button className="btn_submit cursor_pointer" onClick={() => setInsertFormArr(oldVals => [ ...oldVals, 1 ])} type="button"><span className="plus_i">+</span></button>&nbsp;&nbsp;&nbsp;
-						<button className="btn_submit cursor_pointer" type="submit">Save</button>
+				</div>
+				{
+					itemIndx === null ? '' :
+					<div className="input_m_div text_right m_t_30">
+						<button className="btn_cancel cursor_pointer" onClick={handDelete}><small>Delete Project</small></button>&nbsp;&nbsp;&nbsp;
+						<button className="btn_submit cursor_pointer" onClick={() => setAllowEdit(true)}><small>Edit Project</small></button>
 					</div>
-				</form>
+				}
+				{/*UPDATION MY PROJECT*/}
+				{
+					allowEdit ?
+					<div className="future_form">
+						<form onSubmit={ ( e ) => handleUpdate( e ) } action="" method="post" id="update_form" className="m_t_30">
+				         	<div className="d_grid" style={{ gridTemplateColumns: '45% 45%' , gridGap: '10%' }}>
+				         		<div className="grid_item">
+				         			<div className="input_m_div">
+				         				<label><b>Box Name</b></label>
+				         				<input type="text" name="box_name" className="box_name" required defaultValue={dataArr[itemIndx].name} minLength="3" placeholder="Text" />
+				         			</div>
+				         		</div>
+				         		<div className="grid_item">
+				         			<div className="input_m_div">
+				         				<label><b>Select New Image</b></label>
+				         				<input type="file" name="box_img" className="box_img" />
+				         			</div>
+				         		</div>
+				         	</div>
+							<div className="input_m_div text_right m_t_20">
+								<button className="btn_cancel cursor_pointer" onClick={() => setAllowEdit(false)}><small>Cancel</small></button>&nbsp;&nbsp;&nbsp;
+								<button className="btn_submit cursor_pointer"><small>Update</small></button>
+							</div>
+						</form>
+					</div> : ''
+				}
+				{/*FORM INSERTION*/}
+				<div className="future_form">
+					<form onSubmit={ ( e ) => handleSubmit( e ) } action="" method="post" id="insert_form" className="m_t_30">
+						{
+							insertFormArr.map(function(obj, idx){
+						         return (
+						         	<div className="d_grid" key={idx} style={{ gridTemplateColumns: '45% 45%' , gridGap: '10%' }}>
+						         		<div className="grid_item">
+						         			<div className="input_m_div">
+						         				<label><b>Box {idx+1}</b></label>
+						         				<input type="text" name="box_name[]" className="box_name" required minLength="3" placeholder="Text" />
+						         			</div>
+						         		</div>
+						         		<div className="grid_item">
+						         			<div className="input_m_div">
+						         				<label><b>Image {idx+1}</b></label>
+						         				<input type="file" name="box_img[]" className="box_img" required />
+						         			</div>
+						         		</div>
+						         	</div>
+						         )
+						    })
+						}
+						<div className="input_m_div text_right m_t_20">
+							{ insertFormArr.length > 1 ? <button className="btn_submit cursor_pointer" onClick={() =>setInsertFormArr((oldVals) => oldVals.filter((_, i) => i !== oldVals.length - 1))} type="button"><span className="minus_i">-</span></button> : '' }&nbsp;&nbsp;&nbsp;
+							<button className="btn_submit cursor_pointer" onClick={() => setInsertFormArr(oldVals => [ ...oldVals, 1 ])} type="button"><span className="plus_i">+</span></button>&nbsp;&nbsp;&nbsp;
+							<button className="btn_submit cursor_pointer" type="submit">Save</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</>
 	)
