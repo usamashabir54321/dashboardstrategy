@@ -1,9 +1,11 @@
-import {useEffect} from 'react'
+import {useState,useEffect} from 'react'
 import $ from "jquery";
 import axios from 'axios'
 
 export default function Part ({dataSetArr,getStakeHolders}) {
+	const [dataArr,setDataArr] = useState([]);
 	useEffect(() => {
+		setDataArr(dataSetArr);
 		$('form').on('click','.btn_remover',function () {
 			var numItems = $('form .inputs_grid_line').length;
 			if (numItems > 1) $(this).parents('.inputs_grid_line').remove();
@@ -31,7 +33,7 @@ export default function Part ({dataSetArr,getStakeHolders}) {
 	return (
 		<>
 			{
-				dataSetArr.map(function(obj,ind) {
+				dataArr.map(function(obj,ind) {
 					return (
 						<div className="future_form">
 							<h2>Update Lavel {ind + 1}</h2><br/>

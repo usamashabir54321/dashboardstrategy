@@ -1,8 +1,10 @@
-import {useEffect} from 'react'
+import {useState,useEffect} from 'react'
 import $ from "jquery";
 
 export default function ChildPart ({data,labels,handleSubmit}) {
+	const [labelsArr,setLabelsArr] = useState([]);
 	useEffect(() => {
+		setLabelsArr(labels);
 		$('form').on('click','.btn_remover',function () {
 			var numItems = $('form .update_grid_line').length;
 			if (numItems > 1) $(this).parents('.update_grid_line').remove();
@@ -17,7 +19,7 @@ export default function ChildPart ({data,labels,handleSubmit}) {
 		<div className="future_form" id="update_f_grid">
 			<form onSubmit={ ( e ) => handleSubmit( e ) } action="" method="post" className="m_t_30">
 				{
-        			labels.map(function (obj2,ind2) {
+        			labelsArr.map(function (obj2,ind2) {
         				return (
 					        <div className="d_grid update_grid_line" key={ind2} style={{ gridTemplateColumns: '6% 27% 27% 12% 0%' , gridGap: '5%' }}>
 				        		<div className="grid_item"></div>
