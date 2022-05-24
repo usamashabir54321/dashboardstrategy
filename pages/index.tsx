@@ -9,6 +9,37 @@ export default function Page () {
 				<meta name="Home" content="Home,Dashboard Strategy" />
 			</Head>
 			<div id="home">
+					{/*HEADER*/}
+				<section id="header">
+					<div className="clearafix"></div>
+					<div id="header_menu">
+						<div className="d_grid" style={{ gridTemplateColumns: '40% 40% 14%', gridGap: '3%' }}>
+							<div className="grid_item"><img alt="Image" src="/assets/img/home/h_logo.png" /></div>
+							<div className="grid_item">
+								<ul>
+									<li><h4>HOME</h4></li>
+									<li><h4>SERVICES</h4></li>
+									<li><h4>OUR TEAM</h4></li>
+									<li><h4>CONTACT US</h4></li>
+								</ul>
+							</div>
+							<div className="grid_item"><button className="btn btn_web">LOGIN</button></div>
+						</div>
+					</div>
+					<div style={{ display: 'table', width: '100%' , height: '73vh' }}>
+						<div id="header_body" className="text_center">
+							<h1>DASHBOARD STRATEGY</h1>
+							<h3>ADVANCE STEPS TO ACHIEVE VISION</h3>
+							<div id="header_buttons">
+								<button className="btn btn_web">STAKEHOLDERS FRAMEWORK</button>
+								<button className="btn btn_web">KPI’s</button>
+								<button className="btn btn_web">DATA</button>
+								<button className="btn btn_web">SWOT</button>
+								<button className="btn btn_web">ORGANIZATION CHARTS</button>
+							</div>
+						</div>
+					</div>
+				</section>
 					{/*DASHBOARD STRATEGY SECTION*/}
 				<section id="h_sec_2">
 					<div id="h_sec_2_data">
@@ -351,6 +382,45 @@ export default function Page () {
 						</div>
 					</section>	
 				</div>
+					{/*FOOTER*/}
+				<section id="footer">
+					<div className="d_grid" style={{ gridTemplateColumns: '25% 23% 23% 20%' , gridGap: '3%' }}>
+						<div className="grid_item">
+							<img alt="Image" src="/assets/img/home/h_logo.png" /><br/><br/>
+							<h4>
+								Lorem ipsum loren ipsum loren ipsum loren
+								ipsum loren ipsum loren ipsum loren ipsum
+								loren ipsum loren ipsum.
+							</h4>
+						</div>
+						<div className="grid_item">
+							<h4><b>QUICK LINKS</b></h4><br/>
+							<ul>
+								<li className="m_b_8">Stakeholders Frame Work</li>
+								<li className="m_b_8">KPI’s</li>
+								<li className="m_b_8">Data</li>
+								<li className="m_b_8">SWOT</li>
+								<li className="m_b_8">Organization Charts</li>
+							</ul>
+						</div>
+						<div className="grid_item">
+							<h4><b>CONTACT US</b></h4><br/>
+							<ul id="f_ul_with_i">
+								<li className="m_b_8"><img src="/assets/img/home/locate_i.png" alt="icon"/> &nbsp; <p>Lorem ipsum, loren ipsum loren ipsum.</p></li>
+								<li className="m_b_8"><img src="/assets/img/home/phone_i.png" alt="icon"/> &nbsp; <p>+92-42-3578-2222</p></li>
+								<li className="m_b_8"><img src="/assets/img/home/email_i.png" alt="icon"/> &nbsp; <p>Loremipsum@gmail.com</p></li>
+							</ul>
+						</div>
+						<div className="grid_item" id="vip_request_div">
+							<div>
+								<button className="btn btn_web">VIP Request</button>
+							</div>
+						</div>
+					</div>
+					<div id="footer_footer" className="text_center">
+						<h3>@ Copyright 2022 <span style={{ color: 'white' }}>DashboardStrategy.com</span> All Rights Reserved</h3>
+					</div>
+				</section>
 			</div>
 		</>
 	)

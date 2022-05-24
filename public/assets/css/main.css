@@ -604,10 +604,59 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
 #home #chart_types .d_grid {
     margin-bottom: 25px;
 }
+        /*HOME HEADER CSS*/
+#home #header {
+    height: 100vh;
+    background: url(/assets/img/home/header_bg.png) center center no-repeat;
+    background-color: rgba(0, 0, 0, 0.5);
+    background-size: cover;
+}
+#home #header .clearafix {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}
+#home #header #header_body {
+    vertical-align: middle;
+    display: table-cell;
+    z-index: 2;
+    position: relative;
+}
+#home #header #header_body h1 {
+    font-size: 66px;
+    word-spacing: 15px;
+    margin: 2% 0;
+    letter-spacing: 3px;
+    font-weight: 900;
+    -webkit-text-stroke-width: 1px;
+}
+#home #header #header_body h3 {
+    font-size: 28px;
+    margin: 3% 0;
+    font-weight: 600;
+}
+#home #header #header_body #header_buttons button {margin: 0 2%;}
+#home #header #header_menu {
+    z-index: 2;
+    position: relative;
+    margin: 0 10%;
+    padding: 20px 38px;
+    background: rgba(48, 48, 48, 0.7);
+    border-radius: 0px 0px 24px 24px;
+}
+#home #header #header_menu ul {
+    display: flex;
+    margin: 6% 0;
+}
+#home #header #header_menu ul li {margin: 0 4%;}
+#home #header #header_menu button {margin: 9% 0;}
         /*ONLY HOME SECTION 2*/
 #h_sec_2 {
     height: 100vh;
     background: url(/assets/img/home/h_sec_2_bg.png) center center no-repeat;
+    background-color: rgba(0, 0, 0, 0.5);
     background-size: cover;
 }
 #h_sec_2 #h_sec_2_data {
@@ -717,6 +766,7 @@ div#testimonial_counter .card {
 div#testimonial_counter .card h2{
     color: #29ABE2;
     font-weight: 900;
+    -webkit-text-stroke-width: 1px;
 }
 div#testimonial_counter .card p{
     padding: 0px;
@@ -774,6 +824,7 @@ div#testimonial_counter {
     padding: 70px;
     border-radius: 15px;
 }
+.query_form input {margin-bottom: 20px;}
 /*media query */
 @media screen and (min-device-width: 300px) and (max-device-width: 768px) { 
     .d_grid {
@@ -843,4 +894,28 @@ div#testimonial_counter {
 #mission_grid .mission_txt_div h4 {
     display: table-cell;
     vertical-align: middle;
+}
+        /*HOME FOOTER CSS*/
+#home #footer {
+    background-color: #303030;
+    padding: 6% 6% 0;
+}
+#home #footer #footer_footer {
+    background: #474747;
+    border-radius: 24px 24px 0px 0px;
+    padding: 50px;
+    margin-top: 10%;
+}
+#home #footer #vip_request_div {display: table;}
+#home #footer #vip_request_div div {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+#home #footer ul#f_ul_with_i li {display: flex;}
+#home #footer ul#f_ul_with_i li img {
+    height: 20px;
+    width: 20px;
+    margin-right: 10px;
+    margin-top: 5px;
 }
