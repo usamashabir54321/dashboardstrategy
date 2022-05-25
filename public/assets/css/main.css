@@ -934,10 +934,14 @@ div#testimonial_counter {margin-top: 66px;}
     div#testimonial_counter .card {padding: 0px;}
     #h_get_in_touch {padding: 6% 0%;}
     #h_sec_about_us .img_2 {margin-top: 18%;}
-    #mission_grid {height: 170px;padding: 2.5% 5%;}
+    #mission_grid {height: 170px;padding: 2.5% 9%;}
     #mission_grid h2 {font-size: 8px;}
     #mission_grid h4 {font-size: 6px;line-height: 9px;}
     #mission_grid br {display: none;}
+    #mission_grid .mission_txt_div {height: 50%;}
+}
+@media screen and (max-width: 375px) {
+    #mission_grid {padding: 2.5% 5%;}
 }
 @media screen and (max-width: 320px) {
     #h_sec_2 #h_sec_2_data {padding-top: 100%;}
