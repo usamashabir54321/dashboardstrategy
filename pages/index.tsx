@@ -53,7 +53,7 @@ export default function Page () {
 				<div>
 					<div className="sec_testimonail_side_img" style={{ backgroundColor: '#4b4f57'}}></div>
 					<section id="h_sec_about_us">
-						<div style={{ padding: '6% 10% 0%' }}>
+						<div id="about_details_div" style={{ padding: '6% 10% 0%' }}>
 							<div className="sec_header text_center">
 								<h1 className="sec_title">About Us</h1>
 								<br /><p className="sec_seperator"></p>
@@ -352,7 +352,7 @@ export default function Page () {
 					<section id="h_get_in_touch"> 
 						<div className="sec_header ">
 							<div id="team_content">
-								<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' }}>
+								<div className="d_grid gird_form" style={{ gridTemplateColumns: '50% 50%' }}>
 									<div className="grid_item">
 										<div className="card">
 											<div className="query_content">
@@ -368,11 +368,11 @@ export default function Page () {
 									<div className="grid_item">
 										<div className="card">
 											<div className="query_form">
-												<div className="input_field d_inline"><label>Name*</label><input type="text" name="name" /></div>
-												<div className="input_field d_inline"><label>Email Address*</label><input type="email" name="name" /></div>
-												<div className="input_field d_inline"><label>Mobile Number*</label><input type="number" name="name" /></div>
-												<div className="input_field d_inline"><label>Subject*</label><input type="text" name="name" /></div>
-												<div className="input_field d_inline"><label>Enter your message*</label><textarea type="text" name="name" /></div>
+												<div className="input_field d_grid"><label>Name*</label><input type="text" name="name" /></div>
+												<div className="input_field d_grid"><label>Email Address*</label><input type="email" name="name" /></div>
+												<div className="input_field d_grid"><label>Mobile Number*</label><input type="number" name="name" /></div>
+												<div className="input_field d_grid"><label>Subject*</label><input type="text" name="name" /></div>
+												<div className="input_field d_grid"><label>Enter your message*</label><textarea type="text" name="name" /></div>
 												<div className="btn_submit"><button className="btn btn_web m_t_20">Submit</button></div>
 											</div>
 										</div>
@@ -380,7 +380,7 @@ export default function Page () {
 								</div>
 							</div>
 						</div>
-					</section>	
+					</section>
 				</div>
 					{/*FOOTER*/}
 				<section id="footer">
