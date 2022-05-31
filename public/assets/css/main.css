@@ -620,18 +620,18 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     margin-bottom: 25px;
 }
         /*HOME HEADER CSS*/
-#home #header {
-    height: 100vh;
-    background: url(/assets/img/home/header_bg.png) center center no-repeat;
-    background-color: rgba(0, 0, 0, 0.5);
-    background-size: cover;
-}
+#home #header {height: 100vh;}
 #home #header .clearafix {
     width: 100%;
     height: 100vh;
     position: absolute;
     background: rgba(0, 0, 0, 0.5);
     z-index: 1;
+}
+#home #header video.bg_video {
+    z-index: -1;
+    position: absolute;
+    width: 100%;
 }
 #home #header #header_body {
     vertical-align: middle;
@@ -673,9 +673,14 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
         /*ONLY HOME SECTION 2*/
 #h_sec_2 {
     height: 100vh;
-    background: url(/assets/img/home/h_sec_2_bg.png) center center no-repeat;
+    /*background: url(/assets/img/home/h_sec_2_bg.png) center center no-repeat;
     background-color: rgba(0, 0, 0, 0.5);
-    background-size: cover;
+    background-size: cover;*/
+}
+#h_sec_2 .bg_video {
+    position: absolute;
+    width: 100%;
+    z-index: -1;
 }
 #h_sec_2 #h_sec_2_data {
     padding-top: 40%;

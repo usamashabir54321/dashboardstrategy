@@ -1,7 +1,16 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useEffect, useRef } from 'react';
 
 export default function Page () {
+	const hdrVidRef = useRef();
+	const dshbrdVidRef = useRef();
+    useEffect(() => {
+        setTimeout(()=>{
+            hdrVidRef.current.play();
+            dshbrdVidRef.current.play();
+        },5000)
+    }, []);
 	return (
 		<>
 			<Head>
@@ -11,10 +20,16 @@ export default function Page () {
 			<div id="home">
 					{/*HEADER*/}
 				<section id="header">
+					<video ref={hdrVidRef} loop muted controls className="bg_video">
+			            <source src="/assets/media/ROOM.mp4" type="video/mp4" />
+			            Your browser does not support the video tag.
+			       	</video>
 					<div className="clearafix"></div>
 					<div id="header_menu">
 						<div className="d_grid" style={{ gridTemplateColumns: '40% 40% 14%', gridGap: '3%' }}>
-							<div className="grid_item"><img alt="Image" src="/assets/img/home/h_logo.png" /></div>
+							<div className="grid_item">
+								<img alt="Image" src="/assets/img/home/h_logo.png" />
+							</div>
 							<div className="grid_item">
 								<ul>
 									<li><Link href="/"><h4>HOME</h4></Link></li>
@@ -42,6 +57,10 @@ export default function Page () {
 				</section>
 					{/*DASHBOARD STRATEGY SECTION*/}
 				<section id="h_sec_2">
+					<video ref={dshbrdVidRef} loop muted controls className="bg_video">
+			            <source src="/assets/media/WORLD.mp4" type="video/mp4" />
+			            Your browser does not support the video tag.
+			       	</video>
 					<div id="h_sec_2_data">
 						<div className="d_grid" style={{ gridTemplateColumns: 'auto auto' }}>
 							<div className="grid_item"><button className="btn btn_web m_t_20">Questionnaire Survey</button></div>
