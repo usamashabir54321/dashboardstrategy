@@ -39,6 +39,7 @@ export default function Comp ({nameId}) {
 			  	chartTotalArr.push(chartObj);
 			}
 			setDataSetArr(chartTotalArr);
+			setIsUpdComp(false);
 		});
 	};
 	const data = { datasets: dataSetArr, };
