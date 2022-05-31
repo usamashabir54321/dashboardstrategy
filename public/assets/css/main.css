@@ -880,6 +880,8 @@ div#testimonial_counter {margin-top: 66px;}
     .dashboard_pages #admin_header .d_grid {grid-template-columns: auto 51% auto !important;}
     .dashboard_pages #admin_header h1 {font-size: 30px;}
     .dashboard_pages .d_content ul.list li h4 , .dashboard_pages .d_content ul.list li h5 {font-size: 12px;line-height: 15px;}
+    #swottowsdiv {height: 360px;}
+    #swottowsdiv ul li {padding: 21px 0px 19px 26px;font-size: 15px;}
 }
 @media screen and (max-width: 1024px) {
     #home #header #header_menu ul {margin: 5% 0;}
@@ -908,6 +910,10 @@ div#testimonial_counter {margin-top: 66px;}
     .dashboard_pages .d_content .grid_item.card {padding: 20px 10px;}
     .dashboard_pages .d_content ul.list li {padding: 7px 10px;}
     .dashboard_pages .d_content ul.list li h4, .dashboard_pages .d_content ul.list li h5 {font-size: 11px;}
+    #swottowsdiv {height: 245px;}
+    #swottowsdiv ul li {padding: 11px 0px 15px 17px;font-size: 12px;width: 82%;}
+    #swottowsdiv #swottowscat {font-size: 10px;-webkit-text-stroke-width: 0.3px;}
+    #swottowsdiv .right ul li {width: 81%;margin: 0 2rem;}
 }
 @media screen and (max-width: 768px) {
     #home #header #header_menu {padding: 11px 28px;}
