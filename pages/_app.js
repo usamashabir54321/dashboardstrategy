@@ -1,6 +1,7 @@
 import { wrapper, store } from "../store/store";
 import { Provider } from "react-redux";
 import axios from 'axios'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 axios.defaults.baseURL = 'https://backend.dashboardstrategy.com/';
 // axios.defaults.baseURL = 'http://localhost:8000/';

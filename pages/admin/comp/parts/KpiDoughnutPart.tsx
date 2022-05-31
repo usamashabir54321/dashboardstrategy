@@ -10,6 +10,9 @@ import DonutPieUpdateForm from './childParts/DonutPieUpdateForm.tsx';
 export default function Comp ({nameId}) {
 	const [dataSetArr,setDataSetArr] = useState([]);
 	const [isUpdate,setIsUpdate] = useState(false);
+	const [reqPending,setReqPending] = useState(false);
+	const [isValError,setIsValError]= useState(false);
+	const [maxThan100,setMaxThan100]= useState('');
 	useEffect(() => {
 		getStakeHolders();
 	},[]);
@@ -42,14 +45,35 @@ export default function Comp ({nameId}) {
 	};
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		var data = new FormData(e.target);
+		var form = e.target;
+		var data = new FormData(form);
+		const labelValues = form.querySelectorAll("input[name='l_p_inpt[]']");
+		var totalVal = 0;
+		for (var a=0; a<labelValues.length; a++) {
+			var thisVal = labelValues[a].value;
+			totalVal = totalVal + parseInt(thisVal);
+		}
+		if (totalVal > 100) {
+			setMaxThan100(totalVal-100+'%');
+			setIsValError(true);setTimeout(() => { setIsValError(false) },2000);
+			return false;
+		}
+		else if (totalVal < 100) {
+			var emptyVal = 100-totalVal;
+			data.append( 'l_t_inpt[]', '' );
+			data.append( 'l_p_inpt[]', emptyVal );
+			data.append( 'l_b_inpt[]', 'black' );
+		}
 		data.append( 'name_id', nameId );
+		setReqPending(true);
 		axios.post('api/only_post/save_donut_kpi',data).then(res => {
-			getStakeHolders();
+			getStakeHolders();setReqPending(false);
 		});
 	};
 	return (
 		<>
+			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
+			{isValError ? <div className="toast toast-error"><div className="toast-title">Error</div><div className="toast-message">Your percentage value is <b>{maxThan100}</b> than <b>100</b>.</div></div> : ''}
 			<div className="card m_t_25">
 				{/*HEADER*/}
 				<div className="d_grid" style={{ gridTemplateColumns: '40% 60%' }}>
@@ -71,7 +95,11 @@ export default function Comp ({nameId}) {
 				{
 					dataSetArr.length > 0 ?
 					<div className="input_m_div text_right m_t_20">
-						<button className="btn_submit cursor_pointer" type="submit" onClick={() => setIsUpdate(true)}>Edit Project</button>
+						{
+							isUpdate ?
+							<button className="btn_submit cursor_pointer" type="submit" onClick={() => setIsUpdate(false)}>Hide Edit Project</button>
+							: <button className="btn_submit cursor_pointer" type="submit" onClick={() => setIsUpdate(true)}>Edit Project</button>
+						}
 					</div>
 					: <DonutPieInsertForm handleSubmit={handleSubmit} />
 				}

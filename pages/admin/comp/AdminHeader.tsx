@@ -3,10 +3,11 @@ import { useRouter } from 'next/router'
 import { removeCookies } from 'cookies-next';
 import {useSelector, useDispatch} from 'react-redux'
 import {changeTheme} from '../../../store/actions/themeActions'
+import {useState} from 'react'
 import axios from 'axios'
 
-
 export default function Comp ({pageTitle}) {
+	const [reqPending,setReqPending] = useState(false);
 	const themeReducerData = useSelector((state) => state.themeChanger);
 	const adminReducerData = useSelector((state) => state.adminStore);
 	const { themeMode } = themeReducerData;
@@ -14,13 +15,16 @@ export default function Comp ({pageTitle}) {
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const logoutMe = () => {
+		setReqPending(true);
 		axios.get('api/only_get/logoutMe').then(res => {
 			router.push('/login');
 			removeCookies('auth_token');
+			setReqPending(false);
 		});
 	};
 	return (
-		<div className="card m_t_25">
+		<div className="card m_t_25" id="admin_header">
+			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			<div className="d_grid" style={{ gridTemplateColumns: 'auto 68% auto' }}>
 				<div className="grid_item"><h1>{pageTitle}</h1></div>
 				<div className="grid_item"></div>

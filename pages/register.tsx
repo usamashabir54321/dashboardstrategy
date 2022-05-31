@@ -4,6 +4,7 @@ import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
 import Validation from './admin/comp/Validation'
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
 export default function Page () {
 	let [ alert, setAlert ] = useState('');
@@ -11,9 +12,10 @@ export default function Page () {
 	let [ password, setPassword ] = useState('');
 	let [ email, setEmail ] = useState('');
 	let [ contact, setContact ] = useState('');
+	const [reqPending,setReqPending] = useState(false);
 	const router = useRouter();
 	const handleSubmit = async ( e ) => {
-		e.preventDefault();
+		e.preventDefault();setReqPending(true);
 		const headers = {"Content-Type" : `multipart/form-data`};
 		let data = new FormData();
 		data.append( 'name', name );
@@ -33,6 +35,7 @@ export default function Page () {
 			var auth_token = response.data.token;
 			setTimeout(() => {router.push('/login');},1000);
 		}
+		setReqPending(false);
 		setTimeout(() => {setAlert('');},1000);
 	}
 	return (
@@ -43,6 +46,7 @@ export default function Page () {
 			</Head>
 			<Validation alert={alert} />
 			<div className="logins_page" id="main">
+				{reqPending ? <SkeletonTheme baseColor="white" highlightColor="green"><Skeleton count={1} height={3} style={{ position: 'absolute',top: '0%' }}/></SkeletonTheme> : ''}
 				<div className="clearfix"></div>
 				<div className="form_container">
 					<div className="header text_center"><img src="assets/img/logo.png" alt="logo" /></div>

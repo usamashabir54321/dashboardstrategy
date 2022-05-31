@@ -3,15 +3,17 @@ import axios from 'axios'
 
 export default function Comp ({nameId}) {
 	const [dataArr,setDataArr] = useState([]);
-	const [insertFormArr,setInsertFormArr] = useState([1,1]);
+	const [insertFormArr,setInsertFormArr] = useState([1]);
 	const [itemIndx,setItemIndx] = useState(null);
 	const [allowEdit,setAllowEdit] = useState(false);
+	const [reqPending,setReqPending] = useState(false);
 	useEffect(() => {
 		getingData();
 	},[nameId]);
 	const getingData = () => {
+		setReqPending(true);
 		axios.get('api/getById/get_future_sights/'+nameId).then(res => {
-			setDataArr(res.data);
+			setDataArr(res.data);setReqPending(false);
 		});
 	};
 	const handleSubmit = (e) => {
@@ -19,15 +21,17 @@ export default function Comp ({nameId}) {
 		var form = document.querySelector('#insert_form');
 		var data = new FormData(form);
 		data.append( 'cat_name_id', nameId );
+		setReqPending(true);
 		axios.post('api/only_post/create_name_forsight',data).then(res => {
 			setDataArr(res.data);
 			document.getElementById("insert_form").reset();
-			setInsertFormArr(([1,1]));
+			setInsertFormArr(([1]));setReqPending(false);
 		});
 	}
 	const handDelete = () => {
+		setReqPending(true);
 		axios.get('api/getById/del_foreseights/'+dataArr[itemIndx].id).then(res => {
-			setDataArr(res.data);setItemIndx(null);
+			setDataArr(res.data);setItemIndx(null);setReqPending(false);
 		});
 	}
 	const handleUpdate = (e) => {
@@ -37,14 +41,16 @@ export default function Comp ({nameId}) {
 		data.append( 'id', dataArr[itemIndx].id );
 		data.append( 'prev_img_path', dataArr[itemIndx].img_path );
 		data.append( 'cat_name_id', dataArr[itemIndx].cat_name_id );
+		setReqPending(true);
 		axios.post('api/only_post/update_name_forsight',data).then(res => {
 			setDataArr(res.data);
 			document.getElementById("update_form").reset();
-			setAllowEdit(false);setItemIndx(null);
+			setAllowEdit(false);setItemIndx(null);setReqPending(false);
 		});
 	};
 	return (
 		<>
+			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			<div className="card m_t_25">
 				{/*HEADER*/}
 				<div className="d_grid" style={{ gridTemplateColumns: '40% 60%' }}>

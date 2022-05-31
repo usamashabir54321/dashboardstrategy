@@ -17,13 +17,13 @@ export default function Page () {
 							<div className="grid_item"><img alt="Image" src="/assets/img/home/h_logo.png" /></div>
 							<div className="grid_item">
 								<ul>
-									<li><h4>HOME</h4></li>
-									<li><h4>SERVICES</h4></li>
-									<li><h4>OUR TEAM</h4></li>
-									<li><h4>CONTACT US</h4></li>
+									<li><Link href="/"><h4>HOME</h4></Link></li>
+									<li><Link href="/"><h4>SERVICES</h4></Link></li>
+									<li><Link href="/"><h4>OUR TEAM</h4></Link></li>
+									<li><Link href="/"><h4>CONTACT US</h4></Link></li>
 								</ul>
 							</div>
-							<div className="grid_item"><button className="btn btn_web">LOGIN</button></div>
+							<div className="grid_item"><Link href="login"><button className="btn btn_web">LOGIN</button></Link></div>
 						</div>
 					</div>
 					<div style={{ display: 'table', width: '100%' , height: '73vh' }}>

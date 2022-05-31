@@ -5,11 +5,11 @@ export default function ChildPart ({data,handleSubmit}) {
 	const [labelsArr,setLabelsArr] = useState([]);
 	useEffect(() => {
 		setLabelsArr(data.labels);
-		$('form').on('click','.btn_remover',function () {
+		$('#update_f_grid').on('click','.btn_remover',function () {
 			var numItems = $('form .update_grid_line').length;
 			if (numItems > 1) $(this).parents('.update_grid_line').remove();
 		});
-		$('form').on('click','.btn_adder',function () {
+		$('#update_f_grid').on('click','.btn_adder',function () {
 			$(this).parents('.d_grid').addClass('in_action');
 			$(this).parents('.update_grid_line').clone().insertAfter("form .d_grid.in_action");
 			$('.d_grid').removeClass('in_action');

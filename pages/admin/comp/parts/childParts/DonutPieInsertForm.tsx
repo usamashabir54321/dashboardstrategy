@@ -3,11 +3,11 @@ import $ from "jquery";
 
 export default function ChildPart ({handleSubmit}) {
 	useEffect(() => {
-		$('form').on('click','.btn_remover',function () {
+		$('#insert_f_grid').on('click','.btn_remover',function () {
 			var numItems = $('form .insert_grid_line').length;
 			if (numItems > 1) $(this).parents('.insert_grid_line').remove();
 		});
-		$('form').on('click','.btn_adder',function () {
+		$('#insert_f_grid').on('click','.btn_adder',function () {
 			$(this).parents('.d_grid').addClass('in_action');
 			$(this).parents('.insert_grid_line').clone().insertAfter("form .d_grid.in_action");
 			$('.d_grid').removeClass('in_action');

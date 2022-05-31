@@ -20,6 +20,7 @@ export default function Page () {
 	const { auth_u } = adminReducerData;
 	const dispatch = useDispatch();
 	const userImgRef = useRef(null);
+	const [reqPending,setReqPending] = useState(false);
 	const [selectedImage, setSelectedImage] = useState();
 	useEffect(() => {
 		setMission(auth_u.mission);
@@ -30,7 +31,7 @@ export default function Page () {
 		setContact(auth_u.contact);
 	},[]);
 	const handleSubmit = (e) => {
-		e.preventDefault();
+		e.preventDefault();setReqPending(true);
 		let data = new FormData();
 		if(mission == null) data.append( 'mission', '' );else data.append( 'mission', mission );
 		if(vision == null) data.append( 'vision', '' ); else data.append( 'vision', vision );
@@ -38,19 +39,19 @@ export default function Page () {
 		axios.post('api/only_post/edit_comp_profile',data).then(res => {
 			dispatch(setAuthUser(res.data.data.new_user));
 			if( res.data.message == 'form_saved' ) setAlert('form_saved');
+			setReqPending(false);
 			setTimeout(() => {setAlert('');},1000);
 		});
 	}
 	const handleSubmitTwo = (e) => {
-		e.preventDefault();
+		e.preventDefault();setReqPending(true);
 		let data = new FormData();
 		data.append( 'name', name );
-		data.append( 'email', email );
 		data.append( 'contact', contact );
 		axios.post('api/only_post/edit_personal_profile',data).then(res => {
 			dispatch(setAuthUser(res.data.data.new_user));
 			if( res.data.message == 'form_saved' ) setAlert('form_saved');
-			else if( res.data.message == 'double_email' ) setAlert('double_email');
+			setReqPending(false);
 			setTimeout(() => {setAlert('');setPersonalTab(!personalTab);},1000);
 		});
 	}
@@ -58,13 +59,14 @@ export default function Page () {
 		if (userImgRef.current.files && userImgRef.current.files.length > 0) setSelectedImage(userImgRef.current.files[0]);
 	};
 	const submitImageChange = (e) => {
-		e.preventDefault();
+		e.preventDefault();setReqPending(true);
 		let data = new FormData();
 		data.append( 'u_profile_img', userImgRef.current.files[0] );
 		data.append( 'prev_profile_img', auth_u.img_path );
 		axios.post('api/only_post/edit_profile_img',data).then(res => {
 			dispatch(setAuthUser(res.data.data.new_user));
 			if( res.data.message == 'form_saved' ) setAlert('form_saved');
+			setReqPending(false);
 			setTimeout(() => {setAlert('');setSelectedImage();},1000);
 		});
 	}
@@ -78,6 +80,7 @@ export default function Page () {
 				<title>Admin Edit Profile | Dashboard Strategy</title>
 				<meta name="Admin Home" content="Admin Home,Dashboard Strategy" />
 			</Head>
+			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			<Validation alert={alert} />
 			{/*PAGE HEADER*/}
 			<AdminHeader pageTitle="Edit Profile" />
@@ -128,10 +131,6 @@ export default function Page () {
 									<input value={name} onChange={(e) => setName(e.target.value)} type="text" name="name" required minLength="3" maxLength="30" />
 								</div>
 								<div className="input_m_div">
-									<label><b>Email</b></label>
-									<input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="name" required minLength="6" maxLength="30" />
-								</div>
-								<div className="input_m_div">
 									<label><b>Contact</b></label>
 									<input value={contact} onChange={(e) => setContact(e.target.value)} type="tel" name="name" required minLength="5" maxLength="20" />
 								</div>
@@ -144,7 +143,7 @@ export default function Page () {
 								<div className="text_center m_t_10 cursor_pointer" id="u_h_img" onClick={() => userImgRef.current.click()}>
 									{
 										selectedImage ? <img src={URL.createObjectURL(selectedImage)} alt="image" /> :
-										auth_u.img_path ? <img src={axios.defaults.baseURL+auth_u.img_path} alt="image" /> :
+										auth_u.img_path != undefined ? <img src={axios.defaults.baseURL+auth_u.img_path} alt="image" /> :
 										<img src="/assets/img/profile_avatar.png" alt="image" />
 									}
 								</div>

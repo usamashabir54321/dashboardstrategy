@@ -4,10 +4,11 @@ import {useState,useEffect,useRef} from 'react'
 import { ReactDiagram } from 'gojs-react';
 
 export default function Part ({nameId,apiParam}) {
-	const [nodeDataArray, setNodeDataArray] = useState([ { key: 0, text: 'Value 1' } ]);
+	const [nodeDataArray, setNodeDataArray] = useState([]);
 	const [linkDataArray, setLinkDataArray] = useState([]);
 	const [isSavedId, setIsSavedId] = useState('');
 	let [ alert, setAlert ] = useState('');
+	const [reqPending,setReqPending] = useState(false);
 	function initDiagram() {
 		const $ = go.GraphObject.make;
 		const diagram =
@@ -49,7 +50,7 @@ export default function Part ({nameId,apiParam}) {
 				setNodeDataArray(JSON.parse(res.data.text_nodes));
 				setLinkDataArray(JSON.parse(res.data.text_links));
 				setIsSavedId(res.data.id);
-			}
+			} else setNodeDataArray([ { key: 0, text: 'Value 1' } ]);
 		});
 	};
 	const diagramRef = useRef(null);
@@ -157,11 +158,13 @@ export default function Part ({nameId,apiParam}) {
 		data.append( 'link_data', JSON.stringify(diagramRef.current.props.linkDataArray) );
 		data.append( 'cat_id', nameId );
 		if (isSavedId) data.append( 'id', isSavedId );
-		axios.post('api/only_post/save_'+apiParam,data).then(res => { getCatStrategy();setAlert('form_saved');setTimeout(() => {setAlert('');},1000); });
+		setReqPending(true);
+		axios.post('api/only_post/save_'+apiParam,data).then(res => { getCatStrategy();setAlert('form_saved');setTimeout(() => {setAlert('');setReqPending(false);},1000); });
 	}
 	return (
 		<>
 			<Validation alert={alert} />
+			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			<ReactDiagram
 				ref={diagramRef}
 				initDiagram={initDiagram}

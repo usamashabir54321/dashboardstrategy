@@ -10,15 +10,20 @@ import UpdateStakeHolder from './parts/UpdateStakeHolder.tsx';
 export default function Comp ({nameId}) {
 	const [dataSetArr,setDataSetArr] = useState([]);
 	const [isUpdComp,setIsUpdComp] = useState(false);
+	const [reqPending,setReqPending] = useState(false);
+	const [isValError,setIsValError]= useState(false);
+	const [maxThan100,setMaxThan100]= useState('');
 	useEffect(() => {
 		getStakeHolders();
-		$('form').on('click','.btn_remover',function () {
-			var numItems = $('form .inputs_grid_line').length;
-			if (numItems > 1) $(this).parents('.inputs_grid_line').remove();
+		$('#stake_holder_pg').on('click','.insert_grid_line .btn_remover',function (e) {
+			e.stopPropagation();
+			var numItems = $('form .insert_grid_line').length;
+			if (numItems > 1) $(this).parents('.insert_grid_line').remove();
 		});
-		$('form').on('click','.btn_adder',function () {
+		$('#stake_holder_pg').on('click','.insert_grid_line .btn_adder',function (e) {
+			e.stopPropagation();
 			$(this).parents('.d_grid').addClass('in_action');
-			$(this).parents('.inputs_grid_line').clone().insertAfter("form .d_grid.in_action");
+			$(this).parents('.insert_grid_line').clone().insertAfter("form .d_grid.in_action");
 			$('.d_grid').removeClass('in_action');
 		});
 	},[]);
@@ -67,9 +72,27 @@ export default function Comp ({nameId}) {
 	}];
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		var form = document.querySelector('#insert_form');
+		var form = e.target;
 		var data = new FormData(form);
+		const labelValues = form.querySelectorAll("input[name='l_p_inpt[]']");
+		var totalVal = 0;
+		for (var a=0; a<labelValues.length; a++) {
+			var thisVal = labelValues[a].value;
+			totalVal = totalVal + parseInt(thisVal);
+		}
+		if (totalVal > 100) {
+			setMaxThan100(totalVal-100+'%');
+			setIsValError(true);setTimeout(() => { setIsValError(false) },2000);
+			return false;
+		}
+		else if (totalVal < 100) {
+			var emptyVal = 100-totalVal;
+			data.append( 'l_t_inpt[]', '' );
+			data.append( 'l_p_inpt[]', emptyVal );
+			data.append( 'l_b_inpt[]', 'black' );
+		}
 		data.append( 'name_id', nameId );
+		setReqPending(true);
 		axios.post('api/only_post/save_stakeholder',data).then(res => {
 			document.getElementById("insert_form").reset();
 			const elements = document.querySelectorAll('#insert_form .inputs_grid_line');
@@ -77,11 +100,13 @@ export default function Comp ({nameId}) {
 			  if (index > 0) element.remove();
 			});
 			getStakeHolders();
+			setReqPending(false);
 		});
 	};
 	return (
 		<>
-			<div className="card m_t_25">
+			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
+			<div className="card m_t_25" id="stake_holder_pg">
 				{/*HEADER*/}
 				<div className="d_grid" style={{ gridTemplateColumns: '40% 60%' }}>
 					<div className="grid_item"><h2 className="text_blue">Stakeholder's Framework</h2></div>
@@ -98,7 +123,9 @@ export default function Comp ({nameId}) {
 						<Doughnut data={data} options={options} plugins={plugins}/>
 					</div> : ''
 				}
-				<br/><br/>
+				<br/>
+				{isValError ? <div className="toast toast-error"><div className="toast-title">Error</div><div className="toast-message">Your percentage value is <b>{maxThan100}</b> than <b>100</b>.</div></div> : ''}
+				<br/>
 				{/*UPDATION FORM*/}
 				{
 					dataSetArr.length > 0 ?
@@ -118,7 +145,7 @@ export default function Comp ({nameId}) {
 						{/*INSERTION FORM*/}
 						<h2>Enter Lavel</h2>
 						<form onSubmit={ ( e ) => handleSubmit( e ) } action="" method="post" id="insert_form" className="m_t_30">
-	     		        	<div className="d_grid inputs_grid_line" style={{ gridTemplateColumns: '24% 24% 24% 22%' , gridGap: '4%' }}>
+	     		        	<div className="d_grid insert_grid_line" style={{ gridTemplateColumns: '24% 24% 24% 22%' , gridGap: '4%' }}>
 				         		<div className="grid_item">
 				         			<div className="input_m_div"><input type="text" maxLength="35" name="l_t_inpt[]" required placeholder="Text" /></div>
 				         		</div>

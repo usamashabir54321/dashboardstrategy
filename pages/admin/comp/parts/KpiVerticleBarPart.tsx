@@ -10,6 +10,7 @@ export default function Part ({nameId}) {
 	const [dataLablesArr,setDataLablesArr] = useState([]);
 	const [dataSetArr,setDataSetArr] = useState([]);
 	const [isUpdate,setIsUpdate] = useState(false);
+	const [reqPending,setReqPending] = useState(false);
 	useEffect(() => {
 		getStakeHolders();
 	},[]);
@@ -19,10 +20,43 @@ export default function Part ({nameId}) {
 				var label_arr = res.data.labels.split('|');
 				setDataLablesArr(label_arr);
 				var chartTotalArr = [];
-			  	var chartObj = {labels: 'Verticle Bar Chart',data: [],backgroundColor: 'white',id: null};
-			  	chartObj.data = res.data.percent_val.split("|");
-			  	chartObj.id = res.data.id;
-			  	chartTotalArr.push(chartObj);
+			  	var achievedObj = {
+			  		labels: 'Verticle Bar Chart',
+			  		data: [],
+			  		backgroundColor: 'white',
+			  		datalabels: {
+			  			display: true,
+			  			formatter: (val, ctx) => {
+			  				return val+'%';
+			  			},
+			  			color: 'black',
+			  			font: {
+							size: 18,
+						},
+			  		}
+			  	};
+			  	var projectObj = {
+			  		labels: 'Verticle Bar Chart',
+			  		data: [],
+			  		backgroundColor: '#0c94cd',
+			  		categoryPercentage: 0.5,
+	  		  		datalabels: {
+	  		  			display: true,
+	  		  			formatter: (val, ctx) => {
+	  		  				return val+'%';
+	  		  			},
+	  		  			color: 'white',
+	  		  			font: {
+	  						size: 18,
+	  					},
+	  					anchor: 'end',
+	  					align: 'top',
+	  		  		}
+			  	};
+			  	achievedObj.data = res.data.percent_val.split("|");
+			  	projectObj.data = res.data.project_vals.split("|");
+			  	chartTotalArr.push(achievedObj);
+			  	chartTotalArr.push(projectObj);
 				setDataSetArr(chartTotalArr);
 				setIsUpdate(false);
 			}
@@ -42,7 +76,8 @@ export default function Part ({nameId}) {
 					font: {
 						size: 17,
 					}
-				}
+				},
+				stacked: true,
 			},
 			y: {
 				beginAtZero: true,
@@ -67,16 +102,6 @@ export default function Part ({nameId}) {
 			title: {
 				display: false,
 			},
-			datalabels: {
-				display: true,
-				formatter: (val, ctx) => {
-					return val+'%';
-				},
-				color: 'black',
-				font: {
-					size: 18,
-				}
-			},
 		},
 		maintainAspectRatio: true,
 		animation: {
@@ -89,12 +114,14 @@ export default function Part ({nameId}) {
 		e.preventDefault();
 		var data = new FormData(e.target);
 		data.append( 'name_id', nameId );
+		setReqPending(true);
 		axios.post('api/only_post/save_kpi_bars',data).then(res => {
-			getStakeHolders();
+			getStakeHolders();setReqPending(false);
 		});
 	};
 	return (
 		<>
+			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			<div className="card m_t_25">
 				{/*HEADER*/}
 				<div className="d_grid" style={{ gridTemplateColumns: '40% 60%' }}>
@@ -116,11 +143,15 @@ export default function Part ({nameId}) {
 				{
 					dataLablesArr.length > 0 ?
 					<div className="input_m_div text_right m_t_20">
-						<button className="btn_submit cursor_pointer" type="submit" onClick={() => setIsUpdate(true)}>Edit Project</button>
+						{
+							isUpdate ?
+							<button className="btn_submit cursor_pointer" type="submit" onClick={() => setIsUpdate(false)}>Hide Edit Project</button>
+							: <button className="btn_submit cursor_pointer" type="submit" onClick={() => setIsUpdate(true)}>Edit Project</button>
+						}
 					</div>
 					: <BarCharInsertForm handleSubmit={handleSubmit} />
 				}
-				{isUpdate ? <BarChartUpdateForm handleSubmit={handleSubmit} data={dataSetArr[0]} labels={dataLablesArr} /> : ''}
+				{isUpdate ? <BarChartUpdateForm handleSubmit={handleSubmit} data={dataSetArr} labels={dataLablesArr} /> : ''}
 			</div>
 		</>
 	)
