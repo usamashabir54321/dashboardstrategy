@@ -23,7 +23,7 @@ export default function Page () {
 						{
 							auth_u.company ? <h4>{auth_u.company}</h4> :
 							<div className="input_m_div m_t_20">
-								<button className="btn_submit cursor_pointer"><Link href="profile">Save Company Info</Link></button>
+								<Link href="profile"><button className="btn_submit cursor_pointer">Save Company Info</button></Link>
 							</div>
 						}<br />
 					</div>
@@ -32,7 +32,7 @@ export default function Page () {
 						{
 							auth_u.mission ? <h4>{auth_u.mission}</h4> :
 							<div className="input_m_div m_t_20">
-								<button className="btn_submit cursor_pointer"><Link href="profile">Save Your Mission</Link></button>
+								<Link href="profile"><button className="btn_submit cursor_pointer">Save Your Mission</button></Link>
 							</div>
 						}<br />
 					</div>
@@ -52,7 +52,7 @@ export default function Page () {
 						{
 							auth_u.vision ? <h4>{auth_u.vision}</h4> :
 							<div className="input_m_div m_t_20">
-								<button className="btn_submit cursor_pointer"><Link href="profile">Save Your Vision</Link></button>
+								<Link href="profile"><button className="btn_submit cursor_pointer">Save Your Vision</button></Link>
 							</div>
 						}<br />
 					</div>

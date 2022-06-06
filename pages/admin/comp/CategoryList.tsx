@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
-export default function Comp ({tab,selectTabPage}) {
+export default function Comp ({projectId,tab,selectTabPage}) {
 	const [addCat,setAddCat] = useState(false);
 	const [catsArr,setCatsArr] = useState([]);
 	const [catName,setCatName] = useState('');
@@ -16,19 +16,23 @@ export default function Comp ({tab,selectTabPage}) {
 	const [nameId,setNameId] = useState('');
 	const [reqPending,setReqPending] = useState(false);
 	useEffect(() => {
-		const getingTabCats = () => {
-			setReqPending(true);
-			axios.get('api/getById/get_pro_cats/'+tab).then(res => {
-				setCatsArr(res.data);setReqPending(false);
-			});
-		};
 		getingTabCats();
 	},[]);
+	const getingTabCats = () => {
+		setReqPending(true);
+		let data = new FormData();
+		data.append( 'tab', tab );
+		data.append( 'project_id', projectId );
+		axios.post('api/only_post/get_pro_cats',data).then(res => {
+			setCatsArr(res.data);setReqPending(false);
+		});
+	};
 	const handleSubmitCat = (e) => {
 		e.preventDefault();
 		let data = new FormData();
 		data.append( 'catName', catName );
 		data.append( 'type', tab );
+		data.append( 'project_id', projectId );
 		setReqPending(true);
 		axios.post('api/only_post/add_tab_cat',data).then(res => {
 			setCatName('');
@@ -37,9 +41,14 @@ export default function Comp ({tab,selectTabPage}) {
 			setReqPending(false);
 		});
 	}
-	const handDeleteCat = (e,catId) => {
+	const handDeleteCat = (e,delCatId) => {
 		e.stopPropagation();setReqPending(true);
-		axios.get('api/getById/del_pro_cats/'+catId).then(res => { setCatsArr(res.data);setCatNamesArr([]);setCatId('');setReqPending(false); });
+		axios.get('api/getById/del_pro_cats/'+delCatId).then(res => {
+			setCatsArr(res.data);setReqPending(false);
+			if (delCatId == catId) {
+				selectTabPage(null,'');setCatNamesArr([]);setCatId('');
+			}
+		});
 	}
 	const updateThisCat = (e,idx) => {
 		e.stopPropagation();
@@ -51,6 +60,7 @@ export default function Comp ({tab,selectTabPage}) {
 		let data = new FormData();
 		data.append( 'id', thisCatId );
 		data.append( 'name', thisCatName );
+		data.append( 'project_id', projectId );
 		setReqPending(true);
 		axios.post('api/only_post/update_tab_cat',data).then(res => {
 			setThisCatId('');
@@ -89,9 +99,12 @@ export default function Comp ({tab,selectTabPage}) {
 			setReqPending(false);
 		});
 	}
-	const handDeleteName = (e,nameId) => {
+	const handDeleteName = (e,delNameId) => {
 		e.stopPropagation();setReqPending(true);
-		axios.get('api/getById/del_cat_name/'+nameId).then(res => { setCatNamesArr(res.data);setReqPending(false); });
+		axios.get('api/getById/del_cat_name/'+delNameId).then(res => {
+			setCatNamesArr(res.data);setReqPending(false);
+			if (delNameId == nameId) selectTabPage(null,'');
+		});
 	}
 	const updateThisName = (e,idx) => {
 		e.stopPropagation();
@@ -161,7 +174,7 @@ export default function Comp ({tab,selectTabPage}) {
 			         	<div key={obj2.name}>
 				         	<li className={`sublist ${obj2.id == nameId ? 'selected' : ''}`} onClick={(e) => selectName(e,obj2.id)}>
 				         		{
-				         			tab == "swot" || tab == "tows" ? '' :
+				         			tab == "swot" || tab == "tows" || tab == "multiple_dashboard" ? '' :
 				         			<>
 				         				<span className="i_left edit_i" onClick={(e) => updateThisName(e,idx2)}>
 				         				</span><span className="i_left delete_i" onClick={(e) => handDeleteName(e,obj2.id)}></span>
@@ -201,7 +214,7 @@ export default function Comp ({tab,selectTabPage}) {
 				</form> : ''
 			}
 			{
-				tab == "strategy_house" || tab == "swot" || tab == "tows" ? '' :
+				tab == "strategy_house" || tab == "swot" || tab == "tows" || tab == "multiple_dashboard" ? '' :
 				catId && !addCatNames ? <li className="add_list" onClick={() => setAddCatNames(true)}><h4>Add Name +</h4></li> : ''
 			}
 		</>

@@ -5,6 +5,7 @@ import {useState,useEffect} from 'react'
 import axios from 'axios'
 import BarCharInsertForm from './childParts/BarCharInsertForm.tsx';
 import BarChartUpdateForm from './childParts/BarChartUpdateForm.tsx';
+import PageTabNote from './PageTabNote.tsx'
 
 export default function Part ({nameId}) {
 	const [dataLablesArr,setDataLablesArr] = useState([]);
@@ -31,7 +32,7 @@ export default function Part ({nameId}) {
   			  			},
   			  			color: 'black',
   			  			font: {
-  							size: 18,
+  							size: 16,
   						},
   			  		}
   			  	};
@@ -47,7 +48,7 @@ export default function Part ({nameId}) {
   	  		  			},
   	  		  			color: 'white',
   	  		  			font: {
-  	  						size: 18,
+  	  						size: 14,
   	  					},
   	  					anchor: 'end',
   	  					align: 'end',
@@ -66,7 +67,7 @@ export default function Part ({nameId}) {
 		responsive: true,
 		indexAxis: 'y' as const,
 		layout: {
-		    padding: 55
+		    padding: 50
 		},
 		elements: {
 			bar: {
@@ -144,11 +145,11 @@ export default function Part ({nameId}) {
 				{/*DATA IMAGE MAPPING*/}
 				{
 					dataLablesArr.length > 0 ?
-					<div style={{ width: '85%' , margin: '0px auto' }}>
+					<div style={{ width: '100%' , margin: '0px auto' }}>
 						<Bar options={options} data={data} />
 					</div> : ''
 				}
-				<br/><br/>
+				<br/><div className="input_m_div text_center m_t_10"><PageTabNote nameId={nameId} tab="name_note" /></div>
 				{
 					dataLablesArr.length > 0 ?
 					<div className="input_m_div text_right m_t_20">

@@ -6,6 +6,7 @@ import {useState,useEffect} from 'react'
 import axios from 'axios'
 import $ from "jquery";
 import UpdateStakeHolder from './parts/UpdateStakeHolder.tsx';
+import PageTabNote from './parts/PageTabNote.tsx'
 
 export default function Comp ({nameId}) {
 	const [dataSetArr,setDataSetArr] = useState([]);
@@ -124,9 +125,8 @@ export default function Comp ({nameId}) {
 						<Doughnut data={data} options={options} plugins={plugins}/>
 					</div> : ''
 				}
-				<br/>
 				{isValError ? <div className="toast toast-error"><div className="toast-title">Error</div><div className="toast-message">Your percentage value is <b>{maxThan100}</b> than <b>100</b>.</div></div> : ''}
-				<br/>
+				<br/><div className="input_m_div text_center m_t_10"><PageTabNote nameId={nameId} tab="name_note" /></div>
 				{/*UPDATION FORM*/}
 				{
 					dataSetArr.length > 0 ?

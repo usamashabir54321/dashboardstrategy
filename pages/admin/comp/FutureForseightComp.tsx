@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import PageTabNote from './parts/PageTabNote.tsx'
 
 export default function Comp ({nameId}) {
 	const [dataArr,setDataArr] = useState([]);
@@ -48,6 +49,11 @@ export default function Comp ({nameId}) {
 			setAllowEdit(false);setItemIndx(null);setReqPending(false);
 		});
 	};
+	const selectBox = (idx) => {
+		if (idx == itemIndx) setItemIndx(null)
+		else setItemIndx(idx)
+		setAllowEdit(false);
+	};
 	return (
 		<>
 			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
@@ -67,7 +73,7 @@ export default function Comp ({nameId}) {
 					{
 						dataArr.map(function(obj, idx){
 					         return (
-					         	<div className="grid_item cursor_pointer" key={idx} onClick={() => setItemIndx(idx)}>
+					         	<div className="grid_item cursor_pointer" key={idx} onClick={() => selectBox(idx)}>
 						         	<div className={`future_forsight_card card ${idx === itemIndx ? 'selected' : ''}`}>
 						         		<img src={axios.defaults.baseURL+obj.img_path} alt="image" />
 						         		<br/><br/>
@@ -78,13 +84,16 @@ export default function Comp ({nameId}) {
 					    })
 					}
 				</div>
-				{
-					itemIndx === null ? '' :
-					<div className="input_m_div text_right m_t_30">
-						<button className="btn_cancel cursor_pointer" onClick={handDelete}><small>Delete Project</small></button>&nbsp;&nbsp;&nbsp;
-						<button className="btn_submit cursor_pointer" onClick={() => setAllowEdit(true)}><small>Edit Project</small></button>
-					</div>
-				}
+				<div className="input_m_div text_center m_t_30">
+					<PageTabNote nameId={nameId} tab="name_note" />
+					{
+						itemIndx === null ? '' :
+						<div className="text_right">
+							<button className="btn_cancel cursor_pointer" onClick={handDelete}><small>Delete Project</small></button>&nbsp;&nbsp;&nbsp;
+							<button className="btn_submit cursor_pointer" onClick={() => setAllowEdit(true)}><small>Edit Project</small></button>
+						</div>
+					}
+				</div>
 				{/*UPDATION MY PROJECT*/}
 				{
 					allowEdit ?

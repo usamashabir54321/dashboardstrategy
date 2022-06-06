@@ -1,7 +1,9 @@
-import { SET_AUTH_USER, NOTHING_TO_SET } from "../types";
+import { SET_AUTH_USER, SET_SIDEBAR, SET_PROJECT, NOTHING_TO_SET } from "../types";
 
 const initialState = {
   auth_u : {},
+  thisProject : {},
+  openSideBar : false,
 };
 
 const adminReducer = (state = initialState, action) => {
@@ -10,6 +12,18 @@ const adminReducer = (state = initialState, action) => {
       return {
         ...state,
         auth_u: action.payload
+      };
+      
+    case SET_PROJECT:
+      return {
+        ...state,
+        thisProject: action.payload
+      };
+      
+    case SET_SIDEBAR:
+      return {
+        ...state,
+        openSideBar: action.payload
       };
 
     case NOTHING_TO_SET:

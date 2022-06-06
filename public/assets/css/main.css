@@ -47,6 +47,28 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
 	height: 100vh;
     width: 100%;
 }
+.table_search {padding: 10px 0px 30px;}
+.table_search img {
+    position: absolute;
+    margin-top: 12px;
+    margin-left: 12px;
+}
+.table_search input {
+    padding: 12px 0 12px 40px;
+    width: 20%;
+    background-color: #464646;
+    border: 2px solid white;
+    color: white;
+    border-radius: 12px;
+    font-weight: 700;
+}
+.table_search input::placeholder {color: white;}
+.table_board {width: 100%;}
+.table_board thead th {background-color: #646464;padding: 18px;}
+.table_board tbody tr td {padding: 25px 5px;border-bottom: 2px solid #6a6969;}
+.table_board tbody tr:last-child td {border: none;}
+.table_board tbody tr td .table_btn {border: none;padding: 10px;border-radius: 50%;margin: 0 5px;}
+.table_board tbody tr td .table_btn img {width: 15px;height: 15px;}
 .input_m_div .btn_submit,.input_m_div .btn_cancel {
     box-shadow: 0px 0px 30px rgb(0 0 0 / 20%);
     border-radius: 10px;
@@ -374,7 +396,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     padding: 25px;
 }
 .dashboard_pages ul.list li {
-    padding: 10px 30px;
+    padding: 10px 15px;
     background: #0C94CD;
     cursor: pointer;
     text-align: center;
@@ -452,6 +474,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     position: absolute;
     width: 200px;
     right: 10%;
+    margin-top: 50px;
 }
 #u_g_info:hover .dropdown_content {display: block;}
 #u_g_info .dropdown_ul li button {
@@ -537,14 +560,14 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     background: #EBEBEB;
 }
 		/*DASHBOARD PROFILE PAGE*/
-#profile_pg .edit_profile_icon {
+.edit_profile_icon {
     padding: 6px;
     border-radius: 50%;
     display: inline-flex;
     background-color: #29ABE2;
     border: none;
 }
-#profile_pg .edit_profile_icon svg {fill: #E4E4E4;}
+.edit_profile_icon svg {fill: #E4E4E4;}
 #profile_pg #user_detials #u_h_img img {
     border-radius: 50%;
     padding: 15px;
@@ -602,6 +625,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     padding: 20px 35px;
     font-size: 20px;
 }
+#multi_dash_comp img {width: 100%;}
 #home .sec_header {margin-bottom: 5%;}
 #home .sec_title {
     font-size: 45px;
@@ -835,6 +859,9 @@ div#testimonial_counter {margin-top: 66px;}
     height: 650px;
     padding: 1.4% 9%;
 }
+.d_light svg {
+    fill: black !important;
+}
 #mission_grid .mission_txt_div {
     height: 60%;
     display: table;
@@ -849,6 +876,9 @@ div#testimonial_counter {margin-top: 66px;}
 #home #footer {
     background-color: #303030;
     padding: 6% 6% 0;
+}
+div#menu-bar-toggle {
+    display: none;
 }
 #home #footer #footer_footer {
     background: #474747;
@@ -882,11 +912,15 @@ div#testimonial_counter {margin-top: 66px;}
     #h_sec_about_us .img_2 {width: 20%;margin-left: -6%;}
     #mission_grid {padding: 5%;}
         /*ADMIN HEADER CSS*/
-    .dashboard_pages #admin_header .d_grid {grid-template-columns: auto 51% auto !important;}
     .dashboard_pages #admin_header h1 {font-size: 30px;}
     .dashboard_pages .d_content ul.list li h4 , .dashboard_pages .d_content ul.list li h5 {font-size: 12px;line-height: 15px;}
     #swottowsdiv {height: 360px;}
     #swottowsdiv ul li {padding: 21px 0px 19px 26px;font-size: 15px;}
+    #kpi_model_id br {display: none;}
+    #kpi_model_id form {margin-top: 50px;}
+    #kpi_model_id form .d_grid {grid-template-columns: 36% 36% 24% !important; padding: 0px !important;}
+    #kpi_model_id form .input_m_div input, #kpi_model_id form .input_m_div select {font-size: 13px; padding: 10px 5px !important;}
+    #kpi_model_id form .input_m_div .btn_submit {padding: 10px 20px !important;}
 }
 @media screen and (max-width: 1024px) {
     #home #header #header_menu ul {margin: 5% 0;}
@@ -919,6 +953,7 @@ div#testimonial_counter {margin-top: 66px;}
     #swottowsdiv ul li {padding: 11px 0px 15px 17px;font-size: 12px;width: 82%;}
     #swottowsdiv #swottowscat {font-size: 10px;-webkit-text-stroke-width: 0.3px;}
     #swottowsdiv .right ul li {width: 81%;margin: 0 2rem;}
+    ul.u_info_ul .d_grid {grid-template-columns: 0% 35% 0% !important;}
 }
 @media screen and (max-width: 768px) {
     #home #header #header_menu {padding: 11px 28px;}
@@ -945,6 +980,18 @@ div#testimonial_counter {margin-top: 66px;}
     #mission_grid h2 {font-size: 15px;}
     #mission_grid h4 {font-size: 10px;line-height: 19px;}
     #mission_grid .mission_txt_div {height: 38%;}
+    #main_d_layout {grid-template-columns: 100% !important;}
+    #d_menu_sidebar {position: absolute; display: none; width: 40%;z-index: 9;}
+    #d_menu_sidebar.open {display: block;}
+    .d_grid.gap_l_30.gap_s_20 {grid-template-columns: unset !IMPORTANT;}
+    .d_body {padding: 0 10px;}
+    div#admin_header {padding: 20px 10px;}
+    .dashboard_pages #admin_header .d_grid {grid-template-columns: 50% 50% 0% !important;}
+    div#admin_header .d_grid .grid_item:nth-child(1) {padding: 15px 0px;line-height: 28px;}
+    div#menu-bar-toggle {display: block; padding: 18px 0px; margin-left: 15px;}
+    #kpi_model_id {width: 90% !important; padding: 10px 15px !important;}
+    #swottowsdiv {height: 280px;}
+    #swottowsdiv ul li {padding: 15px 0px 17px 17px;}
 }
 @media screen and (max-width: 425px) {
     #home #header #header_body h3 {font-size: 11px;}
@@ -985,6 +1032,7 @@ div#testimonial_counter {margin-top: 66px;}
     #mission_grid {height: 145px;padding: 1.5% 5%;}
 }
         /*MODAL CSS MAIN*/
+.ReactModal__Overlay {z-index: 99;}
 .ReactModal__Content .close_modal {
     float: right;
     padding: 7px 10px;

@@ -4,5 +4,5 @@ import adminReducer from "./adminReducer";
 
 export default combineReducers({
   themeChanger: themeReducer,
-  adminStore: adminReducer
+  adminStore: adminReducer,
 });

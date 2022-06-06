@@ -6,6 +6,7 @@ import {useState,useEffect} from 'react'
 import axios from 'axios'
 import DonutPieInsertForm from './childParts/DonutPieInsertForm.tsx';
 import DonutPieUpdateForm from './childParts/DonutPieUpdateForm.tsx';
+import PageTabNote from './PageTabNote.tsx'
 
 export default function Comp ({nameId}) {
 	const [dataSetArr,setDataSetArr] = useState([]);
@@ -110,7 +111,7 @@ export default function Comp ({nameId}) {
 						<Pie data={data} options={options} />
 					</div> : ''
 				}
-				<br/><br/>
+				<br/><div className="input_m_div text_center m_t_10"><PageTabNote nameId={nameId} tab="name_note" /></div>
 				{
 					dataSetArr.length > 0 ?
 					<div className="input_m_div text_right m_t_20">

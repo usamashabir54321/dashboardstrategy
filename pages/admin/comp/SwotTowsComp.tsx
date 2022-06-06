@@ -1,6 +1,7 @@
 import {useState,useEffect} from 'react'
 import axios from 'axios'
 import ReactTooltip from 'react-tooltip';
+import PageTabNote from './parts/PageTabNote.tsx'
 
 export default function Comp ({nameId,tab}) {
 	const [nameName,setNameName] = useState('');
@@ -70,6 +71,7 @@ export default function Comp ({nameId,tab}) {
 						</div>
 					</div> : ''
 				}
+				<br/><div className="input_m_div text_center m_t_10"><PageTabNote nameId={nameId} tab="name_note" /></div>
 				{/*INSERTION OR UPDATION FORM*/}
 				<div className="future_form">
 					<form onSubmit={ ( e ) => handleSubmit( e ) } action="" method="post" id="insert_form" className="m_t_30">
@@ -79,19 +81,19 @@ export default function Comp ({nameId,tab}) {
 					         	<div className="d_grid" style={{ gridTemplateColumns: '23% 23% 23% 23%' , gridGap: '3%' }}>
 					         		<div className="grid_item">
 					         			<div className="input_m_div"><label><b>Entry 1</b></label></div><br/>
-					         			{ leftTopData.map(function(obj, idx){return <div className="input_m_div"><input type="text" name="l_t_data[]" defaultValue={obj} placeholder="Text" /></div> }) }
+					         			{ leftTopData.map(function(obj, idx){return <div className="input_m_div"><input type="text" maxLength="80" name="l_t_data[]" defaultValue={obj} placeholder="Text" /></div> }) }
 					         		</div>
 					         		<div className="grid_item">
 					         			<div className="input_m_div"><label><b>Entry 2</b></label></div><br/>
-					         			{ leftBottomData.map(function(obj, idx){return <div className="input_m_div"><input type="text" name="l_b_data[]" defaultValue={obj} placeholder="Text" /></div> }) }
+					         			{ leftBottomData.map(function(obj, idx){return <div className="input_m_div"><input type="text" maxLength="80" name="l_b_data[]" defaultValue={obj} placeholder="Text" /></div> }) }
 					         		</div>
 					         		<div className="grid_item">
 					         			<div className="input_m_div"><label><b>Entry 3</b></label></div><br/>
-					         			{ rightTopData.map(function(obj, idx){return <div className="input_m_div"><input type="text" name="r_t_data[]" defaultValue={obj} placeholder="Text" /></div> }) }
+					         			{ rightTopData.map(function(obj, idx){return <div className="input_m_div"><input type="text" maxLength="80" name="r_t_data[]" defaultValue={obj} placeholder="Text" /></div> }) }
 					         		</div>
 					         		<div className="grid_item">
 					         			<div className="input_m_div"><label><b>Entry 4</b></label></div><br/>
-					         			{ rightBottomData.map(function(obj, idx){return <div className="input_m_div"><input type="text" name="r_b_data[]" defaultValue={obj} placeholder="Text" /></div> }) }
+					         			{ rightBottomData.map(function(obj, idx){return <div className="input_m_div"><input type="text" maxLength="80" name="r_b_data[]" defaultValue={obj} placeholder="Text" /></div> }) }
 					         		</div>
 					         	</div>
 								<div className="input_m_div text_right m_t_20">
@@ -103,27 +105,27 @@ export default function Comp ({nameId,tab}) {
 					         	<div className="d_grid" style={{ gridTemplateColumns: '23% 23% 23% 23%' , gridGap: '3%' }}>
 					         		<div className="grid_item">
 					         			<div className="input_m_div"><label><b>Entry 1</b></label></div><br/>
-					         			<div className="input_m_div"><input type="text" name="l_t_data[]" required placeholder="Text" /></div>
-					         			<div className="input_m_div"><input type="text" name="l_t_data[]" placeholder="Text" /></div>
-					         			<div className="input_m_div"><input type="text" name="l_t_data[]" placeholder="Text" /></div>
+					         			<div className="input_m_div"><input type="text" maxLength="80" name="l_t_data[]" required placeholder="Text" /></div>
+					         			<div className="input_m_div"><input type="text" maxLength="80" name="l_t_data[]" placeholder="Text" /></div>
+					         			<div className="input_m_div"><input type="text" maxLength="80" name="l_t_data[]" placeholder="Text" /></div>
 					         		</div>
 					         		<div className="grid_item">
 					         			<div className="input_m_div"><label><b>Entry 2</b></label></div><br/>
-					         			<div className="input_m_div"><input type="text" name="l_b_data[]" required placeholder="Text" /></div>
-					         			<div className="input_m_div"><input type="text" name="l_b_data[]" placeholder="Text" /></div>
-					         			<div className="input_m_div"><input type="text" name="l_b_data[]" placeholder="Text" /></div>
+					         			<div className="input_m_div"><input type="text" maxLength="80" name="l_b_data[]" required placeholder="Text" /></div>
+					         			<div className="input_m_div"><input type="text" maxLength="80" name="l_b_data[]" placeholder="Text" /></div>
+					         			<div className="input_m_div"><input type="text" maxLength="80" name="l_b_data[]" placeholder="Text" /></div>
 					         		</div>
 					         		<div className="grid_item">
 					         			<div className="input_m_div"><label><b>Entry 3</b></label></div><br/>
-					         			<div className="input_m_div"><input type="text" name="r_t_data[]" required placeholder="Text" /></div>
-					         			<div className="input_m_div"><input type="text" name="r_t_data[]" placeholder="Text" /></div>
-					         			<div className="input_m_div"><input type="text" name="r_t_data[]" placeholder="Text" /></div>
+					         			<div className="input_m_div"><input type="text" maxLength="80" name="r_t_data[]" required placeholder="Text" /></div>
+					         			<div className="input_m_div"><input type="text" maxLength="80" name="r_t_data[]" placeholder="Text" /></div>
+					         			<div className="input_m_div"><input type="text" maxLength="80" name="r_t_data[]" placeholder="Text" /></div>
 					         		</div>
 					         		<div className="grid_item">
 					         			<div className="input_m_div"><label><b>Entry 4</b></label></div><br/>
-					         			<div className="input_m_div"><input type="text" name="r_b_data[]" required placeholder="Text" /></div>
-					         			<div className="input_m_div"><input type="text" name="r_b_data[]" placeholder="Text" /></div>
-					         			<div className="input_m_div"><input type="text" name="r_b_data[]" placeholder="Text" /></div>
+					         			<div className="input_m_div"><input type="text" maxLength="80" name="r_b_data[]" required placeholder="Text" /></div>
+					         			<div className="input_m_div"><input type="text" maxLength="80" name="r_b_data[]" placeholder="Text" /></div>
+					         			<div className="input_m_div"><input type="text" maxLength="80" name="r_b_data[]" placeholder="Text" /></div>
 					         		</div>
 					         	</div>
 								<div className="input_m_div text_right m_t_20">

@@ -5,12 +5,14 @@ import axios from 'axios'
 import { useState , useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import {setTheme} from '../../store/actions/themeActions'
-import {setAuthUser} from '../../store/actions/adminActions'
+import {setAuthUser,setSideBar} from '../../store/actions/adminActions'
 import AdminFooter from './comp/AdminFooter.tsx'
 
 export default function Layout ({children}) {
 	const themeReducerData = useSelector((state) => state.themeChanger);
+	const adminStoreData = useSelector((state) => state.adminStore);
 	const { themeMode } = themeReducerData;
+	const { openSideBar } = adminStoreData;
 	const [loader,setLoader] = useState(true);
 	const dispatch = useDispatch();
 	const router = useRouter();
@@ -29,9 +31,9 @@ export default function Layout ({children}) {
 			{/*MAIN LAYOUT*/}
 			<div className={`dashboard_pages ${themeMode}`} id="main">
 				{ loader ? <div id="main_loader"><div></div></div> :
-					<div className="d_grid" style={{ gridTemplateColumns: '14% 86%' }}>
+					<div className="d_grid" id="main_d_layout" style={{ gridTemplateColumns: '14% 86%' }}>
 						{/*SIDE BAR*/}
-						<div className="grid_item" id="d_menu_sidebar">
+						<div className="grid_item" id="d_menu_sidebar" className={ openSideBar ? 'open' : '' }>
 							<div className="sidebar_logo text_center"><img src="/assets/img/logo.png" alt="logo" /></div>
 							<div className="sidebar_links">
 								<ul id="main_ul">
@@ -55,13 +57,15 @@ export default function Layout ({children}) {
 											</h4>
 										</Link>
 									</li>
-									<li>
-										<h4>
-											<svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
-												<path d="M13.5 0H18V4.5H13.5V0ZM0 18H12V0H0V18ZM13.5 11.25H18V6.75H13.5V11.25ZM13.5 18H18V13.5H13.5V18Z"/>
-											</svg>
-											View Projects
-										</h4>
+									<li className={router.pathname == "/admin/view-project" ? "active" : ""}>
+										<Link href="view-project">
+											<h4>
+												<svg xmlns="http://www.w3.org/2000/svg" width="20" height="17" viewBox="0 0 20 17">
+													<path d="M13.5 0H18V4.5H13.5V0ZM0 18H12V0H0V18ZM13.5 11.25H18V6.75H13.5V11.25ZM13.5 18H18V13.5H13.5V18Z"/>
+												</svg>
+												View Projects
+											</h4>
+										</Link>
 									</li>
 								</ul>
 							</div>

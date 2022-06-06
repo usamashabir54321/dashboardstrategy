@@ -2,6 +2,7 @@ import Validation from '../Validation.tsx'
 import axios from 'axios'
 import {useState,useEffect,useRef} from 'react'
 import { ReactDiagram } from 'gojs-react';
+import PageTabNote from './PageTabNote.tsx'
 
 export default function Part ({nameId,apiParam}) {
 	const [nodeDataArray, setNodeDataArray] = useState([]);
@@ -174,6 +175,10 @@ export default function Part ({nameId,apiParam}) {
 				linkDataArray = {linkDataArray}
 		        style={{ width: '100%', height: '600px' }}
 	        />
+	        <br/>
+	        <div className="input_m_div text_center m_t_10">
+	        	{apiParam == 'cat_strategy' ? <PageTabNote nameId={nameId} tab="cat_note" /> : <PageTabNote nameId={nameId} tab="name_note" />}
+	        </div>
 	        <br/>
 	        <ul style={{ marginLeft: '30px' }}>
 	        	<li><small><b>Double click on node to edit text.</b></small></li>

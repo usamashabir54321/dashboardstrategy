@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 import { removeCookies } from 'cookies-next';
 import {useSelector, useDispatch} from 'react-redux'
 import {changeTheme} from '../../../store/actions/themeActions'
+import {setSideBar} from '../../../store/actions/adminActions'
 import {useState} from 'react'
 import axios from 'axios'
 
@@ -11,7 +12,7 @@ export default function Comp ({pageTitle}) {
 	const themeReducerData = useSelector((state) => state.themeChanger);
 	const adminReducerData = useSelector((state) => state.adminStore);
 	const { themeMode } = themeReducerData;
-	const { auth_u } = adminReducerData;
+	const { auth_u,openSideBar } = adminReducerData;
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const logoutMe = () => {
@@ -25,12 +26,11 @@ export default function Comp ({pageTitle}) {
 	return (
 		<div className="card m_t_25" id="admin_header">
 			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
-			<div className="d_grid" style={{ gridTemplateColumns: 'auto 68% auto' }}>
+			<div className="d_grid" style={{ gridTemplateColumns: '50% 50% 0%' }}>
 				<div className="grid_item"><h1>{pageTitle}</h1></div>
-				<div className="grid_item"></div>
 				<div className="grid_item text_right cursor_pointer" id="u_g_info">
 					{auth_u ? 
-						<div className="d_flex">
+						<div className="d_flex" style={{float: 'right'}}>
 							<svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26" id="change_theme_btn" onClick={() => dispatch(changeTheme(themeMode))}>
 								<path d="M13 9.75C14.7918 9.75 16.25 11.2082 16.25 13C16.25 14.7918 14.7918 16.25 13 16.25V9.75ZM13 7.58333C10.0078 7.58333 7.58333 10.0078 7.58333 13C7.58333 15.9922 10.0078 18.4167 13 18.4167C15.9922 18.4167 18.4167 15.9922 18.4167 13C18.4167 10.0078 15.9922 7.58333 13 7.58333ZM8.46733 6.93442L4.57492 3.04092L3.042 4.57275L6.93658 8.46733C7.371 7.88558 7.88558 7.36992 8.46733 6.93442ZM13 5.41667C13.3683 5.41667 13.728 5.45242 14.0833 5.50333V0H11.9167V5.50333C12.272 5.45242 12.6317 5.41667 13 5.41667ZM19.0645 8.46625L22.9591 4.57167L21.4272 3.03983L17.5327 6.93442C18.1144 7.36992 18.629 7.88558 19.0645 8.46625ZM5.41667 13C5.41667 12.6317 5.45242 12.272 5.50333 11.9167H0V14.0833H5.50333C5.45242 13.728 5.41667 13.3683 5.41667 13ZM17.5338 19.0645L21.4272 22.9569L22.9602 21.4251L19.0667 17.5327C18.6301 18.1133 18.1144 18.629 17.5338 19.0645ZM6.93442 17.5327L3.042 21.4251L4.57383 22.9569L8.46625 19.0645C7.88558 18.629 7.371 18.1144 6.93442 17.5327ZM20.4967 11.9167C20.5476 12.272 20.5833 12.6317 20.5833 13C20.5833 13.3683 20.5476 13.728 20.4967 14.0833H26V11.9167H20.4967ZM13 20.5833C12.6317 20.5833 12.272 20.5476 11.9167 20.4967V26H14.0833V20.4967C13.728 20.5476 13.3683 20.5833 13 20.5833Z"/>
 							</svg>
@@ -38,10 +38,18 @@ export default function Comp ({pageTitle}) {
 								<h4><b>{auth_u.name}</b></h4>
 								<h5>{auth_u.role}</h5>
 							</div>
-							{
-								auth_u.img_path ? <img src={axios.defaults.baseURL+auth_u.img_path} alt="image" className="avatar" /> :
-								<img src="/assets/img/admin_avatar.png" alt="image" className="avatar" />
-							}
+							<div>
+								{
+									auth_u.img_path ? <img src={axios.defaults.baseURL+auth_u.img_path} alt="image" className="avatar" /> :
+									<img src="/assets/img/admin_avatar.png" alt="image" className="avatar" />
+								}
+							</div>
+							<div id="menu-bar-toggle" onClick={() => dispatch(setSideBar(!openSideBar))}>
+								{
+									openSideBar ? <svg fill="#fff" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="24px" height="24px"><path d="M 7.71875 6.28125 L 6.28125 7.71875 L 23.5625 25 L 6.28125 42.28125 L 7.71875 43.71875 L 25 26.4375 L 42.28125 43.71875 L 43.71875 42.28125 L 26.4375 25 L 43.71875 7.71875 L 42.28125 6.28125 L 25 23.5625 Z"/></svg>
+									: <svg fill="#fff" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="24px" height="24px"><path d="M 2 5 L 2 7 L 22 7 L 22 5 L 2 5 z M 2 11 L 2 13 L 22 13 L 22 11 L 2 11 z M 2 17 L 2 19 L 22 19 L 22 17 L 2 17 z"/></svg>
+								}
+							</div>
 						</div>
 						: ''
 					}

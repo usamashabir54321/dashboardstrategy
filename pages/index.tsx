@@ -11,6 +11,9 @@ export default function Page () {
             dshbrdVidRef.current.play();
         },5000)
     }, []);
+    const scrollTo = (id) => {
+    	if (id) document.getElementById(id).scrollIntoView({ behavior: "smooth" })
+    };
 	return (
 		<>
 			<Head>
@@ -20,7 +23,7 @@ export default function Page () {
 			<div id="home">
 					{/*HEADER*/}
 				<section id="header">
-					<video ref={hdrVidRef} loop muted controls className="bg_video">
+					<video ref={hdrVidRef} loop muted className="bg_video">
 			            <source src="/assets/media/ROOM.mp4" type="video/mp4" />
 			            Your browser does not support the video tag.
 			       	</video>
@@ -32,10 +35,10 @@ export default function Page () {
 							</div>
 							<div className="grid_item">
 								<ul>
-									<li><Link href="/"><h4>HOME</h4></Link></li>
-									<li><Link href="/"><h4>SERVICES</h4></Link></li>
-									<li><Link href="/"><h4>OUR TEAM</h4></Link></li>
-									<li><Link href="/"><h4>CONTACT US</h4></Link></li>
+									<li onClick={() => scrollTo('header')}><h4>HOME</h4></li>
+									<li onClick={() => scrollTo('h_sec_services')}><h4>SERVICES</h4></li>
+									<li onClick={() => scrollTo('h_sec_team')}><h4>OUR TEAM</h4></li>
+									<li onClick={() => scrollTo('h_get_in_touch')}><h4>CONTACT US</h4></li>
 								</ul>
 							</div>
 							<div className="grid_item"><Link href="login"><button className="btn btn_web">LOGIN</button></Link></div>
@@ -46,18 +49,18 @@ export default function Page () {
 							<h1>DASHBOARD STRATEGY</h1>
 							<h3>ADVANCE STEPS TO ACHIEVE VISION</h3>
 							<div id="header_buttons">
-								<button className="btn btn_web">STAKEHOLDERS FRAMEWORK</button>
-								<button className="btn btn_web">KPI’s</button>
-								<button className="btn btn_web">DATA</button>
-								<button className="btn btn_web">SWOT</button>
-								<button className="btn btn_web">ORGANIZATION CHARTS</button>
+								<button onClick={() => scrollTo('h_sec_services')} className="btn btn_web">STAKEHOLDERS FRAMEWORK</button>
+								<button onClick={() => scrollTo('h_sec_services')} className="btn btn_web">KPI’s</button>
+								<button onClick={() => scrollTo('h_sec_services')} className="btn btn_web">DATA</button>
+								<button onClick={() => scrollTo('h_sec_services')} className="btn btn_web">SWOT</button>
+								<button onClick={() => scrollTo('h_sec_services')} className="btn btn_web">ORGANIZATION CHARTS</button>
 							</div>
 						</div>
 					</div>
 				</section>
 					{/*DASHBOARD STRATEGY SECTION*/}
 				<section id="h_sec_2">
-					<video ref={dshbrdVidRef} loop muted controls className="bg_video">
+					<video ref={dshbrdVidRef} loop muted className="bg_video">
 			            <source src="/assets/media/WORLD.mp4" type="video/mp4" />
 			            Your browser does not support the video tag.
 			       	</video>
@@ -152,6 +155,42 @@ export default function Page () {
 					</div>
 					<div id="chart_types">
 						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
+							<div className="grid_item"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/donut_chart.png" /></div></div>
+							<div className="grid_item chart_txt_grid">
+								<div className="chart_txt_wrap">
+									<h2><b>Donut Pie Chart</b></h2><br />
+									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
+								</div>
+							</div>
+						</div>
+						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
+							<div className="grid_item chart_txt_grid">
+								<div className="chart_txt_wrap">
+									<h2><b>2D Pie Chart</b></h2><br />
+									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
+								</div>
+							</div>
+							<div className="grid_item text_center"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/2d_pie_chart.png" /></div></div>
+						</div>
+						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
+							<div className="grid_item"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/verticle.png" /></div></div>
+							<div className="grid_item chart_txt_grid">
+								<div className="chart_txt_wrap">
+									<h2><b>Verticle Bar Chart</b></h2><br />
+									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
+								</div>
+							</div>
+						</div>
+						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
+							<div className="grid_item chart_txt_grid">
+								<div className="chart_txt_wrap">
+									<h2><b>Horizontal Bar Chart</b></h2><br />
+									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
+								</div>
+							</div>
+							<div className="grid_item text_center"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/horizontal.png" /></div></div>
+						</div>
+						{/*<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
 							<div className="grid_item"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/chart_1.png" /></div></div>
 							<div className="grid_item chart_txt_grid">
 								<div className="chart_txt_wrap">
@@ -213,7 +252,7 @@ export default function Page () {
 									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
 								</div>
 							</div>
-						</div>
+						</div>*/}
 					</div>
 				</section>
 					{/*OUR SERVICES*/}

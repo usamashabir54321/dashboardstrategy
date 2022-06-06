@@ -6,10 +6,12 @@ import {useState,useEffect} from 'react'
 import axios from 'axios'
 import DonutPieInsertForm from './childParts/DonutPieInsertForm.tsx';
 import DonutPieUpdateForm from './childParts/DonutPieUpdateForm.tsx';
+import PageTabNote from './PageTabNote.tsx'
 
 export default function Comp ({nameId}) {
 	const [dataSetArr,setDataSetArr] = useState([]);
 	const [isUpdate,setIsUpdate] = useState(false);
+	const [radiusNum,setRadiusNum] = useState('');
 	const [reqPending,setReqPending] = useState(false);
 	const [isValError,setIsValError]= useState(false);
 	const [maxThan100,setMaxThan100]= useState('');
@@ -18,11 +20,13 @@ export default function Comp ({nameId}) {
 	},[]);
 	const getStakeHolders = () => {
 		axios.get('api/getById/get_donut_kpi/'+nameId).then(res => {
-			if (res.data.labels) {
+			if (res.data.percent_val) {
 				var chartTotalArr = [];
-			  	var chartObj = {labels: [],data: [],backgroundColor: [],borderColor: ['white'],borderWidth: 2,id: null};
+			  	var chartObj = {labels: [],data: [],backgroundColor: [],cutout: "80%",borderColor: ['white'],borderWidth: 2,id: null};
+			  	var percentValArr = res.data.percent_val.split("|");
+				setRadiusNum(percentValArr[0]);
 			  	chartObj.labels = res.data.labels.split("|");
-			  	chartObj.data = res.data.percent_val.split("|");
+			  	chartObj.data = percentValArr;
 			  	chartObj.backgroundColor = res.data.colors.split("|");
 			  	chartObj.id = res.data.id;
 			  	chartTotalArr.push(chartObj);
@@ -65,9 +69,10 @@ export default function Comp ({nameId}) {
 			data.append( 'l_b_inpt[]', 'black' );
 		}
 		data.append( 'name_id', nameId );
+		data.append( 'l_t_inpt[]', '' );
 		setReqPending(true);
 		axios.post('api/only_post/save_donut_kpi',data).then(res => {
-			getStakeHolders();setReqPending(false);
+			setRadiusNum('');getStakeHolders();setReqPending(false);
 		});
 	};
 	return (
@@ -87,11 +92,12 @@ export default function Comp ({nameId}) {
 				{/*DATA IMAGE MAPPING*/}
 				{
 					dataSetArr.length > 0 ?
-					<div style={{ width: '60%' , margin: '0px auto' }}>
+					<div style={{ width: '50%' , margin: '0px auto' }}>
 						<Doughnut data={data} options={options} />
+						<div className="donut-inner" style={{ marginTop: '-51%',marginBottom: '50%',textAlign: 'center' }}><h1 style={{ fontWeight: '900',letterSpacing: '2px',fontSize: '39px' }}>{radiusNum} %</h1></div>
 					</div> : ''
 				}
-				<br/><br/>
+				<br/><div className="input_m_div text_center m_t_10"><PageTabNote nameId={nameId} tab="name_note" /></div>
 				{
 					dataSetArr.length > 0 ?
 					<div className="input_m_div text_right m_t_20">
@@ -101,9 +107,64 @@ export default function Comp ({nameId}) {
 							: <button className="btn_submit cursor_pointer" type="submit" onClick={() => setIsUpdate(true)}>Edit Project</button>
 						}
 					</div>
-					: <DonutPieInsertForm handleSubmit={handleSubmit} />
+					:
+					<div className="future_form" id="insert_f_grid">
+						<form onSubmit={ ( e ) => handleSubmit( e ) } action="" method="post">
+					        <div className="d_grid insert_grid_line" style={{ gridTemplateColumns: '10% 30% 30% 10%' , gridGap: '4%' }}>
+				         		<div className="grid_item"></div>
+				         		<div className="grid_item">
+				         			<div className="input_m_div"><input type="number" name="l_p_inpt[]" required placeholder="Percentage" /></div>
+				         		</div>
+				         		<div className="grid_item">
+				         			<div className="input_m_div">
+				         				<select name="l_b_inpt[]" required>
+				         					<option value="">Choose Background Color</option>
+					         				<option value="#565049">Dark</option>
+					         				<option value="#274e94">Navy Blue</option>
+					         				<option value="#bf9000">Dark Yellow</option>
+				         				</select>
+				         			</div>
+				         		</div>
+				         		<div className="grid_item">
+				         			<div className="input_m_div text_center">
+				         				<button className="btn_submit cursor_pointer" type="submit">Save</button>
+				         			</div>
+				         		</div>
+				         		<div className="grid_item"></div>
+				         	</div>
+						</form>
+					</div>
 				}
-				{isUpdate ? <DonutPieUpdateForm handleSubmit={handleSubmit} data={dataSetArr[0]} /> : ''}
+				{
+					isUpdate ?
+					<div className="future_form" id="update_f_grid">
+						<form onSubmit={ ( e ) => handleSubmit( e ) } action="" method="post">
+					        <div className="d_grid update_grid_line" style={{ gridTemplateColumns: '10% 30% 30% 10%' , gridGap: '4%' }}>
+				         		<div className="grid_item"></div>
+				         		<div className="grid_item">
+				         			<div className="input_m_div"><input type="number" defaultValue={dataSetArr[0].data[0]} name="l_p_inpt[]" required placeholder="Percentage" /></div>
+				         		</div>
+				         		<div className="grid_item">
+				         			<div className="input_m_div">
+				         				<select name="l_b_inpt[]" required defaultValue={dataSetArr[0].backgroundColor[0]}>
+				         					<option value="">Choose Background Color</option>
+					         				<option value="#565049">Dark</option>
+					         				<option value="#274e94">Navy Blue</option>
+					         				<option value="#bf9000">Dark Yellow</option>
+				         				</select>
+				         			</div>
+				         		</div>
+				         		<div className="grid_item">
+				         			<div className="input_m_div text_center">
+				         				<button className="btn_submit cursor_pointer" type="submit">Update</button>
+				         			</div>
+				         		</div>
+				         		<div className="grid_item"></div>
+				         	</div>
+						</form>
+					</div>
+					: ''
+				}
 			</div>
 		</>
 	)

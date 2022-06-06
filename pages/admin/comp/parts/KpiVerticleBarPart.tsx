@@ -5,6 +5,7 @@ import {useState,useEffect} from 'react'
 import axios from 'axios'
 import BarCharInsertForm from './childParts/BarCharInsertForm.tsx';
 import BarChartUpdateForm from './childParts/BarChartUpdateForm.tsx';
+import PageTabNote from './PageTabNote.tsx'
 
 export default function Part ({nameId}) {
 	const [dataLablesArr,setDataLablesArr] = useState([]);
@@ -139,7 +140,7 @@ export default function Part ({nameId}) {
 						<Bar options={options} data={data} />
 					</div> : ''
 				}
-				<br/><br/>
+				<br/><div className="input_m_div text_center m_t_10"><PageTabNote nameId={nameId} tab="name_note" /></div>
 				{
 					dataLablesArr.length > 0 ?
 					<div className="input_m_div text_right m_t_20">
