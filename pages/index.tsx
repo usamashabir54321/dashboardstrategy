@@ -27,7 +27,6 @@ export default function Page () {
 			            <source src="/assets/media/ROOM.mp4" type="video/mp4" />
 			            Your browser does not support the video tag.
 			       	</video>
-					<div className="clearafix"></div>
 					<div id="header_menu">
 						<div className="d_grid" style={{ gridTemplateColumns: '40% 40% 14%', gridGap: '3%' }}>
 							<div className="grid_item">
@@ -44,7 +43,7 @@ export default function Page () {
 							<div className="grid_item"><Link href="login"><button className="btn btn_web">LOGIN</button></Link></div>
 						</div>
 					</div>
-					<div style={{ display: 'table', width: '100%' , height: '73vh' }}>
+					<div style={{ display: 'table', width: '100%' }}>
 						<div id="header_body" className="text_center">
 							<h1>DASHBOARD STRATEGY</h1>
 							<h3>ADVANCE STEPS TO ACHIEVE VISION</h3>
@@ -155,7 +154,7 @@ export default function Page () {
 					</div>
 					<div id="chart_types">
 						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
-							<div className="grid_item"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/donut_chart.png" /></div></div>
+							<div className="grid_item text_center"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/donut_chart.png" /></div></div>
 							<div className="grid_item chart_txt_grid">
 								<div className="chart_txt_wrap">
 									<h2><b>Donut Pie Chart</b></h2><br />
@@ -173,7 +172,7 @@ export default function Page () {
 							<div className="grid_item text_center"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/2d_pie_chart.png" /></div></div>
 						</div>
 						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
-							<div className="grid_item"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/verticle.png" /></div></div>
+							<div className="grid_item text_center"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/verticle.png" /></div></div>
 							<div className="grid_item chart_txt_grid">
 								<div className="chart_txt_wrap">
 									<h2><b>Verticle Bar Chart</b></h2><br />
@@ -263,7 +262,7 @@ export default function Page () {
 					</div>
 					<br />
 					<div id="services_content">
-						<div className="d_grid" style={{ gridTemplateColumns: '30.33% 30.33% 30.33%', gridGap: '4.33%', gridRowGap: '5.33%' }}>
+						<div className="d_grid" style={{ gridTemplateColumns: '32% 32% 32%', gridGap: '4% 2%', gridRowGap: '4%' }}>
 							<div className="grid_item">
 								<div className="card text_center">
 									<div className="card_img"><img alt="Image" src="/assets/img/home/services/service_1.png" /></div>

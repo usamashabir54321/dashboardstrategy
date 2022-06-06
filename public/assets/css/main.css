@@ -644,14 +644,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     margin-bottom: 25px;
 }
         /*HOME HEADER CSS*/
-#home #header {height: 100vh;}
-#home #header .clearafix {
-    width: 100%;
-    height: 100vh;
-    position: absolute;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 1;
-}
+#home #header {height: auto;background: rgba(0, 0, 0, 0.5);}
 #home #header video.bg_video {
     z-index: -1;
     position: absolute;
@@ -676,7 +669,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     margin: 3% 0;
     font-weight: 600;
 }
-#home #header #header_body #header_buttons button {margin: 0 2%;}
+#home #header #header_body #header_buttons button {margin: 0 1%;}
 #home #header #header_menu {
     z-index: 2;
     position: relative;
@@ -696,20 +689,25 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
 #h_sec_about_us #about_details_div .img_3 {max-width: 42%;}
         /*ONLY HOME SECTION 2*/
 #h_sec_2 {
-    height: 100vh;
-    /*background: url(/assets/img/home/h_sec_2_bg.png) center center no-repeat;
-    background-color: rgba(0, 0, 0, 0.5);
-    background-size: cover;*/
+    height: auto;
+}
+div#header_buttons {
+    display: flex;
+    justify-content: center;
 }
 #h_sec_2 .bg_video {
     position: absolute;
     width: 100%;
     z-index: -1;
 }
+div#header_body {
+    padding: 12% 0;
+}
 #h_sec_2 #h_sec_2_data {
     padding-top: 40%;
     padding-left: 8%;
     padding-right: 8%;
+    padding-bottom: 5%;
 }
 #h_sec_2 #h_sec_2_data #bard_code_img {width: 20%;}
         /*CHART SECTIONS*/
@@ -732,7 +730,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     background: url(/assets/img/home/h_sec_services_bg.png) center center no-repeat;
     background-size: cover;
     background-color: #474747;
-    padding: 6% 10%;
+    padding: 6%;
 }
 #h_sec_services #services_content .card {
     background: linear-gradient(180deg, #474747 0%, rgba(71, 71, 71, 0) 100%);
@@ -906,9 +904,9 @@ div#menu-bar-toggle {
 }
 @media screen and (max-width: 1440px) {
     #home #header #header_menu ul li {margin: 0 2%;}
-    #home #header #header_menu .d_grid {grid-template-columns: 34% 40% 14% !important;grid-gap: 5% !important;}
-    #home #header #header_menu ul {margin: 7% 0;}
-    #h_sec_2 #h_sec_2_data {padding-top: 48%;}
+    #home #header #header_menu .d_grid {grid-template-columns: 21% 58% 21% !important;grid-gap: 2% !important;}
+    #home #header #header_menu ul {margin: 7% 0;justify-content: center;}
+    #h_sec_2 #h_sec_2_data {padding-top: 35%;}
     #h_sec_about_us .img_2 {width: 20%;margin-left: -6%;}
     #mission_grid {padding: 5%;}
         /*ADMIN HEADER CSS*/
@@ -921,18 +919,20 @@ div#menu-bar-toggle {
     #kpi_model_id form .d_grid {grid-template-columns: 36% 36% 24% !important; padding: 0px !important;}
     #kpi_model_id form .input_m_div input, #kpi_model_id form .input_m_div select {font-size: 13px; padding: 10px 5px !important;}
     #kpi_model_id form .input_m_div .btn_submit {padding: 10px 20px !important;}
+    #h_sec_services #services_content .card h2 {font-size: 20px;margin-bottom: 10px;}
+    #h_sec_services #services_content .card br {display: none;}
+    #h_sec_services #services_content .card h5 {font-size: 65%;}
 }
 @media screen and (max-width: 1024px) {
     #home #header #header_menu ul {margin: 5% 0;}
     #home #header #header_body h1 {font-size: 37px;}
     #home #header #header_body h3 {font-size: 18px;}
     #home .btn_web {padding: 17px 30px;font-size: 10px;}
-    #home #header #header_menu img {max-width: 110px;}
+    #home #header #header_menu img {max-width: 70px;margin-top: 10px;}
     #home #header #header_menu ul li h4 {font-size: 12px;}
     #home #footer ul li {font-size: 12px;margin-bottom: 0px;}
     #h_sec_charts #chart_types .d_grid {display: inline;}
     #h_sec_charts #chart_types .d_grid .grid_item {margin-top: 25px;}
-    #h_sec_2 #h_sec_2_data {padding-top: 68%;}
     .query_content {padding: 13px;}
     .query_form {padding: 45px;}
     div.sec_testimonail_side_img {display: none;}
@@ -954,6 +954,9 @@ div#menu-bar-toggle {
     #swottowsdiv #swottowscat {font-size: 10px;-webkit-text-stroke-width: 0.3px;}
     #swottowsdiv .right ul li {width: 81%;margin: 0 2rem;}
     ul.u_info_ul .d_grid {grid-template-columns: 0% 35% 0% !important;}
+    #h_sec_services #services_content .card h2 {font-size: 16px;}
+    #h_sec_services #services_content .card h5 {font-size: 52%;}
+    div#header_body {padding: 10% 0;}
 }
 @media screen and (max-width: 768px) {
     #home #header #header_menu {padding: 11px 28px;}
@@ -969,7 +972,6 @@ div#menu-bar-toggle {
     #home #footer .d_grid .grid_item {margin-top: 20px;}
     #h_sec_team #team_content .d_grid {display: inline;}
     #h_sec_services #services_content .d_grid {display: inline;}
-    #h_sec_2 #h_sec_2_data {padding-top: 93%;}
     #h_get_in_touch #team_content .gird_form {display: inline;}
     #h_sec_testimonials #team_content .d_grid {display: inline;}
     div#testimonial_counter .card p {font-size: 11px;}
@@ -992,6 +994,7 @@ div#menu-bar-toggle {
     #kpi_model_id {width: 90% !important; padding: 10px 15px !important;}
     #swottowsdiv {height: 280px;}
     #swottowsdiv ul li {padding: 15px 0px 17px 17px;}
+    #h_sec_services #services_content .card h5 {font-size: 80%;}
 }
 @media screen and (max-width: 425px) {
     #home #header #header_body h3 {font-size: 11px;}
@@ -1008,8 +1011,6 @@ div#menu-bar-toggle {
     #home #header #header_body #header_buttons button {display: block;margin: 6% auto;width: 160px;height: 45px;position: relative;}
     #h_sec_team #team_content .card_img {width: 200px;height: 200px;line-height: 17;}
     #h_sec_charts #chart_types .chart_img_wrap img {width: 100%;}
-    #h_sec_2 {height: 52vh;}
-    #h_sec_2 #h_sec_2_data {padding-top: 88%;}
     #h_sec_2 #h_sec_2_data #bard_code_img {margin-top: 17px;}
     div#testimonial_counter .card h2 {font-size: 12px;}
     div#testimonial_counter .card p {font-size: 6px;}
@@ -1021,13 +1022,14 @@ div#menu-bar-toggle {
     #mission_grid h4 {font-size: 6px;line-height: 9px;}
     #mission_grid br {display: none;}
     #mission_grid .mission_txt_div {height: 50%;}
+    #h_sec_services #services_content .card h2 {font-size: 16px;}
+    #h_sec_charts .chart_txt_grid .chart_txt_wrap h4 {font-size: 14px;line-height: 20px;}
+    div#header_buttons {display: inline;}
 }
 @media screen and (max-width: 375px) {
     #mission_grid {padding: 2.5% 5%;}
 }
 @media screen and (max-width: 320px) {
-    #h_sec_2 #h_sec_2_data {padding-top: 100%;}
-    #h_sec_2 {height: 48vh;}
     .query_form {padding: 30px 15px;}
     #mission_grid {height: 145px;padding: 1.5% 5%;}
 }
