@@ -21,7 +21,7 @@ const modalStyle = {
 	},
 };
 
-export default function Part ({obj,kpiCatsArr}) {
+export default function Part ({obj}) {
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [catArr,setCatArr] = useState([]);
 	const [nameArr,setNameArr] = useState([]);
@@ -30,10 +30,15 @@ export default function Part ({obj,kpiCatsArr}) {
 	const [alert,setAlert] = useState('');
 	useEffect(() => {
 		setCompObj(obj);
-		setCatArr(kpiCatsArr);
+		getAllKpisCats();
 	},[]);
 	function openModal() { setIsOpen(true); }
 	function closeModal() { setIsOpen(false); }
+	const getAllKpisCats = () => {
+		axios.get('api/only_get/all_kpi_cats').then(res => {
+			setCatArr(res.data);
+		});
+	};
 	const handleChangeCat = (e) => {
 		var catId = e.target.value;
 		setNameArr([]);

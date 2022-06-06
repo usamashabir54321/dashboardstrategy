@@ -4,19 +4,12 @@ import {useState,useEffect} from 'react'
 
 export default function Comp ({nameId}) {
 	const [multiArr,setMultiArr] = useState([]);
-	const [kpiCatsArr,setKpiCatsArr] = useState([]);
 	useEffect(() => {
 		getCompKpis();
 	},[]);
 	const getCompKpis = () => {
 		axios.get('api/getById/get_multi_kpis/'+nameId).then(res => {
 			setMultiArr(res.data);
-			getAllKpisCats();
-		});
-	};
-	const getAllKpisCats = () => {
-		axios.get('api/only_get/all_kpi_cats').then(res => {
-			setKpiCatsArr(res.data);
 		});
 	};
 	return (
@@ -36,7 +29,7 @@ export default function Comp ({nameId}) {
 				{
 					multiArr.map(function (obj,indx) {
 						return (
-							<MultiMainComp obj={obj} kpiCatsArr={kpiCatsArr} key={indx}/>
+							<MultiMainComp obj={obj} key={indx}/>
 						)
 					})
 				}
