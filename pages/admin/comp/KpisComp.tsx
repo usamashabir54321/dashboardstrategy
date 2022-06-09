@@ -105,7 +105,7 @@ export default function Comp ({nameId}) {
 											<>
 												<div className="grid_item">
 													<div className="input_m_div">
-														<button className="kpi_modl_btn" onClick={()=>selectDeepChart('2d_pie_chart')}><img src="/assets/img/pie_chart_simple.png" alt="icon"/></button><br/><br/>
+														<button className="kpi_modl_btn" onClick={()=>selectDeepChart('2d_pie_chart')}><img src="/assets/img/donut_pie_chart.png" alt="icon"/></button><br/><br/>
 														<h4>2D Pie Chart</h4>
 													</div>
 												</div>

@@ -38,15 +38,13 @@ export default function Comp ({chartData}) {
 			}
 		},
 		responsive: true,
-		maintainAspectRatio: true,
+		maintainAspectRatio: false,
 		animation: {
 			animateScale: true,
 			animateRotate: true
 		}
 	};
-	return (
-		<div style={{ width: '100%' , margin: '7% auto' }}>
-			<Pie data={data} options={options} />
-		</div>
+	return (		
+		<Pie data={data} options={options} />
 	)
 }

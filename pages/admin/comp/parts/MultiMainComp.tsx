@@ -84,16 +84,10 @@ export default function Part ({obj}) {
 									</div>
 								</div>
 							</div>
-							<div className="text_center">
-								{
-									compObj.image_type ?
-									<div>
-										<img src={`/assets/img/multi_chart_${compObj.image_type}.png`} alt="image" />
-										{compObj.image_type != '1' ? <div>&nbsp;</div> : ''}
-										<h4 className="text_blue"><b>lorem ipsum</b></h4>
-									</div> : ''
-								}
+							<div className="text_center" className="multi_dummy_box">
+								{compObj.image_type ?<div className="dummy_mulit_txt"><h4>There is no any KPI Choose. Please Choose KPI</h4></div> : ''}
 							</div>
+							<h4 className="text_blue text_center"><b>lorem ipsum</b></h4>
 						</>
 					}
 				</div>

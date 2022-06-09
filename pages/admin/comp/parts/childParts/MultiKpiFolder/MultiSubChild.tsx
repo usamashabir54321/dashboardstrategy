@@ -38,16 +38,16 @@ export default function Child ({compObj,openModal}) {
 				</div>
 			</div>
 			<div className="text_center">
-				<div>
+				<div className="multi_chart_cover">
 					{
 						chartData.deep_chart == 'donut_pie_chart' ? <KpiDoughnutPart chartData={chartData} /> :
 						chartData.deep_chart == '2d_pie_chart' ? <Kpi2dPiePart chartData={chartData} /> :
 						chartData.deep_chart == 'verticle_bar_chart' ? <KpiVerticleBarPart chartData={chartData} /> :
 						chartData.deep_chart == 'horizontal_bar_chart' ? <KpiHorizontalBarPart chartData={chartData} /> : ''
 					}
-					<h4 className="text_blue"><b>{nameData.note_name}</b></h4>
 				</div>
 			</div>
+			<h4 className="text_blue text_center"><b>{nameData.note_name}</b></h4>
 		</>
 	)
 };

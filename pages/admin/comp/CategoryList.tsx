@@ -154,19 +154,6 @@ export default function Comp ({projectId,tab,selectTabPage}) {
 			         )
 			    })
 			}
-			{/*IF WANT ADDING CAT*/}
-			{
-				!addCat ? <li className="add_list" onClick={() => setAddCat(true)}><h4>Add Category +</h4></li> :
-				<form onSubmit={ ( e ) => handleSubmitCat( e ) } action="" method="post">
-					<div className="input_m_div">
-						<input onChange={(e) => setCatName(e.target.value)} type="text" placeholder="Type Category Name" required minLength="3" maxLength="70" />
-					</div>
-					<div className="input_m_div text_right">
-						<button className="btn_submit cursor_pointer" type="submit"><small>Save</small></button>&nbsp;
-						<button className="btn_cancel cursor_pointer" onClick={() => setAddCat(false)}><small>Cancel</small></button>
-					</div>
-				</form>
-			}
 			{/*MAPPING CATS NAMES*/}
 			{
 				catNamesArr.map(function(obj2, idx2){
@@ -215,7 +202,20 @@ export default function Comp ({projectId,tab,selectTabPage}) {
 			}
 			{
 				tab == "strategy_house" || tab == "swot" || tab == "tows" || tab == "multiple_dashboard" ? '' :
-				catId && !addCatNames ? <li className="add_list" onClick={() => setAddCatNames(true)}><h4>Add Name +</h4></li> : ''
+				catId && !addCatNames ? <li className="add_list" onClick={() => setAddCatNames(true)} style={{ width:'65%',marginLeft:'35%' }}><h4>Add Name +</h4></li> : ''
+			}
+			{/*IF WANT ADDING CAT*/}
+			{
+				!addCat ? <li className="add_list" onClick={() => setAddCat(true)}><h4>Add Category +</h4></li> :
+				<form onSubmit={ ( e ) => handleSubmitCat( e ) } action="" method="post">
+					<div className="input_m_div">
+						<input onChange={(e) => setCatName(e.target.value)} type="text" placeholder="Type Category Name" required minLength="3" maxLength="70" />
+					</div>
+					<div className="input_m_div text_right">
+						<button className="btn_submit cursor_pointer" type="submit"><small>Save</small></button>&nbsp;
+						<button className="btn_cancel cursor_pointer" onClick={() => setAddCat(false)}><small>Cancel</small></button>
+					</div>
+				</form>
 			}
 		</>
 	)

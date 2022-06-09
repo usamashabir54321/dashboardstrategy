@@ -395,6 +395,9 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     border-radius: 12px;
     padding: 25px;
 }
+.multi_dummy_box {height: 450px;display: table;width: 100%;text-align: center;}
+.multi_dummy_box .dummy_mulit_txt {display: table-cell;vertical-align: middle;}
+.multi_chart_cover {width: 400px;height: 400px;margin: 5% auto;}
 .dashboard_pages ul.list li {
     padding: 10px 15px;
     background: #0C94CD;
@@ -922,6 +925,13 @@ div#menu-bar-toggle {
     #h_sec_services #services_content .card h2 {font-size: 20px;margin-bottom: 10px;}
     #h_sec_services #services_content .card br {display: none;}
     #h_sec_services #services_content .card h5 {font-size: 65%;}
+    .multi_chart_cover {width: 300px;height: 300px;}
+    .multi_dummy_box {height: 330px;}
+}
+@media screen and (max-width: 1150px){
+    .multi_chart_cover {width: 250px;height: 250px;}
+    .multi_dummy_box {height: 280px;}
+    .multi_chart_cover .donut-inner {margin-top: -55% !important;}
 }
 @media screen and (max-width: 1024px) {
     #home #header #header_menu ul {margin: 5% 0;}
@@ -957,6 +967,8 @@ div#menu-bar-toggle {
     #h_sec_services #services_content .card h2 {font-size: 16px;}
     #h_sec_services #services_content .card h5 {font-size: 52%;}
     div#header_body {padding: 10% 0;}
+    .multi_chart_cover {width: 230px;height: 230px;}
+    .multi_dummy_box {height: 240px;}
 }
 @media screen and (max-width: 768px) {
     #home #header #header_menu {padding: 11px 28px;}
@@ -995,6 +1007,8 @@ div#menu-bar-toggle {
     #swottowsdiv {height: 280px;}
     #swottowsdiv ul li {padding: 15px 0px 17px 17px;}
     #h_sec_services #services_content .card h5 {font-size: 80%;}
+    .multi_chart_cover {width: 300px;height: 300px;}
+    .multi_dummy_box {height: 330px;}
 }
 @media screen and (max-width: 425px) {
     #home #header #header_body h3 {font-size: 11px;}

@@ -21,6 +21,8 @@ export default function Comp ({chartData}) {
 	},[]);
 	const data = { datasets: dataSetArr, };
 	const options = {
+		responsive: true,
+		maintainAspectRatio: false,
 		plugins: {
 			datalabels: {
 				display: true,
@@ -32,9 +34,9 @@ export default function Comp ({chartData}) {
 		}
 	};
 	return (
-		<div style={{ width: '100%' , margin: '7% auto' }}>
+		<>
 			<Doughnut data={data} options={options} />
 			<div className="donut-inner" style={{ marginTop: '-51%',marginBottom: '50%',textAlign: 'center' }}><h1 style={{ fontWeight: '900',letterSpacing: '2px',fontSize: '39px' }}>{radiusNum} %</h1></div>
-		</div>
+		</>
 	)
 }

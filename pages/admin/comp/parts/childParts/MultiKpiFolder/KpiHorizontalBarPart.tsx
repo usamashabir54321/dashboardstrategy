@@ -96,7 +96,7 @@ export default function Part ({chartData}) {
 				display: false,
 			},
 		},
-		maintainAspectRatio: true,
+		maintainAspectRatio: false,
 		animation: {
 			animateScale: true,
 			animateRotate: true
@@ -104,8 +104,6 @@ export default function Part ({chartData}) {
 	};
 	const data = {labels: dataLablesArr , datasets: dataSetArr};
 	return (
-		<div style={{ width: '100%' , margin: '5% auto' }}>
-			<Bar options={options} data={data} />
-		</div>
+		<Bar options={options} data={data} />
 	)
 };
