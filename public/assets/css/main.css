@@ -43,10 +43,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
   background-color: darkgrey;
   outline: 1px solid slategrey;
 }
-#main {
-	height: 100vh;
-    width: 100%;
-}
+#main {height: 100vh;width: 100%;}
 .table_search {padding: 10px 0px 30px;}
 .table_search img {
     position: absolute;
@@ -218,10 +215,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     padding: 18px;
     height: 55px;
 }
-.logins_page .input_icons .icon img {
-    width: 20px;
-    height: 20px;
-}
+.logins_page .input_icons .icon img {width: 20px;height: 20px;}
 .logins_page .input_field {
     width: 100%;
     padding: 12px 10px 11px 52px;
@@ -286,10 +280,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
 	    grid-gap: 20px;
 	    justify-content: center;
 	}
-	.logins_page .p_s_colors div {
-	    padding: 19px;
-	    width: 100%;
-	}
+	.logins_page .p_s_colors div {padding: 19px;width: 100%;}
 }
         /*TOASTR CSS*/
 .toast {
@@ -340,17 +331,11 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
 		| DASHBOARD PAGES |
 	----------------------------------------*/
 		/*DASHBOARD SIDEBAR*/
-#d_menu_sidebar {
-	height: 100vh;
-}
+#d_menu_sidebar {height: 100vh;}
 			/*dark working*/
-.d_dark #d_menu_sidebar {
-    background-color: #474747;
-}
+.d_dark #d_menu_sidebar {background-color: #474747;}
 			/*light working*/
-.d_light #d_menu_sidebar {
-    background-color: #EAEAEA;
-}
+.d_light #d_menu_sidebar {background-color: #EAEAEA;}
 #d_menu_sidebar .sidebar_logo {
 	height: 10vh;
     padding: 20px 0;
@@ -363,10 +348,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     max-width: 45%;
 }
 #d_menu_sidebar .sidebar_links {height: 78vh;}
-#d_menu_sidebar .sidebar_links #main_ul {
-    padding: 30px 0;
-    list-style: none;
-}
+#d_menu_sidebar .sidebar_links #main_ul {padding: 30px 0;list-style: none;}
 #d_menu_sidebar .sidebar_links #main_ul li {padding: 8px 20px;cursor: pointer;}
 #d_menu_sidebar .sidebar_links #main_ul li h4 {font-weight: 600;}
 #d_menu_sidebar .sidebar_links #main_ul li svg {
@@ -391,10 +373,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     height: 100vh;
     overflow: auto;
 }
-.card {
-    border-radius: 12px;
-    padding: 25px;
-}
+.card {border-radius: 12px;padding: 25px;}
 .multi_dummy_box {height: 450px;display: table;width: 100%;text-align: center;}
 .multi_dummy_box .dummy_mulit_txt {display: table-cell;vertical-align: middle;}
 .multi_chart_cover {width: 400px;height: 400px;margin: 5% auto;}
@@ -406,20 +385,14 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     border-radius: 12px;
     margin: 15px 0;
 }
-.dashboard_pages ul.list li h4 span.i_right {
-    -webkit-text-stroke-width: 2px;
-    float: right;
-}
+.dashboard_pages ul.list li h4 span.i_right {-webkit-text-stroke-width: 2px;float: right;}
 .dashboard_pages ul.list li .i_left {
     float: left;
     width: 14px;
     height: 19px;
     margin-right: 7px;
 }
-.dashboard_pages ul.list li.catlist h5 {
-    text-align: start;
-    padding-left: 60px;
-}
+.dashboard_pages ul.list li.catlist h5 {text-align: start;padding-left: 60px;}
 .edit_i {background: url(/assets/img/home/edit.svg) center center no-repeat;}
 .delete_i {background: url(/assets/img/home/delete.svg) center center no-repeat;}
 .download_i {
@@ -454,10 +427,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     padding: 4px 12px;
 }
 .d_light ul.list li.sublist {background-color: #3190b9;}
-.dashboard_pages ul.list .input_m_div input {
-    padding: 10px 20px;
-    font-weight: 600;
-}
+.dashboard_pages ul.list .input_m_div input {padding: 10px 20px;font-weight: 600;}
 .d_footer {
     position: sticky;
     top: 100%;
@@ -469,9 +439,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     border-radius: 50%;
 }
 .d_body .card #u_g_info .infor_text {padding-top: 7px;}
-.links_dropdown {
-	position: relative;
-}
+.links_dropdown {position: relative;}
 .dropdown_content {
 	display: none;
     position: absolute;
@@ -489,10 +457,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     font-size: 15px;
     font-weight: 600;
 }
-#change_theme_btn {
-    margin-right: 15px;
-    margin-top: 7px;
-}
+#change_theme_btn {margin-right: 15px;margin-top: 7px;}
 #swottowsdiv {
     background: url(../img/swottows.png) center center no-repeat;
     background-size: cover;
@@ -592,13 +557,8 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
 			/*on laptop*/
 @media screen and (max-width: 1024px) {
 	.dashboard_pages #d_menu_sidebar .sidebar_links #main_ul li h4 {font-size: 14px;}
-	#d_menu_sidebar .sidebar_links #main_ul li {
-	    padding: 8px;
-	}
-	#d_menu_sidebar .sidebar_links #main_ul li svg {
-		padding-top: 7px;
-		margin-right: 0px;
-	}
+	#d_menu_sidebar .sidebar_links #main_ul li {padding: 8px;}
+	#d_menu_sidebar .sidebar_links #main_ul li svg {padding-top: 7px;margin-right: 0px;}
 	.d_body .card h4 {font-size: 17px;}
 }
 			/*on tab*/
@@ -614,10 +574,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     font-weight: 500;
     line-height: 29px;
 }
-#home b {
-    -webkit-text-stroke-width: 1px;
-    letter-spacing: 1px;
-}
+#home b {-webkit-text-stroke-width: 1px;letter-spacing: 1px;}
 #home section {width: 100%;}
 #home button {color: #FFFFFF;}
 #home .btn_web {
@@ -643,9 +600,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     background: #29ABE2;
     display: inline-block;
 }
-#home #chart_types .d_grid {
-    margin-bottom: 25px;
-}
+#home #chart_types .d_grid {margin-bottom: 25px;}
         /*HOME HEADER CSS*/
 #home #header {height: auto;background: rgba(0, 0, 0, 0.5);}
 #home #header video.bg_video {
@@ -691,9 +646,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
 #h_sec_about_us #about_details_div .img_2 {width: 21%;}
 #h_sec_about_us #about_details_div .img_3 {max-width: 42%;}
         /*ONLY HOME SECTION 2*/
-#h_sec_2 {
-    height: auto;
-}
+#h_sec_2 {height: auto;}
 div#header_buttons {
     display: flex;
     justify-content: center;
@@ -703,9 +656,7 @@ div#header_buttons {
     width: 100%;
     z-index: -1;
 }
-div#header_body {
-    padding: 12% 0;
-}
+div#header_body {padding: 12% 0;}
 #h_sec_2 #h_sec_2_data {
     padding-top: 40%;
     padding-left: 8%;
@@ -741,12 +692,8 @@ div#header_body {
     border-radius: 34px;
     padding: 15px;
 }
-#h_sec_services #services_content .card .card_img {
-    margin-bottom: 20px;
-}
-#h_sec_services #services_content .card .card_img img {
-    width: 100%;
-}
+#h_sec_services #services_content .card .card_img {margin-bottom: 20px;}
+#h_sec_services #services_content .card .card_img img {width: 100%;}
         /*TEAM SECTION*/
 #h_sec_team {
     background: url(/assets/img/home/h_sec_team_bg.png) center center no-repeat;
