@@ -1,8 +1,9 @@
 import Head from 'next/head'
 import Link from 'next/link'
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 export default function Page () {
+	const [openSideBar,setOpenSideBar] = useState(false);
 	const hdrVidRef = useRef();
 	const dshbrdVidRef = useRef();
     useEffect(() => {
@@ -27,7 +28,20 @@ export default function Page () {
 			            <source src="/assets/media/ROOM.mp4" type="video/mp4" />
 			            Your browser does not support the video tag.
 			       	</video>
-					<div id="header_menu">
+			       	<div id="header_nav" className="desktop_d_none header_menu">
+			       		<div className="d_grid" style={{ gridTemplateColumns: '90% 10% !important' }}>
+			       			<div className="grid_item">
+			       				<img alt="Image" src="/assets/img/home/h_logo.png" />
+			       			</div>
+			       			<div className="grid_item" id="menu-bar-toggle" onClick={() => setOpenSideBar(!openSideBar)}>
+			       				{
+			       					openSideBar ? <svg fill="#fff" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 50 50" width="24px" height="24px"><path d="M 7.71875 6.28125 L 6.28125 7.71875 L 23.5625 25 L 6.28125 42.28125 L 7.71875 43.71875 L 25 26.4375 L 42.28125 43.71875 L 43.71875 42.28125 L 26.4375 25 L 43.71875 7.71875 L 42.28125 6.28125 L 25 23.5625 Z"/></svg>
+			       					: <svg fill="#fff" xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" width="24px" height="24px"><path d="M 2 5 L 2 7 L 22 7 L 22 5 L 2 5 z M 2 11 L 2 13 L 22 13 L 22 11 L 2 11 z M 2 17 L 2 19 L 22 19 L 22 17 L 2 17 z"/></svg>
+			       				}
+			       			</div>
+			       		</div>
+			       	</div>
+					<div className={`tab_d_none header_menu ${openSideBar ? 'open' : ''}`}>
 						<div className="d_grid" style={{ gridTemplateColumns: '40% 40% 14%', gridGap: '3%' }}>
 							<div className="grid_item">
 								<img alt="Image" src="/assets/img/home/h_logo.png" />
@@ -103,12 +117,12 @@ export default function Page () {
 								</div>
 							</div>
 							<br/><br/><br/>
-							<div className="sec_header text_center">
+							{/*<div className="sec_header text_center">
 								<h1 className="sec_title">Our Mission</h1>
 								<br /><p className="sec_seperator"></p>
-							</div>
+							</div>*/}
 						</div>
-						<div className="d_grid" style={{ gridTemplateColumns: '33% 33% 33%' }} id="mission_grid">
+						{/*<div className="d_grid" style={{ gridTemplateColumns: '33% 33% 33%' }} id="mission_grid">
 							<div className="grid_item text_center">
 								<h2>Values</h2><br/>
 								<div className="mission_txt_div">
@@ -142,7 +156,7 @@ export default function Page () {
 									</h4>
 								</div>
 							</div>
-						</div>
+						</div>*/}
 						<br/><br/>
 					</section>
 				</div>
@@ -189,69 +203,6 @@ export default function Page () {
 							</div>
 							<div className="grid_item text_center"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/horizontal.png" /></div></div>
 						</div>
-						{/*<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
-							<div className="grid_item"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/chart_1.png" /></div></div>
-							<div className="grid_item chart_txt_grid">
-								<div className="chart_txt_wrap">
-									<h2><b>Chart 1</b></h2><br />
-									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
-								</div>
-							</div>
-						</div>
-						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
-							<div className="grid_item chart_txt_grid">
-								<div className="chart_txt_wrap">
-									<h2><b>Chart 2</b></h2><br />
-									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
-								</div>
-							</div>
-							<div className="grid_item text_center"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/chart_2.png" /></div></div>
-						</div>
-						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
-							<div className="grid_item"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/chart_3.png" /></div></div>
-							<div className="grid_item chart_txt_grid">
-								<div className="chart_txt_wrap">
-									<h2><b>Chart 3</b></h2><br />
-									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
-								</div>
-							</div>
-						</div>
-						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
-							<div className="grid_item chart_txt_grid">
-								<div className="chart_txt_wrap">
-									<h2><b>Chart 4</b></h2><br />
-									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
-								</div>
-							</div>
-							<div className="grid_item text_center"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/chart_4.png" /></div></div>
-						</div>
-						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
-							<div className="grid_item"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/chart_5.png" /></div></div>
-							<div className="grid_item chart_txt_grid">
-								<div className="chart_txt_wrap">
-									<h2><b>Chart 5</b></h2><br />
-									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
-								</div>
-							</div>
-						</div>
-						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
-							<div className="grid_item chart_txt_grid">
-								<div className="chart_txt_wrap">
-									<h2><b>Chart 6</b></h2><br />
-									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
-								</div>
-							</div>
-							<div className="grid_item text_center"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/chart_6.png" /></div></div>
-						</div>
-						<div className="d_grid" style={{ gridTemplateColumns: '50% 50%' , gridGap: '30px' }}>
-							<div className="grid_item"><div className="chart_img_wrap"><img alt="Image" src="/assets/img/home/charts/chart_7.png" /></div></div>
-							<div className="grid_item chart_txt_grid">
-								<div className="chart_txt_wrap">
-									<h2><b>Chart 7</b></h2><br />
-									<h4>Lorem ipsum loren ipsum loren ipsum loren lorem ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum ipsum loren ipsum loren ipsum loren ipsum loren ipsum loren ipsum. </h4>
-								</div>
-							</div>
-						</div>*/}
 					</div>
 				</section>
 					{/*OUR SERVICES*/}

@@ -373,7 +373,8 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     height: 100vh;
     overflow: auto;
 }
-.card {border-radius: 12px;padding: 25px;}
+.desktop_d_none {display: none;}
+.card {border-radius: 12px;padding: 15px;}
 .multi_dummy_box {height: 450px;display: table;width: 100%;text-align: center;}
 .multi_dummy_box .dummy_mulit_txt {display: table-cell;vertical-align: middle;}
 .multi_chart_cover {width: 400px;height: 400px;margin: 5% auto;}
@@ -384,6 +385,9 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     text-align: center;
     border-radius: 12px;
     margin: 15px 0;
+}
+.dashboard_pages ul.list li.add_list h4 {
+    text-align: center;
 }
 .dashboard_pages ul.list li h4 span.i_right {-webkit-text-stroke-width: 2px;float: right;}
 .dashboard_pages ul.list li .i_left {
@@ -409,7 +413,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     float: left;
     margin-right: 10px;
 }
-.dashboard_pages ul.list li h4 {-webkit-text-stroke-width: 0.41px;text-align: center;}
+.dashboard_pages ul.list li h4 {-webkit-text-stroke-width: 0.41px;text-align: left;}
 .dashboard_pages ul.list li .close,.dashboard_pages ul.list li.active .open {display: none;}
 .dashboard_pages ul.list li.active .close {display: inline-block;}
 .dashboard_pages ul.list li.sublist {background-color: #16536D;}
@@ -628,7 +632,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     font-weight: 600;
 }
 #home #header #header_body #header_buttons button {margin: 0 1%;}
-#home #header #header_menu {
+#home #header .header_menu {
     z-index: 2;
     position: relative;
     margin: 0 10%;
@@ -636,12 +640,12 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     background: rgba(48, 48, 48, 0.7);
     border-radius: 0px 0px 24px 24px;
 }
-#home #header #header_menu ul {
+#home #header .header_menu ul {
     display: flex;
     margin: 6% 0;
 }
-#home #header #header_menu ul li {margin: 0 4%;cursor: pointer;}
-#home #header #header_menu button {margin: 9% 0;}
+#home #header .header_menu ul li {margin: 0 4%;cursor: pointer;}
+#home #header .header_menu button {margin: 9% 0;}
 #h_sec_about_us #about_details_div .img_1 {max-width: 60%;}
 #h_sec_about_us #about_details_div .img_2 {width: 21%;}
 #h_sec_about_us #about_details_div .img_3 {max-width: 42%;}
@@ -701,6 +705,8 @@ div#header_body {padding: 12% 0;}
     background-color: #474747;
     padding: 6% 10%;
 }
+#home #header .header_menu.open {display: block !important;padding-top: 35px;margin-top: -17px;position: absolute;right: 0;z-index: 9;width: 80%;background: black;}
+.tab_d_none.open .grid_item button.btn.btn_web {margin: 5% 0 !important;}
 #h_sec_team #team_content .card_img {
     background: #474747;
     box-shadow: inset 0px 4px 17px rgb(0 0 0 / 25%);
@@ -782,7 +788,7 @@ div#testimonial_counter {margin-top: 66px;}
 .query_form input {margin-bottom: 20px;}
 /*media query */
 @media screen and (min-device-width: 300px) and (max-device-width: 768px) { 
-    div#home h1 {line-height: 33px;font-size: 26px !important;}
+    div#home h1 {line-height: 43px;font-size: 35px !important;}
     div#services_content .grid_item {margin: 40px auto;}
     section#h_sec_testimonials .card {margin: unset !important;}
     section#h_sec_testimonials div#team_content .grid_item:nth-child(2) {margin: unset !important;}
@@ -849,16 +855,28 @@ div#menu-bar-toggle {
 }
             /*HOME PAGE MEDIA QUERIES*/
 @media screen and (max-width: 2560px) {
-    #home #header #header_menu ul {margin: 5% 0;}
-    #home #header #header_menu button {margin: 8% 0;}
+    #home #header .header_menu ul {margin: 5% 0;}
+    #home #header .header_menu button {margin: 8% 0;}
+}
+@media screen and (max-width: 1800px) {
+    #mission_grid {height: 600px;}
+}
+@media screen and (max-width: 1700px) {
+    #home #header .header_menu .d_grid {grid-template-columns: 32% 50% 14% !important;}
+}
+@media screen and (max-width: 1650px) {
+    #mission_grid {height: 545px;}
+}
+@media screen and (max-width: 1500px) {
+    #mission_grid {height: 520px;}
 }
 @media screen and (max-width: 1440px) {
-    #home #header #header_menu ul li {margin: 0 2%;}
-    #home #header #header_menu .d_grid {grid-template-columns: 21% 58% 21% !important;grid-gap: 2% !important;}
-    #home #header #header_menu ul {margin: 7% 0;justify-content: center;}
+    #home #header .header_menu ul li {margin: 0 2%;}
+    #home #header .header_menu .d_grid {grid-template-columns: 21% 58% 21% !important;grid-gap: 2% !important;}
+    #home #header .header_menu ul {margin: 7% 0;justify-content: center;}
     #h_sec_2 #h_sec_2_data {padding-top: 35%;}
     #h_sec_about_us .img_2 {width: 20%;margin-left: -6%;}
-    #mission_grid {padding: 5%;}
+    #mission_grid {height: 480px;}
         /*ADMIN HEADER CSS*/
     .dashboard_pages #admin_header h1 {font-size: 30px;}
     .dashboard_pages .d_content ul.list li h4 , .dashboard_pages .d_content ul.list li h5 {font-size: 12px;line-height: 15px;}
@@ -875,18 +893,16 @@ div#menu-bar-toggle {
     .multi_chart_cover {width: 300px;height: 300px;}
     .multi_dummy_box {height: 330px;}
 }
-@media screen and (max-width: 1150px){
+@media screen and (max-width: 1150px) {
     .multi_chart_cover {width: 250px;height: 250px;}
     .multi_dummy_box {height: 280px;}
     .multi_chart_cover .donut-inner {margin-top: -55% !important;}
-}
-@media screen and (max-width: 1024px) {
-    #home #header #header_menu ul {margin: 5% 0;}
+    #home #header .header_menu ul {margin: 5% 0;}
     #home #header #header_body h1 {font-size: 37px;}
     #home #header #header_body h3 {font-size: 18px;}
     #home .btn_web {padding: 17px 30px;font-size: 10px;}
-    #home #header #header_menu img {max-width: 70px;margin-top: 10px;}
-    #home #header #header_menu ul li h4 {font-size: 12px;}
+    #home #header .header_menu img {max-width: 70px;margin-top: 10px;}
+    #home #header .header_menu ul li h4 {font-size: 12px;}
     #home #footer ul li {font-size: 12px;margin-bottom: 0px;}
     #h_sec_charts #chart_types .d_grid {display: inline;}
     #h_sec_charts #chart_types .d_grid .grid_item {margin-top: 25px;}
@@ -918,14 +934,24 @@ div#menu-bar-toggle {
     .multi_dummy_box {height: 240px;}
 }
 @media screen and (max-width: 768px) {
-    #home #header #header_menu {padding: 11px 28px;}
-    #home #header #header_menu ul {margin: 7% 0;}
-    #home #header #header_menu ul li h4 {font-size: 9px;}
-    #home #header #header_body #header_buttons button {margin: 0 1%;}
-    #home .btn_web {padding: 14px 23px;}
-    #home #header #header_menu button {margin: 13% 0;}
-    #home #footer #footer_footer {padding: 18px;}
-    #home #footer #footer_footer h3 {font-size: 8px;}
+    #home #header .header_menu {padding: 11px 28px;}
+    #home #header .header_menu ul {margin: 7% 0;}
+    #home #header .header_menu ul li h4 {font-size: 9px;}
+    #home #header .header_menu.open .d_grid {display: block;}
+    #home #header video.bg_video {width: auto;}
+    .tab_d_none.open .grid_item:nth-child(1) {display: none;}
+    .tab_d_none.open .grid_item ul {display: block !important;}
+    .tab_d_none.open .grid_item ul h4 {font-size: 14px !important;margin-bottom: 10px;}
+    #home #header #header_body #header_buttons button {margin: 4% 1%; width: 100%;}
+    div#header_buttons {display: block; margin: 0 20%;}
+    #home #header {height: 660px;display: inline-block;position: relative;}
+    #home .btn_web {padding: 17px 23px;}
+    #home .btn_web {font-size: 14px;}
+    #h_sec_2_data .d_grid {align-items: end;}
+    #h_sec_2 #h_sec_2_data #bard_code_img {width: 25%;}
+    #home #header .header_menu button {margin: 13% 0;}
+    #home #footer #footer_footer {padding: 18px 0px;}
+    #home #footer #footer_footer h3 {font-size: 11px;}
     #home #footer .d_grid {display: inline;}
     #home #footer .d_grid img {max-width: 150px;}
     #home #footer .d_grid .grid_item {margin-top: 20px;}
@@ -944,6 +970,10 @@ div#menu-bar-toggle {
     #main_d_layout {grid-template-columns: 100% !important;}
     #d_menu_sidebar {position: absolute; display: none; width: 40%;z-index: 9;}
     #d_menu_sidebar.open {display: block;}
+    #h_get_in_touch {padding: 6% 3%;}
+    .btn_submit button.btn.btn_web {width: 100%;}
+    #home #footer {padding: 6% 8% 0;}
+    #home #footer ul li {font-size: 15px;}
     .d_grid.gap_l_30.gap_s_20 {grid-template-columns: unset !IMPORTANT;}
     .d_body {padding: 0 10px;}
     div#admin_header {padding: 20px 10px;}
@@ -956,18 +986,21 @@ div#menu-bar-toggle {
     #h_sec_services #services_content .card h5 {font-size: 80%;}
     .multi_chart_cover {width: 300px;height: 300px;}
     .multi_dummy_box {height: 330px;}
+    .chart_img_wrap img {width: 100%;}
+    .tab_d_none {display: none;}
+    .desktop_d_none {display: block;}
 }
 @media screen and (max-width: 425px) {
     #home #header #header_body h3 {font-size: 11px;}
     #home #header #header_body h1 {font-size: 15px !important;word-spacing: 0px !important;}
     #home .btn_web {font-size: 8px;padding: 9px 18px;}
-    #home #header #header_menu {padding: 11px 15px;margin: 0 5%;}
-    #home #header #header_menu img {width: 55px;}
-    #home #header #header_menu ul li h4 {font-size: 6px;}
-    #home #header #header_menu .d_grid {grid-template-columns: 28% 51% 14% !important;grid-gap: 3% !important;}
-    #home #header #header_menu ul li {margin: 0 1%;}
-    #home #header #header_menu ul {margin: 4% 0;}
-    #home #header #header_menu button {font-size: 6px;padding: 6px 10px;}
+    #home #header .header_menu {padding: 11px 15px;margin: 0 5%;}
+    #home #header .header_menu img {width: 55px;}
+    #home #header .header_menu ul li h4 {font-size: 6px;}
+    #home #header .header_menu .d_grid {grid-template-columns: 28% 51% 14% !important;grid-gap: 3% !important;}
+    #home #header .header_menu ul li {margin: 0 1%;}
+    #home #header .header_menu ul {margin: 4% 0;}
+    #home #header .header_menu button {font-size: 6px;padding: 6px 10px;}
     #home #header #header_body #header_buttons {margin-top: 33px;}
     #home #header #header_body #header_buttons button {display: block;margin: 6% auto;width: 160px;height: 45px;position: relative;}
     #h_sec_team #team_content .card_img {width: 200px;height: 200px;line-height: 17;}
