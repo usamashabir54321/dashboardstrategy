@@ -144,7 +144,7 @@ export default function Page () {
 									{
 										selectedImage ? <img src={URL.createObjectURL(selectedImage)} alt="image" /> :
 										auth_u.img_path != undefined ? <img src={axios.defaults.baseURL+auth_u.img_path} alt="image" /> :
-										<img src="/assets/img/profile_avatar.png" alt="image" />
+										<img src="/assets/img/admin_avatar.png" alt="image" />
 									}
 								</div>
 								<input type="file" accept="image/*" ref={userImgRef} style={{display: "none"}} onChange={imageChangeEvent}/>
