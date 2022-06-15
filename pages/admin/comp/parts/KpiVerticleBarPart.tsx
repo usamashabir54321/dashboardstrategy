@@ -134,6 +134,7 @@ export default function Part ({nameId}) {
 					</div>
 				</div>
 				{/*DATA IMAGE MAPPING*/}
+				<br/>
 				{
 					dataLablesArr.length > 0 ?
 					<div style={{ width: '80%' , margin: '0px auto' }}>

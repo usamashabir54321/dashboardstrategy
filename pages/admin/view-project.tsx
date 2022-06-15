@@ -3,6 +3,7 @@ import Layout from './layout.tsx'
 import AdminHeader from './comp/AdminHeader.tsx'
 import {useState,useEffect} from 'react'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import { useRouter } from 'next/router';
 import {useDispatch} from 'react-redux'
 import {setPorject} from '../../store/actions/adminActions'
@@ -26,10 +27,20 @@ export default function Page () {
 		router.push('/admin/create-project');
 	};
 	const handleDelete = (id) => {
-		setReqPending(true);
-		axios.get('api/getById/del_project/'+id).then(res => {
-			setDataArr(res.data);setReqPending(false);
-		});
+		Swal.fire({
+			title: 'Do you want to delete this item?',
+			confirmButtonText: 'Delete',
+			showCancelButton: true,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				setReqPending(true);
+				axios.get('api/getById/del_project/'+id).then(res => {
+					setDataArr(res.data);setReqPending(false);
+					Swal.fire('Your item is deleted successfully.', '', 'success')
+				});
+			}
+			else Swal.fire('Your item is confirmly saved.', '', 'success')
+		})
 	};
 	const handleSearch = (str) => {
 		setReqPending(true);

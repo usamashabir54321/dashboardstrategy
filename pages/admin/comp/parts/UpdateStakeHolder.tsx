@@ -1,6 +1,7 @@
 import {useState,useEffect} from 'react'
 import $ from "jquery";
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default function Part ({dataSetArr,getStakeHolders}) {
 	const [dataArr,setDataArr] = useState([]);
@@ -24,10 +25,20 @@ export default function Part ({dataSetArr,getStakeHolders}) {
 		setTimeout(() => { setNowSet(true); },700);
 	},[]);
 	const handleDelete = (id) => {
-		setReqPending(true);
-		axios.get('api/getById/del_stake_holder/'+id).then(res => {
-			getStakeHolders();setReqPending(false);
-		});
+		Swal.fire({
+			title: 'Do you want to delete this item?',
+			confirmButtonText: 'Delete',
+			showCancelButton: true,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				setReqPending(true);
+				axios.get('api/getById/del_stake_holder/'+id).then(res => {
+					getStakeHolders();setReqPending(false);
+					Swal.fire('Your item is deleted successfully.', '', 'success')
+				});
+			}
+			else Swal.fire('Your item is confirmly saved.', '', 'success')
+		})
 	};
 	const handleSubmit = (e,id) => {
 		e.preventDefault();

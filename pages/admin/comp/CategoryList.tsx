@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default function Comp ({projectId,tab,selectTabPage}) {
 	const [addCat,setAddCat] = useState(false);
@@ -42,13 +43,24 @@ export default function Comp ({projectId,tab,selectTabPage}) {
 		});
 	}
 	const handDeleteCat = (e,delCatId) => {
-		e.stopPropagation();setReqPending(true);
-		axios.get('api/getById/del_pro_cats/'+delCatId).then(res => {
-			setCatsArr(res.data);setReqPending(false);
-			if (delCatId == catId) {
-				selectTabPage(null,'');setCatNamesArr([]);setCatId('');
+		e.stopPropagation();
+		Swal.fire({
+			title: 'Do you want to delete this item?',
+			confirmButtonText: 'Delete',
+			showCancelButton: true,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				setReqPending(true);
+				axios.get('api/getById/del_pro_cats/'+delCatId).then(res => {
+					setCatsArr(res.data);setReqPending(false);
+					Swal.fire('Your item is deleted successfully.', '', 'success')
+					if (delCatId == catId) {
+						selectTabPage(null,'');setCatNamesArr([]);setCatId('');
+					}
+				});
 			}
-		});
+			else Swal.fire('Your item is confirmly saved.', '', 'success')
+		})
 	}
 	const updateThisCat = (e,idx) => {
 		e.stopPropagation();
@@ -100,11 +112,22 @@ export default function Comp ({projectId,tab,selectTabPage}) {
 		});
 	}
 	const handDeleteName = (e,delNameId) => {
-		e.stopPropagation();setReqPending(true);
-		axios.get('api/getById/del_cat_name/'+delNameId).then(res => {
-			setCatNamesArr(res.data);setReqPending(false);
-			if (delNameId == nameId) selectTabPage(null,'');
-		});
+		e.stopPropagation();
+		Swal.fire({
+			title: 'Do you want to delete this item?',
+			confirmButtonText: 'Delete',
+			showCancelButton: true,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				setReqPending(true);
+				axios.get('api/getById/del_cat_name/'+delNameId).then(res => {
+					setCatNamesArr(res.data);setReqPending(false);
+					Swal.fire('Your item is deleted successfully.', '', 'success')
+					if (delNameId == nameId) selectTabPage(null,'');
+				});
+			}
+			else Swal.fire('Your item is confirmly saved.', '', 'success')
+		})
 	}
 	const updateThisName = (e,idx) => {
 		e.stopPropagation();

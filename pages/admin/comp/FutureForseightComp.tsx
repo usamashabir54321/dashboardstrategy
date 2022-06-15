@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 import PageTabNote from './parts/PageTabNote.tsx'
 
 export default function Comp ({nameId}) {
@@ -30,10 +31,20 @@ export default function Comp ({nameId}) {
 		});
 	}
 	const handDelete = () => {
-		setReqPending(true);
-		axios.get('api/getById/del_foreseights/'+dataArr[itemIndx].id).then(res => {
-			setDataArr(res.data);setItemIndx(null);setReqPending(false);
-		});
+		Swal.fire({
+			title: 'Do you want to delete this item?',
+			confirmButtonText: 'Delete',
+			showCancelButton: true,
+		}).then((result) => {
+			if (result.isConfirmed) {
+				setReqPending(true);
+				axios.get('api/getById/del_foreseights/'+dataArr[itemIndx].id).then(res => {
+					setDataArr(res.data);setItemIndx(null);setReqPending(false);
+					Swal.fire('Your item is deleted successfully.', '', 'success')
+				});
+			}
+			else Swal.fire('Your item is confirmly saved.', '', 'success')
+		})
 	}
 	const handleUpdate = (e) => {
 		e.preventDefault();
