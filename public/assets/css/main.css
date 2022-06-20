@@ -465,6 +465,8 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
 #swottowsdiv {
     background: url(../img/swottows.png) center center no-repeat;
     background-size: cover;
+    width: 100%;
+    height: auto;
 }
 #swottowsdiv #swottowscat {
     display: table-cell;
@@ -477,13 +479,13 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     -webkit-text-stroke-color: white;
 }
 #swottowsdiv ul li {
-    padding: 29px 0px 31px 37px;
     font-weight: 700;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
     width: 87%;
     cursor: pointer;
+    padding: 15px 0px 27px 25px;
 }
 #swottowsdiv .right ul li {
     color: black;
@@ -1048,3 +1050,43 @@ div#menu-bar-toggle {
     border-radius: 50%;
 }
 .select_kpi_model .kpi_modl_btn img {max-width: 45px;}
+    /*PRESENTATION PAGE CSS*/
+.tab_card {
+    background: linear-gradient(180deg, #333333 0%, rgba(71, 71, 71, 0.65) 100%);
+    border-radius: 24px;
+    padding: 10px;
+    cursor: pointer;
+}
+.tab_card img {width: 100%;}
+.tab_card img {
+    width: 100%;
+    height: 240px;
+    border-radius: 12px;
+}
+.tab_card .text_div {
+    margin: 20px 0;
+    color: white;
+}
+.tab_card .text_div h4 {margin-bottom: 20px;}
+.tab_card .text_div h5 {font-weight: 300;}
+#contact_box {
+    background: rgba(72, 72, 72, 0.7);
+    box-shadow: 0px 4px 4px rgb(0 0 0 / 25%);
+    border-radius: 50px;
+    padding: 35px;
+    width: 50%;
+    margin: 0 auto;
+}
+#contact_box .grid_item {
+    border: 1px solid #6B6B6B;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+    border-radius: 22px;
+}
+#contact_box .right {padding: 30px;}
+#contact_box ul li {
+    border-bottom: 1px solid #5b5a59;
+    padding: 24px 15px;
+    color: white;
+}
+#contact_box ul li:last-child {border: none;}
+#contact_box ul li h5 span {margin-right: 8px;}

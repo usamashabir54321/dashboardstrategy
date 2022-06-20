@@ -6,7 +6,7 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import { useRouter } from 'next/router';
 import {useDispatch} from 'react-redux'
-import {setPorject} from '../../store/actions/adminActions'
+import {setPorject,setPresentId} from '../../store/actions/adminActions'
 
 export default function Page () {
 	const [dataArr,setDataArr] = useState([]);
@@ -41,6 +41,10 @@ export default function Page () {
 			}
 			else Swal.fire('Your item is confirmly saved.', '', 'success')
 		})
+	};
+	const makePresent = (id) => {
+		dispatch(setPresentId(id));
+		router.push('/admin/presentation');
 	};
 	const handleSearch = (str) => {
 		setReqPending(true);
@@ -83,10 +87,10 @@ export default function Page () {
 										<td>{ obj.name }</td>
 										<td>{ obj.cat_name }</td>
 										<td>
-											<button className="table_btn" style={{ background: '#E39601' }}><img src="/assets/img/t_file.png" alt="image" /></button>
-											<button className="table_btn" style={{ background: '#2AD300' }}><img src="/assets/img/t_play.png" alt="image" /></button>
-											<button className="table_btn" onClick={() => handleUpdate(obj)} style={{ background: '#29ABE2' }}><img src="/assets/img/t_edit.png" alt="image" /></button>
-											<button className="table_btn" onClick={() => handleDelete(obj.id)} style={{ background: '#E80000' }}><img src="/assets/img/t_del.png" alt="image" /></button>
+											<button className="table_btn" style={{ background: '#E39601' }} title="Export" ><img src="/assets/img/t_file.png" alt="image" /></button>
+											<button className="table_btn" onClick={() => makePresent(obj.id)} style={{ background: '#2AD300' }} title="Presentation" ><img src="/assets/img/t_play.png" alt="image" /></button>
+											<button className="table_btn" onClick={() => handleUpdate(obj)} style={{ background: '#29ABE2' }} title="Edit" ><img src="/assets/img/t_edit.png" alt="image" /></button>
+											<button className="table_btn" onClick={() => handleDelete(obj.id)} style={{ background: '#E80000' }} title="Delete" ><img src="/assets/img/t_del.png" alt="image" /></button>
 										</td>
 									</tr>
 								)

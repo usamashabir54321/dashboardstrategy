@@ -13,6 +13,13 @@ export const setPorject = (obj) => {
     }
 }
 
+export const setPresentId = (id) => {
+    return {
+        type: 'SET_PRESENTATION_PROJECT_ID',
+        payload: id
+    }
+}
+
 export const setSideBar = (status) => {
     return {
         type: 'SET_SIDEBAR',

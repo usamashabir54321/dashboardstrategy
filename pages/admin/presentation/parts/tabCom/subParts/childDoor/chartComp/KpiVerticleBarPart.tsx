@@ -10,39 +10,39 @@ export default function Part ({chartData}) {
 		var label_arr = chartData.labels.split('|');
 		setDataLablesArr(label_arr);
 		var chartTotalArr = [];
-		  	var achievedObj = {
-		  		labels: 'Verticle Bar Chart',
-		  		data: [],
-		  		backgroundColor: 'white',
+	  	var achievedObj = {
+	  		labels: 'Verticle Bar Chart',
+	  		data: [],
+	  		backgroundColor: 'white',
+	  		datalabels: {
+	  			display: true,
+	  			formatter: (val, ctx) => {
+	  				return val+'%';
+	  			},
+	  			color: 'black',
+	  			font: {
+					size: 14,
+				},
+	  		}
+	  	};
+	  	var projectObj = {
+	  		labels: 'Verticle Bar Chart',
+	  		data: [],
+	  		backgroundColor: '#0c94cd',
+	  		categoryPercentage: 0.5,
 		  		datalabels: {
 		  			display: true,
 		  			formatter: (val, ctx) => {
 		  				return val+'%';
 		  			},
-		  			color: 'black',
+		  			color: 'white',
 		  			font: {
 						size: 14,
 					},
+					anchor: 'end',
+					align: 'top',
 		  		}
-		  	};
-		  	var projectObj = {
-		  		labels: 'Verticle Bar Chart',
-		  		data: [],
-		  		backgroundColor: '#0c94cd',
-		  		categoryPercentage: 0.6,
-  		  		datalabels: {
-  		  			display: true,
-  		  			formatter: (val, ctx) => {
-  		  				return val+'%';
-  		  			},
-  		  			color: 'white',
-  		  			font: {
-  						size: 12,
-  					},
-  					anchor: 'end',
-  					align: 'end',
-  		  		}
-		  	};
+	  	};
 	  	achievedObj.data = chartData.percent_val.split("|");
 	  	projectObj.data = chartData.project_vals.split("|");
 	  	chartTotalArr.push(achievedObj);
@@ -51,28 +51,8 @@ export default function Part ({chartData}) {
 	},[]);
 	const options = {
 		responsive: true,
-		indexAxis: 'y' as const,
-		elements: {
-			bar: {
-				borderWidth: 2,
-			},
-		},
 		scales: {
 			x: {
-				grid: {
-					color: 'white',
-					borderColor: 'white',
-				},
-				ticks: {
-					color: 'white',
-					padding: 26,
-					font: {
-						size: 14,
-					}
-				}
-			},
-			y: {
-				beginAtZero: true,
 				grid: {
 					color: 'white',
 					borderColor: 'white',
@@ -85,6 +65,20 @@ export default function Part ({chartData}) {
 					}
 				},
 				stacked: true,
+			},
+			y: {
+				beginAtZero: true,
+				grid: {
+					color: 'white',
+					borderColor: 'white',
+				},
+				ticks: {
+					color: 'white',
+					padding: 15,
+					font: {
+						size: 13,
+					}
+				}
 			},
 		},
 		plugins: {

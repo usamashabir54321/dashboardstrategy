@@ -16,8 +16,8 @@ export default function Comp ({nameId}) {
 		axios.get('api/getById/get_organ_chart_data/'+nameId).then(res => {
 			if(res.data.no_employe) setNoEmploye(res.data.no_employe); else setNoEmploye('48');
 			if(res.data.orders) setOrders(res.data.orders); else setOrders('12');
-			if(res.data.productivity) setProductivity(res.data.productivity+'%'); else setProductivity('89%');
-			if(res.data.training) setTraining(res.data.training+'%'); else setTraining('65%');
+			if(res.data.productivity) setProductivity(res.data.productivity); else setProductivity('89');
+			if(res.data.training) setTraining(res.data.training); else setTraining('65');
 		});
 	};
 	const handleUpdate = (e) => {
@@ -63,14 +63,14 @@ export default function Comp ({nameId}) {
 			        </div>
 			        <div className="grid_item cursor_pointer">
 			         	<div className={`future_forsight_card card text_center ${selectBox == 'change_productivity' ? 'selected' : ''}`} onClick={() => setSelectBox('change_productivity')}>
-			         		<h1><b>{productivity}</b></h1>
+			         		<h1><b>{productivity}%</b></h1>
 			         		<h5 className="m_t_10">Employee Productivity</h5>
 			         		<img className="m_t_10" src="/assets/img/home/percent_product.png" alt="image" style={{ height: "50px",width: "50px" }} />
 			         	</div>
 			        </div>
 			        <div className="grid_item cursor_pointer">
 			         	<div className={`future_forsight_card card text_center ${selectBox == 'change_training' ? 'selected' : ''}`} onClick={() => setSelectBox('change_training')}>
-			         		<h1><b>{training}</b></h1>
+			         		<h1><b>{training}%</b></h1>
 			         		<h5 className="m_t_10">% of Training</h5>
 			         		<img className="m_t_10" src="/assets/img/home/training_calculate.png" alt="image" style={{ height: "50px",width: "50px",borderRadius: '0' }} />
 			         	</div>

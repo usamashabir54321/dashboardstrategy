@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
+import html2canvas from 'html2canvas'
 import Swal from 'sweetalert2'
 import PageTabNote from './parts/PageTabNote.tsx'
 
@@ -9,6 +10,7 @@ export default function Comp ({nameId}) {
 	const [itemIndx,setItemIndx] = useState(null);
 	const [allowEdit,setAllowEdit] = useState(false);
 	const [reqPending,setReqPending] = useState(false);
+	const exportRef = useRef();
 	useEffect(() => {
 		getingData();
 	},[nameId]);
@@ -65,17 +67,35 @@ export default function Comp ({nameId}) {
 		else setItemIndx(idx)
 		setAllowEdit(false);
 	};
+	const downloadImage = () => {
+		html2canvas(document.querySelector("#divToPrint"), {
+			logging: true,
+			letterRendering: 1,
+			allowTaint: true,
+			useCORS: true,
+			scrollX: 0,
+			scrollY: -window.scrollY,
+			async: true,
+		}).then((canvas) => {
+			var a = document.createElement("a");
+			a.href = canvas
+			.toDataURL("image/png")
+			.replace("image/png", "image/octet-stream");
+			a.download = "somefilename.jpg";
+			a.click();
+		});
+	};
 	return (
 		<>
 			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
-			<div className="card m_t_25">
+			<div className="card m_t_25" id="divToPrint">
 				{/*HEADER*/}
 				<div className="d_grid" style={{ gridTemplateColumns: '40% 60%' }}>
 					<div className="grid_item"><h2 className="text_blue">Future  Forseight</h2></div>
 					<div className="grid_item">
 						<div className="input_m_div text_right">
 							<button className="btn_submit cursor_pointer"><span className="download_i"></span> <small>Download Template File</small></button> &nbsp;&nbsp;&nbsp;
-							<button className="btn_submit cursor_pointer"><span className="file_i"></span> <small>Export</small></button>
+							<button onClick={() => downloadImage()} className="btn_submit cursor_pointer"><span className="file_i"></span> <small>Export</small></button>
 						</div>
 					</div>
 				</div>

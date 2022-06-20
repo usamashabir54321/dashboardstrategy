@@ -60,13 +60,13 @@ export default function Comp ({nameId,tab}) {
 					<div id="swottowsdiv" className="m_t_20">
 						<div className="d_grid" style={{ gridTemplateColumns: '37% 21% 36%', gridGap: '2%' }}>
 							<div className="grid_item left">
-								<ul className="top">{ leftTopData.map(function(obj, idx){return <li>{obj ? <p data-tip={obj}>{obj}</p> : <b >&nbsp;</b> }</li> }) }</ul>
-								<ul className="bottom">{ leftBottomData.map(function(obj, idx){return <li>{obj ? <p data-tip={obj}>{obj}</p> : <b>&nbsp;</b> }</li> }) }</ul>
+								<ul className="top">{ leftTopData.map(function(obj, idx){return <li key={idx}>{obj ? <p data-tip={obj}>{obj}</p> : <b >&nbsp;</b> }</li> }) }</ul>
+								<ul className="bottom">{ leftBottomData.map(function(obj, idx){return <li key={idx}>{obj ? <p data-tip={obj}>{obj}</p> : <b>&nbsp;</b> }</li> }) }</ul>
 							</div>
 							<div className="grid_item" style={{ display: 'table' }}><h2 id="swottowscat">{nameName}</h2></div>
 							<div className="grid_item right text_right">
-								<ul className="top">{ rightTopData.map(function(obj, idx){return <li>{obj ? <p data-tip={obj}>{obj}</p> : <b>&nbsp;</b> }</li> }) }</ul>
-								<ul className="bottom">{ rightBottomData.map(function(obj, idx){return <li>{obj ? <p data-tip={obj}>{obj}</p> : <b>&nbsp;</b> }</li> }) }</ul>
+								<ul className="top">{ rightTopData.map(function(obj, idx){return <li key={idx}>{obj ? <p data-tip={obj}>{obj}</p> : <b>&nbsp;</b> }</li> }) }</ul>
+								<ul className="bottom">{ rightBottomData.map(function(obj, idx){return <li key={idx}>{obj ? <p data-tip={obj}>{obj}</p> : <b>&nbsp;</b> }</li> }) }</ul>
 							</div>
 						</div>
 					</div> : ''

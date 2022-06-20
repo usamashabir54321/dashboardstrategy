@@ -6,4 +6,5 @@ export const NO_THEME = "NO_THEME";
 export const SET_AUTH_USER = "SET_AUTH_USER";
 export const SET_PROJECT = "SET_PROJECT";
 export const SET_SIDEBAR = "SET_SIDEBAR";
+export const SET_PRESENTATION_PROJECT_ID = "SET_PRESENTATION_PROJECT_ID";
 export const NOTHING_TO_SET = "NOTHING_TO_SET";
