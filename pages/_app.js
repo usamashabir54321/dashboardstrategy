@@ -6,6 +6,7 @@ import withReactContent from 'sweetalert2-react-content'
 
 axios.defaults.baseURL = 'https://backend.dashboardstrategy.com/';
 // axios.defaults.baseURL = 'http://localhost:8000/';
+axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*';
 
 function MyApp({ Component, pageProps }) {
   const Layout = Component.layout || EmptyLayout;

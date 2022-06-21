@@ -6,5 +6,16 @@ module.exports = {
     ignoreDuringBuilds: true,
   },nextConfig: {
     reactStrictMode: true,
+  },async rewrites() {
+    return [ {
+      source: '/:path*',
+      destination: 'https://*',
+    },]
+  },
+  async headers() {
+    return [{
+      source: "/:path*",
+      headers: [{ key: "Access-Control-Allow-Origin", value: "*" },],
+    },]
   },
 }

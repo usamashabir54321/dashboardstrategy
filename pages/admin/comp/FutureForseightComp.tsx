@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react'
 import axios from 'axios'
-import html2canvas from 'html2canvas'
 import Swal from 'sweetalert2'
 import PageTabNote from './parts/PageTabNote.tsx'
 
@@ -67,24 +66,6 @@ export default function Comp ({nameId}) {
 		else setItemIndx(idx)
 		setAllowEdit(false);
 	};
-	const downloadImage = () => {
-		html2canvas(document.querySelector("#divToPrint"), {
-			logging: true,
-			letterRendering: 1,
-			allowTaint: true,
-			useCORS: true,
-			scrollX: 0,
-			scrollY: -window.scrollY,
-			async: true,
-		}).then((canvas) => {
-			var a = document.createElement("a");
-			a.href = canvas
-			.toDataURL("image/png")
-			.replace("image/png", "image/octet-stream");
-			a.download = "somefilename.jpg";
-			a.click();
-		});
-	};
 	return (
 		<>
 			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
@@ -95,12 +76,12 @@ export default function Comp ({nameId}) {
 					<div className="grid_item">
 						<div className="input_m_div text_right">
 							<button className="btn_submit cursor_pointer"><span className="download_i"></span> <small>Download Template File</small></button> &nbsp;&nbsp;&nbsp;
-							<button onClick={() => downloadImage()} className="btn_submit cursor_pointer"><span className="file_i"></span> <small>Export</small></button>
+							<button className="btn_submit cursor_pointer"><span className="file_i"></span> <small>Export</small></button>
 						</div>
 					</div>
 				</div>
 				{/*DATA ARRAY MAPPING*/}
-				<div className="d_grid m_t_30" style={{ gridTemplateColumns: '30% 30% 30%' , gap: '8% 4%', marginBottom: '8%' }}>
+				<div className="d_grid m_t_30" style={{ gridTemplateColumns: '30% 30% 30%',gap: '4.5%',gridRowGap: '0',marginLeft: '10px', }}>
 					{
 						dataArr.map(function(obj, idx){
 					         return (
@@ -115,7 +96,7 @@ export default function Comp ({nameId}) {
 					    })
 					}
 				</div>
-				<div className="input_m_div text_center m_t_30">
+				<div className="input_m_div text_center">
 					<PageTabNote nameId={nameId} tab="name_note" />
 					{
 						itemIndx === null ? '' :

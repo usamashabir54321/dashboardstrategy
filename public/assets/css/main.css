@@ -103,6 +103,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     box-shadow: 0px 4px 8px 8px rgb(255 255 255 / 20%);
     border-radius: 34px;
     padding: 13px 13px 25px;
+    margin-bottom: 30px;
 }
 .dashboard_pages .future_forsight_card img {width: 100%;border-radius: 22px;}
 		/*LOADER*/
