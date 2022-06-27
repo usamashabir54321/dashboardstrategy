@@ -152,7 +152,7 @@ export default function Comp ({nameId,props}) {
 				{/*DATA IMAGE MAPPING*/}
 				{
 					dataSetArr.length > 0 ?
-					<div style={{ width: `${dataSetArr.length > 2 ? '80%' : dataSetArr.length > 5 ? '100%' : '60%' }`,margin: '0px auto',backgroundColor: '#464747' }} id="printPDF">
+					<div style={{ width: '65%',margin: '0px auto',backgroundColor: '#464747' }} id="printPDF">
 						<Doughnut data={data} options={options} plugins={plugins}/>
 					</div> : ''
 				}
