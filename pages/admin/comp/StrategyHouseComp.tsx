@@ -1,5 +1,6 @@
 import {useSelector} from 'react-redux'
 import TreeNode from './parts/TreeNode.tsx'
+import Link from 'next/link'
 
 export default function Comp ({nameId,props}) {
 	const adminReducerData = useSelector((state) => state.adminStore);
@@ -11,7 +12,7 @@ export default function Comp ({nameId,props}) {
 				{
 					auth_u.mission ? <h4>{auth_u.mission}</h4> :
 					<div className="input_m_div m_t_20">
-						<props.Link href="profile"><button className="btn_submit cursor_pointer">Save Your Mission</button></props.Link>
+						<Link href="profile"><button className="btn_submit cursor_pointer">Save Your Mission</button></Link>
 					</div>
 				}<br />
 			</div>
@@ -20,7 +21,7 @@ export default function Comp ({nameId,props}) {
 				{
 					auth_u.vision ? <h4>{auth_u.vision}</h4> :
 					<div className="input_m_div m_t_20">
-						<props.Link href="profile"><button className="btn_submit cursor_pointer">Save Your Vision</button></props.Link>
+						<Link href="profile"><button className="btn_submit cursor_pointer">Save Your Vision</button></Link>
 					</div>
 				}<br />
 			</div>

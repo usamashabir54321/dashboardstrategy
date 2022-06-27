@@ -5,6 +5,7 @@ import {changeTheme} from '../../../store/actions/themeActions'
 import {setSideBar} from '../../../store/actions/adminActions'
 import {useState} from 'react'
 import axios from 'axios'
+import Link from 'next/link'
 
 export default function Comp ({pageTitle,props}) {
 	const themeReducerData = useSelector((state) => state.themeChanger);
@@ -54,14 +55,14 @@ export default function Comp ({pageTitle,props}) {
 						<div className="dropdown_content">
 							<ul className="dropdown_ul">
 								<li>
-									<props.Link href="profile">
+									<Link href="profile">
 										<button>
 											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 15 15">
 												<path d="M4.45437 14.1012L0 15L0.89875 10.545L4.45437 14.1012ZM5.33813 13.2175L12.3556 6.20188L8.79938 2.64437L1.7825 9.66125L5.33813 13.2175ZM11.4431 0L9.68312 1.76062L13.24 5.3175L15 3.55562L11.4431 0V0Z"/>
 											</svg>
 											 &nbsp; Edit Profile
 										</button>
-									</props.Link>
+									</Link>
 								</li>
 								<li>
 									<button>
