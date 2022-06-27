@@ -1,8 +1,6 @@
-import Head from 'next/head'
-import Link from 'next/link'
 import { useState, useEffect, useRef } from 'react';
 
-export default function Page () {
+export default function Page (props) {
 	const [openSideBar,setOpenSideBar] = useState(false);
 	const hdrVidRef = useRef();
 	const dshbrdVidRef = useRef();
@@ -17,10 +15,10 @@ export default function Page () {
     };
 	return (
 		<>
-			<Head>
+			<props.Head>
 				<title>Home Page | Dashboard Strategy</title>
 				<meta name="Home" content="Home,Dashboard Strategy" />
-			</Head>
+			</props.Head>
 			<div id="home">
 					{/*HEADER*/}
 				<section id="header">
@@ -31,7 +29,7 @@ export default function Page () {
 			       	<div id="header_nav" className="desktop_d_none header_menu">
 			       		<div className="d_grid" style={{ gridTemplateColumns: '90% 10% !important' }}>
 			       			<div className="grid_item">
-			       				<img alt="Image" src="/assets/img/home/h_logo.png" />
+			       				<img alt="Image" src="/assets/img/home/h_logo.png"/>
 			       			</div>
 			       			<div className="grid_item" id="menu-bar-toggle" onClick={() => setOpenSideBar(!openSideBar)}>
 			       				{
@@ -44,7 +42,7 @@ export default function Page () {
 					<div className={`tab_d_none header_menu ${openSideBar ? 'open' : ''}`}>
 						<div className="d_grid" style={{ gridTemplateColumns: '40% 40% 14%', gridGap: '3%' }}>
 							<div className="grid_item">
-								<img alt="Image" src="/assets/img/home/h_logo.png" />
+								<img alt="Image" src="/assets/img/home/h_logo.png"/>
 							</div>
 							<div className="grid_item">
 								<ul>
@@ -54,7 +52,7 @@ export default function Page () {
 									<li onClick={() => scrollTo('h_get_in_touch')}><h4>CONTACT US</h4></li>
 								</ul>
 							</div>
-							<div className="grid_item"><Link href="login"><button className="btn btn_web">LOGIN</button></Link></div>
+							<div className="grid_item"><props.Link href="login"><button className="btn btn_web">LOGIN</button></props.Link></div>
 						</div>
 					</div>
 					<div style={{ display: 'table', width: '100%' }}>
@@ -117,46 +115,7 @@ export default function Page () {
 								</div>
 							</div>
 							<br/><br/><br/>
-							{/*<div className="sec_header text_center">
-								<h1 className="sec_title">Our Mission</h1>
-								<br /><p className="sec_seperator"></p>
-							</div>*/}
 						</div>
-						{/*<div className="d_grid" style={{ gridTemplateColumns: '33% 33% 33%' }} id="mission_grid">
-							<div className="grid_item text_center">
-								<h2>Values</h2><br/>
-								<div className="mission_txt_div">
-									<h4>
-										Honesty, confidentiality,
-										 quality, accuracy, 
-										professionalism, cooperation
-									</h4>
-								</div>
-							</div>
-							<div className="grid_item text_center">
-								<h2>Vision</h2><br/>
-								<div className="mission_txt_div">
-									<h4>
-										Top Ranking Website
-										for performance platform
-										design and big data
-										management
-									</h4>
-								</div>
-							</div>
-							<div className="grid_item text_center">
-								<h2>Mission</h2><br/>
-								<div className="mission_txt_div">
-									<h4>
-										Support for strategic
-										plans, data management
-										and presentation in
-										advanced performance
-										platform
-									</h4>
-								</div>
-							</div>
-						</div>*/}
 						<br/><br/>
 					</section>
 				</div>

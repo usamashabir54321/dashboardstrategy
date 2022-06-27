@@ -1,15 +1,12 @@
-import Head from 'next/head'
 import Layout from './layout.tsx'
 import AdminHeader from './comp/AdminHeader.tsx'
 import {useSelector, useDispatch} from 'react-redux'
 import {useState, useEffect, useRef} from 'react'
-import Validation from './comp/Validation'
 import {setAuthUser} from '../../store/actions/adminActions'
 import axios from 'axios'
 
-export default function Page () {
+export default function Page (props) {
 	const adminReducerData = useSelector((state) => state.adminStore);
-	let [ alert, setAlert ] = useState('');
 	const [personalTab,setPersonalTab] = useState(false);
 	const [mission,setMission] = useState('');
 	const [vision,setVision] = useState('');
@@ -20,7 +17,6 @@ export default function Page () {
 	const { auth_u } = adminReducerData;
 	const dispatch = useDispatch();
 	const userImgRef = useRef(null);
-	const [reqPending,setReqPending] = useState(false);
 	const [selectedImage, setSelectedImage] = useState();
 	useEffect(() => {
 		setMission(auth_u.mission);
@@ -31,43 +27,42 @@ export default function Page () {
 		setContact(auth_u.contact);
 	},[]);
 	const handleSubmit = (e) => {
-		e.preventDefault();setReqPending(true);
+		e.preventDefault();props.Swal.showLoading();
 		let data = new FormData();
 		if(mission == null) data.append( 'mission', '' );else data.append( 'mission', mission );
 		if(vision == null) data.append( 'vision', '' ); else data.append( 'vision', vision );
 		if(company == null) data.append( 'company', '' ); else data.append( 'company', company );
 		axios.post('api/only_post/edit_comp_profile',data).then(res => {
 			dispatch(setAuthUser(res.data.data.new_user));
-			if( res.data.message == 'form_saved' ) setAlert('form_saved');
-			setReqPending(false);
-			setTimeout(() => {setAlert('');},1000);
+			props.Swal.close();
+			if( res.data.message == 'form_saved' ) props.Toast.fire({icon: 'success',title: 'Changes are saved successfully.'});
 		});
 	}
 	const handleSubmitTwo = (e) => {
-		e.preventDefault();setReqPending(true);
+		e.preventDefault();props.Swal.showLoading();
 		let data = new FormData();
 		data.append( 'name', name );
 		data.append( 'contact', contact );
 		axios.post('api/only_post/edit_personal_profile',data).then(res => {
 			dispatch(setAuthUser(res.data.data.new_user));
-			if( res.data.message == 'form_saved' ) setAlert('form_saved');
-			setReqPending(false);
-			setTimeout(() => {setAlert('');setPersonalTab(!personalTab);},1000);
+			props.Swal.close();
+			if( res.data.message == 'form_saved' ) props.Toast.fire({icon: 'success',title: 'Changes are saved successfully.'});
+			setTimeout(() => {setPersonalTab(!personalTab);},1000);
 		});
 	}
 	const imageChangeEvent = (e) => {
 		if (userImgRef.current.files && userImgRef.current.files.length > 0) setSelectedImage(userImgRef.current.files[0]);
 	};
 	const submitImageChange = (e) => {
-		e.preventDefault();setReqPending(true);
+		e.preventDefault();props.Swal.showLoading();
 		let data = new FormData();
 		data.append( 'u_profile_img', userImgRef.current.files[0] );
 		data.append( 'prev_profile_img', auth_u.img_path );
 		axios.post('api/only_post/edit_profile_img',data).then(res => {
 			dispatch(setAuthUser(res.data.data.new_user));
-			if( res.data.message == 'form_saved' ) setAlert('form_saved');
-			setReqPending(false);
-			setTimeout(() => {setAlert('');setSelectedImage();},1000);
+			props.Swal.close();
+			if( res.data.message == 'form_saved' ) props.Toast.fire({icon: 'success',title: 'Changes are saved successfully.'});
+			setTimeout(() => {setSelectedImage();},1000);
 		});
 	}
 	const allowPersonalProfile = () => {
@@ -76,14 +71,12 @@ export default function Page () {
 	};
 	return (
 		<>
-			<Head>
+			<props.Head>
 				<title>Admin Edit Profile | Dashboard Strategy</title>
 				<meta name="Admin Home" content="Admin Home,Dashboard Strategy" />
-			</Head>
-			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
-			<Validation alert={alert} />
+			</props.Head>
 			{/*PAGE HEADER*/}
-			<AdminHeader pageTitle="Edit Profile" />
+			<AdminHeader pageTitle="Edit Profile" props={props} />
 			{/*PAGE BODY*/}
 			<div className="d_content">
 				<div className="d_grid gap_l_30 gap_s_20" id="profile_pg" style={{ gridTemplateColumns: 'auto auto' }}>

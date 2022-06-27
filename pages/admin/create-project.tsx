@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { useState,useEffect } from 'react'
 import Layout from './layout.tsx'
 import AdminHeader from './comp/AdminHeader.tsx'
@@ -33,7 +32,7 @@ const modalStyle = {
 	},
 };
 
-export default function Page () {
+export default function Page (props) {
 	const adminReducerData = useSelector((state) => state.adminStore);
 	const { thisProject } = adminReducerData;
 	const [pageTab,setPageTab] = useState('');
@@ -42,7 +41,6 @@ export default function Page () {
 	const [projectId,setProjectId] = useState(null);
 	const [modalIsOpen, setIsOpen] = useState(true);
 	const dispatch = useDispatch();
-	const [reqPending,setReqPending] = useState(false);
 	useEffect(() => {
 		if (thisProject.id) setProjectId(thisProject.id);
 		return () => {
@@ -55,35 +53,34 @@ export default function Page () {
 	}
 	function project () {
 		switch(nameTabCom) {
-			case "future_forseight":   return <FutureForseightComp nameId={nameId} />;
-			case "strategy_house":   return <StrategyHouseComp nameId={nameId} />;
-			case "organization_chart":   return <OrganChartComp nameId={nameId} />;
-			case "swot":   return <SwotTowsComp nameId={nameId} tab={nameTabCom} />;
-			case "tows":   return <SwotTowsComp nameId={nameId} tab={nameTabCom} />;
-			case "stakeholders":   return <StakeholderComp nameId={nameId} />;
-			case "kpis":   return <KpisComp nameId={nameId} />;
-			case "multiple_dashboard":   return <MultiDashboard nameId={nameId} />;
+			case "future_forseight":   return <FutureForseightComp nameId={nameId} props={props} />;
+			case "strategy_house":   return <StrategyHouseComp nameId={nameId} props={props} />;
+			case "organization_chart":   return <OrganChartComp nameId={nameId} props={props} />;
+			case "swot":   return <SwotTowsComp nameId={nameId} tab={nameTabCom} props={props} />;
+			case "tows":   return <SwotTowsComp nameId={nameId} tab={nameTabCom} props={props} />;
+			case "stakeholders":   return <StakeholderComp nameId={nameId} props={props} />;
+			case "kpis":   return <KpisComp nameId={nameId} props={props} />;
+			case "multiple_dashboard":   return <MultiDashboard nameId={nameId} props={props} />;
 			default: return <div className="card m_t_25"><h1>No Project Match</h1></div>
 		}
 	}
 	function openModal() { setIsOpen(true); }function closeModal() { setIsOpen(false); }
 	const handleSubmit = (e) => {
-		e.preventDefault();setReqPending(true);
+		e.preventDefault();props.Swal.showLoading();
 		var data = new FormData(e.target);
 		if (projectId) data.append('id',projectId);
 		axios.post('api/only_post/create_project',data).then(res => {
-			setProjectId(res.data);setReqPending(false);closeModal();
+			setProjectId(res.data);props.Swal.close();closeModal();
 		});
 	};
 	return (
 		<>
-			<Head>
+			<props.Head>
 				<title>Create Project | Dashboard Strategy</title>
 				<meta name="Create Project" content="Create Project,Dashboard Strategy" />
-			</Head>
+			</props.Head>
 			{/*PAGE HEADER*/}
-			<AdminHeader pageTitle="Create Project" />
-			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
+			{thisProject.id ? <AdminHeader pageTitle="Update Project" props={props} /> : <AdminHeader pageTitle="Create Project" props={props} />}
 			{/*PAGE BODY*/}
 			{
 				projectId ?
@@ -100,55 +97,55 @@ export default function Page () {
 										Future Foreseight <span className="iconites"><span className="i_right close">--</span><span className="i_right open">+</span></span>
 									</h4>
 								</li>
-								{ pageTab == 'future_forseight' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} /> : '' }
+								{ pageTab == 'future_forseight' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} props={props} /> : '' }
 								<li className={pageTab == 'strategy_house' ? 'active' : ''}  onClick={() => setPageTab('strategy_house')}>
 									<h4>
 										Strategy House <span className="iconites"><span className="i_right close">--</span><span className="i_right open">+</span></span>
 									</h4>
 								</li>
-								{ pageTab == 'strategy_house' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} /> : '' }
+								{ pageTab == 'strategy_house' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} props={props} /> : '' }
 								<li className={pageTab == 'organization_chart' ? 'active' : ''}  onClick={() => setPageTab('organization_chart')}>
 									<h4>
 										Organization Chart <span className="iconites"><span className="i_right close">--</span><span className="i_right open">+</span></span>
 									</h4>
 								</li>
-								{ pageTab == 'organization_chart' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} /> : '' }
+								{ pageTab == 'organization_chart' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} props={props} /> : '' }
 								<li className={pageTab == 'road_map' ? 'active' : ''}  onClick={() => setPageTab('road_map')}>
 									<h4>
 										Road Map <span className="iconites"><span className="i_right close">--</span><span className="i_right open">+</span></span>
 									</h4>
 								</li>
-								{ pageTab == 'road_map' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} /> : '' }
+								{ pageTab == 'road_map' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} props={props} /> : '' }
 								<li className={pageTab == 'swot' ? 'active' : ''}  onClick={() => setPageTab('swot')}>
 									<h4>
 										SWOT <span className="iconites"><span className="i_right close">--</span><span className="i_right open">+</span></span>
 									</h4>
 								</li>
-								{ pageTab == 'swot' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} /> : '' }
+								{ pageTab == 'swot' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} props={props} /> : '' }
 								<li className={pageTab == 'tows' ? 'active' : ''}  onClick={() => setPageTab('tows')}>
 									<h4>
 										TOWS <span className="iconites"><span className="i_right close">--</span><span className="i_right open">+</span></span>
 									</h4>
 								</li>
-								{ pageTab == 'tows' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} /> : '' }
+								{ pageTab == 'tows' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} props={props} /> : '' }
 								<li className={pageTab == 'stakeholders' ? 'active' : ''}  onClick={() => setPageTab('stakeholders')}>
 									<h4>
 										Stakeholders <span className="iconites"><span className="i_right close">--</span><span className="i_right open">+</span></span>
 									</h4>
 								</li>
-								{ pageTab == 'stakeholders' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} /> : '' }
+								{ pageTab == 'stakeholders' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} props={props} /> : '' }
 								<li className={pageTab == 'kpis' ? 'active' : ''}  onClick={() => setPageTab('kpis')}>
 									<h4>
 										KPI’s <span className="iconites"><span className="i_right close">--</span><span className="i_right open">+</span></span>
 									</h4>
 								</li>
-								{ pageTab == 'kpis' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} /> : '' }
+								{ pageTab == 'kpis' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} props={props} /> : '' }
 								<li className={pageTab == 'multiple_dashboard' ? 'active' : ''}  onClick={() => setPageTab('multiple_dashboard')}>
 									<h4>
 										Dashboard <span className="iconites"><span className="i_right close">--</span><span className="i_right open">+</span></span>
 									</h4>
 								</li>
-								{ pageTab == 'multiple_dashboard' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} /> : '' }
+								{ pageTab == 'multiple_dashboard' ? <CategoryList projectId={projectId} tab={pageTab} selectTabPage={selectTabPage} props={props} /> : '' }
 							</ul>
 						</div>
 					</div>

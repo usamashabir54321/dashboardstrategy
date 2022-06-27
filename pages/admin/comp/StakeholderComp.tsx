@@ -7,15 +7,16 @@ import axios from 'axios'
 import $ from "jquery";
 import UpdateStakeHolder from './parts/UpdateStakeHolder.tsx';
 import PageTabNote from './parts/PageTabNote.tsx'
+import html2canvas from "html2canvas";
+import jsPdf from "jspdf";
 
-export default function Comp ({nameId}) {
+export default function Comp ({nameId,props}) {
 	const [dataSetArr,setDataSetArr] = useState([]);
 	const [isUpdComp,setIsUpdComp] = useState(false);
-	const [reqPending,setReqPending] = useState(false);
 	const [isValError,setIsValError]= useState(false);
 	const [maxThan100,setMaxThan100]= useState('');
 	useEffect(() => {
-		getStakeHolders();
+		getStakeHolders('get');
 		$('#stake_holder_pg').on('click','.insert_grid_line .btn_remover',function (e) {
 			e.stopPropagation();
 			var numItems = $('form .insert_grid_line').length;
@@ -28,7 +29,8 @@ export default function Comp ({nameId}) {
 			$('.d_grid').removeClass('in_action');
 		});
 	},[]);
-	const getStakeHolders = () => {
+	const getStakeHolders = (status) => {
+		props.Swal.showLoading();
 		axios.get('api/getById/get_stake_holder/'+nameId).then(res => {
 			var chartTotalArr = [];
 			for (let loop = 0; loop < res.data.length; loop++) {
@@ -41,6 +43,20 @@ export default function Comp ({nameId}) {
 			}
 			setDataSetArr(chartTotalArr);
 			setIsUpdComp(false);
+			props.Swal.close();
+			if (status == 'update') {
+				setTimeout(() => {
+					var pdfElement = document.getElementById("printPDF");
+					html2canvas(pdfElement).then(canvas => {
+						var canImg = canvas.toDataURL('image/png');
+						var data = new FormData();
+						data.append( 'name_id', nameId );
+						data.append( 'canvas_url', canImg );
+						data.append( 'type', 'stakeholders' );
+						axios.post('api/only_post/make_canvas_image',data);
+					});
+				},2000);
+			}
 		});
 	};
 	const data = { datasets: dataSetArr, };
@@ -94,34 +110,49 @@ export default function Comp ({nameId}) {
 			data.append( 'l_b_inpt[]', 'black' );
 		}
 		data.append( 'name_id', nameId );
-		setReqPending(true);
+		props.Swal.showLoading();
 		axios.post('api/only_post/save_stakeholder',data).then(res => {
 			document.getElementById("insert_form").reset();
 			const elements = document.querySelectorAll('#insert_form .inputs_grid_line');
 			Array.from(elements).forEach((element, index) => {
 			  if (index > 0) element.remove();
 			});
-			getStakeHolders();
-			setReqPending(false);
+			getStakeHolders('update');
+			props.Swal.close();
+		});
+	};
+	const printPDF = () => {
+		props.Swal.showLoading();
+		var pdfElement = document.getElementById("printPDF");
+		html2canvas(pdfElement).then(canvas => {
+			var canImg = canvas.toDataURL('image/png');
+			const pdf = new jsPdf({ orientation: 'portrait' });
+			const imgProps= pdf.getImageProperties(canImg);
+			const pdfWidth = pdf.internal.pageSize.getWidth();
+			const pdfHeight = pdf.internal.pageSize.getHeight();
+			var imgHeight = imgProps.height * pdfWidth / imgProps.width;
+			pdf.text(100, 15, "Stakeholder's Framework", 'center');
+			pdf.addImage(canImg, 'PNG', 0, 25, pdfWidth, imgHeight);
+			pdf.save(`${new Date().toISOString()}.pdf`);
+			props.Swal.close();
 		});
 	};
 	return (
 		<>
-			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			<div className="card m_t_25" id="stake_holder_pg">
 				{/*HEADER*/}
 				<div className="d_grid" style={{ gridTemplateColumns: '40% 60%' }}>
 					<div className="grid_item"><h2 className="text_blue">Stakeholder's Framework</h2></div>
 					<div className="grid_item">
 						<div className="input_m_div text_right">
-							<button className="btn_submit cursor_pointer"><span className="file_i"></span> <small>Export</small></button>
+							<button onClick={printPDF} className="btn_submit cursor_pointer"><span className="file_i"></span> <small>Export</small></button>
 						</div>
 					</div>
 				</div>
 				{/*DATA IMAGE MAPPING*/}
 				{
 					dataSetArr.length > 0 ?
-					<div style={{ width: `${dataSetArr.length > 2 ? '80%' : dataSetArr.length > 5 ? '100%' : '60%' }`,margin: '0px auto' }}>
+					<div style={{ width: `${dataSetArr.length > 2 ? '80%' : dataSetArr.length > 5 ? '100%' : '60%' }`,margin: '0px auto',backgroundColor: '#464747' }} id="printPDF">
 						<Doughnut data={data} options={options} plugins={plugins}/>
 					</div> : ''
 				}

@@ -1,22 +1,19 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect } from 'react'
 import axios from 'axios'
-import Swal from 'sweetalert2'
 import PageTabNote from './parts/PageTabNote.tsx'
 
-export default function Comp ({nameId}) {
+export default function Comp ({nameId,props}) {
 	const [dataArr,setDataArr] = useState([]);
 	const [insertFormArr,setInsertFormArr] = useState([1]);
 	const [itemIndx,setItemIndx] = useState(null);
 	const [allowEdit,setAllowEdit] = useState(false);
-	const [reqPending,setReqPending] = useState(false);
-	const exportRef = useRef();
 	useEffect(() => {
 		getingData();
 	},[nameId]);
 	const getingData = () => {
-		setReqPending(true);
+		props.Swal.showLoading();
 		axios.get('api/getById/get_future_sights/'+nameId).then(res => {
-			setDataArr(res.data);setReqPending(false);
+			setDataArr(res.data);props.Swal.close();
 		});
 	};
 	const handleSubmit = (e) => {
@@ -24,27 +21,27 @@ export default function Comp ({nameId}) {
 		var form = document.querySelector('#insert_form');
 		var data = new FormData(form);
 		data.append( 'cat_name_id', nameId );
-		setReqPending(true);
+		props.Swal.showLoading();
 		axios.post('api/only_post/create_name_forsight',data).then(res => {
 			setDataArr(res.data);
 			document.getElementById("insert_form").reset();
-			setInsertFormArr(([1]));setReqPending(false);
+			setInsertFormArr(([1]));props.Swal.close();
 		});
 	}
 	const handDelete = () => {
-		Swal.fire({
+		props.Swal.fire({
 			title: 'Do you want to delete this item?',
 			confirmButtonText: 'Delete',
 			showCancelButton: true,
 		}).then((result) => {
 			if (result.isConfirmed) {
-				setReqPending(true);
+				props.Swal.showLoading();
 				axios.get('api/getById/del_foreseights/'+dataArr[itemIndx].id).then(res => {
-					setDataArr(res.data);setItemIndx(null);setReqPending(false);
-					Swal.fire('Your item is deleted successfully.', '', 'success')
+					setDataArr(res.data);setItemIndx(null);props.Swal.close();
+					props.Swal.fire('Your item is deleted successfully.', '', 'success')
 				});
 			}
-			else Swal.fire('Your item is confirmly saved.', '', 'success')
+			else props.Swal.fire('Your item is confirmly saved.', '', 'success')
 		})
 	}
 	const handleUpdate = (e) => {
@@ -54,11 +51,11 @@ export default function Comp ({nameId}) {
 		data.append( 'id', dataArr[itemIndx].id );
 		data.append( 'prev_img_path', dataArr[itemIndx].img_path );
 		data.append( 'cat_name_id', dataArr[itemIndx].cat_name_id );
-		setReqPending(true);
+		props.Swal.showLoading();
 		axios.post('api/only_post/update_name_forsight',data).then(res => {
 			setDataArr(res.data);
 			document.getElementById("update_form").reset();
-			setAllowEdit(false);setItemIndx(null);setReqPending(false);
+			setAllowEdit(false);setItemIndx(null);props.Swal.close();
 		});
 	};
 	const selectBox = (idx) => {
@@ -66,9 +63,18 @@ export default function Comp ({nameId}) {
 		else setItemIndx(idx)
 		setAllowEdit(false);
 	};
+	const exportFunc = () => {
+		props.Swal.showLoading();
+		var data = new FormData();
+		data.append('tab','future_forseight');
+		data.append('name_id',nameId);
+		axios.post('/api/only_post/makepdf',data).then(res => {
+			props.Swal.close();
+			window.open(res.data, '_blank');
+		});
+	};
 	return (
 		<>
-			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			<div className="card m_t_25" id="divToPrint">
 				{/*HEADER*/}
 				<div className="d_grid" style={{ gridTemplateColumns: '40% 60%' }}>
@@ -76,7 +82,7 @@ export default function Comp ({nameId}) {
 					<div className="grid_item">
 						<div className="input_m_div text_right">
 							<button className="btn_submit cursor_pointer"><span className="download_i"></span> <small>Download Template File</small></button> &nbsp;&nbsp;&nbsp;
-							<button className="btn_submit cursor_pointer"><span className="file_i"></span> <small>Export</small></button>
+							<button onClick={() => exportFunc()} className="btn_submit cursor_pointer"><span className="file_i"></span> <small>Export</small></button>
 						</div>
 					</div>
 				</div>

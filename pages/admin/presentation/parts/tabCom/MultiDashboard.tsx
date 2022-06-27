@@ -2,17 +2,20 @@ import {useState,useEffect} from 'react'
 import axios from 'axios'
 import MultiMainSubPart from './subParts/MultiMainSubPart.tsx'
 
-export default function Comp ({setTabComp,proId}) {
+export default function Comp ({setTabComp,proId,props}) {
 	const [dataArr,setDataArr] = useState([]);
 	useEffect(() => {
 		getData();
 	},[]);
 	const getData = () => {
+		props.Swal.showLoading();
 		var data = new FormData();
 		data.append('project_id',proId);
 		data.append('tab','multiple_dashboard');
 		axios.post('/api/only_post/get_present_pro_data',data).then(res => {
 			setDataArr(res.data);
+			props.Swal.close();
+			if (res.data.length < 1) props.Toast.fire({ icon: 'info', title: 'Empty Data.' }); 
 		});
 	};
 	return (

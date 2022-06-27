@@ -5,7 +5,6 @@ import Swal from 'sweetalert2'
 
 export default function Part ({dataSetArr,getStakeHolders}) {
 	const [dataArr,setDataArr] = useState([]);
-	const [reqPending,setReqPending] = useState(false);
 	const [nowSet,setNowSet] = useState(false);
 	const [isValError,setIsValError]= useState(false);
 	const [maxThan100,setMaxThan100]= useState('');
@@ -31,9 +30,8 @@ export default function Part ({dataSetArr,getStakeHolders}) {
 			showCancelButton: true,
 		}).then((result) => {
 			if (result.isConfirmed) {
-				setReqPending(true);
 				axios.get('api/getById/del_stake_holder/'+id).then(res => {
-					getStakeHolders();setReqPending(false);
+					getStakeHolders('update');
 					Swal.fire('Your item is deleted successfully.', '', 'success')
 				});
 			}
@@ -62,14 +60,12 @@ export default function Part ({dataSetArr,getStakeHolders}) {
 			data.append( 'l_p_inpt[]', emptyVal );
 			data.append( 'l_b_inpt[]', 'black' );
 		}
-		setReqPending(true);
 		axios.post('api/only_post/update_stakeholder',data).then(res => {
-			getStakeHolders();setReqPending(false);
+			getStakeHolders('update');
 		});
 	};
 	return (
 		<div id="stake_update_comp">
-			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			{isValError ? <div className="toast toast-error"><div className="toast-title">Error</div><div className="toast-message">Your percentage value is <b>{maxThan100}</b> than <b>100</b>.</div></div> : ''}
 			{nowSet ?
 				dataArr.map(function(obj,ind) {

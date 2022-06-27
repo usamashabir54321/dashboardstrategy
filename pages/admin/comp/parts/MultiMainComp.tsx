@@ -2,6 +2,7 @@ import { useState,useEffect } from 'react'
 import Modal from 'react-modal';
 import axios from 'axios'
 import MultiSubChild from './childParts/MultiKpiFolder/MultiSubChild.tsx'
+import Swal from 'sweetalert2'
 Modal.setAppElement('body');
 const modalStyle = {
 	content: {
@@ -21,12 +22,11 @@ const modalStyle = {
 	},
 };
 
-export default function Part ({obj}) {
+export default function Part ({obj,saveCanvasNow}) {
 	const [modalIsOpen, setIsOpen] = useState(false);
 	const [catArr,setCatArr] = useState([]);
 	const [nameArr,setNameArr] = useState([]);
 	const [compObj,setCompObj] = useState({});
-	const [reqPending,setReqPending] = useState(false);
 	const [alert,setAlert] = useState('');
 	useEffect(() => {
 		setCompObj(obj);
@@ -51,20 +51,19 @@ export default function Part ({obj}) {
 		var data = new FormData();
 		data.append('name_id',nameId);
 		data.append('multi_comp_id',compObj.id);
-		setIsOpen(false);setReqPending(true);
+		setIsOpen(false);Swal.showLoading();
 		axios.post('api/only_post/make_multi_kpi_data',data).then(res => {
 			if (res.data != 0) {
 				setCompObj({});
 				setTimeout(() => {setCompObj(res.data);},500);
 			}
 			else setAlert('no_kpi_data');
-			setReqPending(false);
-			setTimeout(() => { setAlert(''); },2000);
+			Swal.close();
+			setTimeout(() => { setAlert('');saveCanvasNow(); },2000);
 		});
 	};
 	return (
 		<>
-			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			{ alert == 'no_kpi_data' ? <div className="toast toast-warning"><div className="toast-title">Warning</div><div className="toast-message">This kpi has no data. Please try another kpi.</div></div> : '' }
 			<div className="grid_item">
 				<div className="card m_t_25">

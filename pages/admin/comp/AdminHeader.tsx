@@ -1,4 +1,3 @@
-import Link from 'next/link';
 import { useRouter } from 'next/router'
 import { removeCookies } from 'cookies-next';
 import {useSelector, useDispatch} from 'react-redux'
@@ -7,8 +6,7 @@ import {setSideBar} from '../../../store/actions/adminActions'
 import {useState} from 'react'
 import axios from 'axios'
 
-export default function Comp ({pageTitle}) {
-	const [reqPending,setReqPending] = useState(false);
+export default function Comp ({pageTitle,props}) {
 	const themeReducerData = useSelector((state) => state.themeChanger);
 	const adminReducerData = useSelector((state) => state.adminStore);
 	const { themeMode } = themeReducerData;
@@ -16,16 +14,15 @@ export default function Comp ({pageTitle}) {
 	const dispatch = useDispatch();
 	const router = useRouter();
 	const logoutMe = () => {
-		setReqPending(true);
+		props.Swal.showLoading();
 		axios.get('api/only_get/logoutMe').then(res => {
 			router.push('/login');
 			removeCookies('auth_token');
-			setReqPending(false);
+			props.Swal.close();
 		});
 	};
 	return (
 		<div className="card m_t_25" id="admin_header">
-			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			<div className="d_grid" style={{ gridTemplateColumns: '50% 50% 0%' }}>
 				<div className="grid_item"><h1>{pageTitle}</h1></div>
 				<div className="grid_item text_right cursor_pointer" id="u_g_info">
@@ -57,14 +54,14 @@ export default function Comp ({pageTitle}) {
 						<div className="dropdown_content">
 							<ul className="dropdown_ul">
 								<li>
-									<Link href="profile">
+									<props.Link href="profile">
 										<button>
 											<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 15 15">
 												<path d="M4.45437 14.1012L0 15L0.89875 10.545L4.45437 14.1012ZM5.33813 13.2175L12.3556 6.20188L8.79938 2.64437L1.7825 9.66125L5.33813 13.2175ZM11.4431 0L9.68312 1.76062L13.24 5.3175L15 3.55562L11.4431 0V0Z"/>
 											</svg>
 											 &nbsp; Edit Profile
 										</button>
-									</Link>
+									</props.Link>
 								</li>
 								<li>
 									<button>

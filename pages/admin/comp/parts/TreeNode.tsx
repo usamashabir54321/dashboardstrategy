@@ -1,15 +1,13 @@
-import Validation from '../Validation.tsx'
 import axios from 'axios'
 import {useState,useEffect,useRef} from 'react'
 import { ReactDiagram } from 'gojs-react';
 import PageTabNote from './PageTabNote.tsx'
+import html2canvas from "html2canvas";
 
-export default function Part ({nameId,apiParam}) {
+export default function Part ({nameId,apiParam,props}) {
 	const [nodeDataArray, setNodeDataArray] = useState([]);
 	const [linkDataArray, setLinkDataArray] = useState([]);
 	const [isSavedId, setIsSavedId] = useState('');
-	let [ alert, setAlert ] = useState('');
-	const [reqPending,setReqPending] = useState(false);
 	function initDiagram() {
 		const $ = go.GraphObject.make;
 		const diagram =
@@ -154,18 +152,19 @@ export default function Part ({nameId,apiParam}) {
 		}
 	}
 	function saveModule () {
+		props.Swal.showLoading();
+		var treeCanvas = document.getElementsByTagName("canvas");
+		var treeImg = treeCanvas[0].toDataURL("image/png");
 		let data = new FormData();
 		data.append( 'node_data', JSON.stringify(diagramRef.current.props.nodeDataArray) );
 		data.append( 'link_data', JSON.stringify(diagramRef.current.props.linkDataArray) );
 		data.append( 'cat_id', nameId );
+		data.append( 'canvas_url', treeImg );
 		if (isSavedId) data.append( 'id', isSavedId );
-		setReqPending(true);
-		axios.post('api/only_post/save_'+apiParam,data).then(res => { getCatStrategy();setAlert('form_saved');setTimeout(() => {setAlert('');setReqPending(false);},1000); });
+		axios.post('api/only_post/save_'+apiParam,data).then(res => { getCatStrategy();props.Swal.close();props.Toast.fire({ icon: 'success', title: 'Saved successfully!.' }); });
 	}
 	return (
 		<>
-			<Validation alert={alert} />
-			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			<ReactDiagram
 				ref={diagramRef}
 				initDiagram={initDiagram}

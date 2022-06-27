@@ -1,20 +1,18 @@
-import Head from 'next/head'
-import Link from 'next/link'
 import Layout from './layout.tsx'
 import AdminHeader from './comp/AdminHeader.tsx'
 import {useSelector} from 'react-redux'
 
-export default function Page () {
+export default function Page (props) {
 	const adminReducerData = useSelector((state) => state.adminStore);
 	const { auth_u } = adminReducerData;
 	return (
 		<>
-			<Head>
+			<props.Head>
 				<title>Admin Dashboard Home | Dashboard Strategy</title>
 				<meta name="Admin Home" content="Admin Home,Dashboard Strategy" />
-			</Head>
+			</props.Head>
 			{/*PAGE HEADER*/}
-			<AdminHeader pageTitle="Dashboard" />
+			<AdminHeader pageTitle="Dashboard" props={props} />
 			{/*PAGE BODY*/}
 			<div className="d_content">
 				<div className="d_grid gap_l_30 gap_s_20" style={{ gridTemplateColumns: '58% 40%' }}>
@@ -23,7 +21,7 @@ export default function Page () {
 						{
 							auth_u.company ? <h4>{auth_u.company}</h4> :
 							<div className="input_m_div m_t_20">
-								<Link href="profile"><button className="btn_submit cursor_pointer">Save Company Info</button></Link>
+								<props.Link href="profile"><button className="btn_submit cursor_pointer">Save Company Info</button></props.Link>
 							</div>
 						}<br />
 					</div>
@@ -32,7 +30,7 @@ export default function Page () {
 						{
 							auth_u.mission ? <h4>{auth_u.mission}</h4> :
 							<div className="input_m_div m_t_20">
-								<Link href="profile"><button className="btn_submit cursor_pointer">Save Your Mission</button></Link>
+								<props.Link href="profile"><button className="btn_submit cursor_pointer">Save Your Mission</button></props.Link>
 							</div>
 						}<br />
 					</div>
@@ -52,7 +50,7 @@ export default function Page () {
 						{
 							auth_u.vision ? <h4>{auth_u.vision}</h4> :
 							<div className="input_m_div m_t_20">
-								<Link href="profile"><button className="btn_submit cursor_pointer">Save Your Vision</button></Link>
+								<props.Link href="profile"><button className="btn_submit cursor_pointer">Save Your Vision</button></props.Link>
 							</div>
 						}<br />
 					</div>

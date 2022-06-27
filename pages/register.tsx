@@ -1,21 +1,15 @@
-import Head from 'next/head'
-import Link from 'next/link'
 import axios from 'axios'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
-import Validation from './admin/comp/Validation'
-import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 
-export default function Page () {
-	let [ alert, setAlert ] = useState('');
+export default function Page (props) {
 	let [ name, setName ] = useState('');
 	let [ password, setPassword ] = useState('');
 	let [ email, setEmail ] = useState('');
 	let [ contact, setContact ] = useState('');
-	const [reqPending,setReqPending] = useState(false);
 	const router = useRouter();
 	const handleSubmit = async ( e ) => {
-		e.preventDefault();setReqPending(true);
+		e.preventDefault();props.Swal.showLoading();
 		const headers = {"Content-Type" : `multipart/form-data`};
 		let data = new FormData();
 		data.append( 'name', name );
@@ -29,24 +23,21 @@ export default function Page () {
 			headers: headers,
 		});
 		let response = result.data;
-		if( response['message'] == 'double_email' ) {setAlert('double_email');}
+		props.Swal.close();
+		if( response['message'] == 'double_email' ) props.Toast.fire({icon: 'error',title: 'This email is already registered.'});
 		else if( response['message'] == 'success' ) {
-			setAlert('register_suc');
+			props.Toast.fire({icon: 'success',title: 'Registered successfully.'});
 			var auth_token = response.data.token;
 			setTimeout(() => {router.push('/login');},1000);
 		}
-		setReqPending(false);
-		setTimeout(() => {setAlert('');},1000);
 	}
 	return (
 		<>
-			<Head>
+			<props.Head>
 				<title>Register Now | Dashboard Strategy</title>
 				<meta name="Sign Up" content="Sign Up,Dashboard Strategy" />
-			</Head>
-			<Validation alert={alert} />
+			</props.Head>
 			<div className="logins_page" id="main">
-				{reqPending ? <SkeletonTheme baseColor="white" highlightColor="green"><Skeleton count={1} height={3} style={{ position: 'absolute',top: '0%' }}/></SkeletonTheme> : ''}
 				<div className="clearfix"></div>
 				<div className="form_container">
 					<div className="header text_center"><img src="assets/img/logo.png" alt="logo" /></div>
@@ -72,9 +63,9 @@ export default function Page () {
 							<input type="submit" name="submit" value="Sign Up" className="input_field btn_submit cursor_pointer" />
 						</div>
 						<div className="form_footer m_t_20 text_center">
-							<Link href="login">
+							<props.Link href="login">
 								<button className="btn btn_outline_primary">Sign In</button>
-							</Link>
+							</props.Link>
 						</div>
 					</form>
 				</div>

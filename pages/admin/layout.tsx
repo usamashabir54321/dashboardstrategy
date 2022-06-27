@@ -5,7 +5,7 @@ import axios from 'axios'
 import { useState , useEffect } from 'react'
 import { useSelector, useDispatch } from "react-redux";
 import {setTheme} from '../../store/actions/themeActions'
-import {setAuthUser,setSideBar} from '../../store/actions/adminActions'
+import {setAuthUser} from '../../store/actions/adminActions'
 import AdminFooter from './comp/AdminFooter.tsx'
 
 export default function Layout ({children}) {

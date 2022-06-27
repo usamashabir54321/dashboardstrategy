@@ -1,8 +1,7 @@
-import Link from 'next/link'
 import {useSelector} from 'react-redux'
 import TreeNode from './parts/TreeNode.tsx'
 
-export default function Comp ({nameId}) {
+export default function Comp ({nameId,props}) {
 	const adminReducerData = useSelector((state) => state.adminStore);
 	const { auth_u } = adminReducerData;
 	return (
@@ -12,7 +11,7 @@ export default function Comp ({nameId}) {
 				{
 					auth_u.mission ? <h4>{auth_u.mission}</h4> :
 					<div className="input_m_div m_t_20">
-						<Link href="profile"><button className="btn_submit cursor_pointer">Save Your Mission</button></Link>
+						<props.Link href="profile"><button className="btn_submit cursor_pointer">Save Your Mission</button></props.Link>
 					</div>
 				}<br />
 			</div>
@@ -21,14 +20,14 @@ export default function Comp ({nameId}) {
 				{
 					auth_u.vision ? <h4>{auth_u.vision}</h4> :
 					<div className="input_m_div m_t_20">
-						<Link href="profile"><button className="btn_submit cursor_pointer">Save Your Vision</button></Link>
+						<props.Link href="profile"><button className="btn_submit cursor_pointer">Save Your Vision</button></props.Link>
 					</div>
 				}<br />
 			</div>
 			{/*CREATING TREE NODE*/}
 			<div className="card m_t_25">
 				<h2 className="text_blue">Strategy House</h2><br/>
-				<TreeNode nameId={nameId} apiParam="cat_strategy"/>
+				<TreeNode nameId={nameId} apiParam="cat_strategy" props={props} />
 		    </div>
 		</>
 	)

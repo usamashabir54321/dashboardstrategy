@@ -16,6 +16,7 @@
     "@react-pdf/renderer": "^2.2.0",
     "axios": "^0.27.2",
     "babel-plugin-styled-components": "^2.0.7",
+    "canvas2pdf": "^1.0.7",
     "chart.js": "^3.7.1",
     "chart.js-plugin-labels-dv": "^3.0.6",
     "chartjs-plugin-datalabels": "^2.0.0",

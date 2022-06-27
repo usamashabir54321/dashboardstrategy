@@ -289,8 +289,8 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     pointer-events: auto;
     overflow: hidden;
     margin: 0 0 6px;
-    padding: 15px 15px 15px 50px;
-    width: 300px;
+    padding: 13px 13px 13px 50px;
+    width: 270px;
     border-radius: 3px;
     background-position: 15px center;
     background-repeat: no-repeat;
@@ -376,7 +376,7 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
 }
 .desktop_d_none {display: none;}
 .card {border-radius: 12px;padding: 15px;}
-.multi_dummy_box {height: 450px;display: table;width: 100%;text-align: center;}
+.multi_dummy_box {height: 440px;display: table;width: 100%;text-align: center;}
 .multi_dummy_box .dummy_mulit_txt {display: table-cell;vertical-align: middle;}
 .multi_chart_cover {width: 400px;height: 400px;margin: 5% auto;}
 .dashboard_pages ul.list li {
@@ -468,7 +468,9 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
     background-size: cover;
     width: 100%;
     height: auto;
+    background-color: #464747;
 }
+#multi_dash_comp .card {background-color: #474747;}
 #swottowsdiv #swottowscat {
     display: table-cell;
     vertical-align: middle;
@@ -491,7 +493,8 @@ div::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb {
 #swottowsdiv .right ul li {
     color: black;
     width: 85%;
-    margin: 0 3rem;
+    margin-left: 3rem;
+    margin-right: 3rem;
 }
 #swottowsdiv .left ul.top li:nth-child(1) , #swottowsdiv .left ul.bottom li:nth-child(3) {margin: 0 8%;}
 #swottowsdiv .left ul.top li:nth-child(2) , #swottowsdiv .left ul.bottom li:nth-child(2)  {margin: 0 4%;}

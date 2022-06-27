@@ -24,11 +24,10 @@ const modalStyle = {
 	},
 };
 
-export default function Comp ({nameId}) {
+export default function Comp ({nameId,props}) {
 	const [nameKpis,setNameKpis] = useState({});
 	const [mainChart,setMainChart] = useState('');
 	const [deepChart,setDeepChart] = useState('');
-	const [reqPending,setReqPending] = useState(false);
 	const [modalIsOpen, setIsOpen] = useState(true);
 	useEffect(() => {
 		gettingNameData();
@@ -44,14 +43,13 @@ export default function Comp ({nameId}) {
 		data.append( 'name_id', nameId );
 		data.append( 'main_chart', mainChart );
 		data.append( 'deep_chart', chartName );
-		setReqPending(true);
-		axios.post('api/only_post/save_kpi_name_chart',data).then(res => { gettingNameData();setReqPending(false); });
+		props.Swal.showLoading();
+		axios.post('api/only_post/save_kpi_name_chart',data).then(res => { gettingNameData();props.Swal.close(); });
 	};
 	function openModal() { setIsOpen(true); }
 	function closeModal() { setIsOpen(false); }
 	return (
 		<>
-			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			<div className="card m_t_25">
 				{
 					nameKpis.deep_chart == 'donut_pie_chart' ? <KpiDoughnutPart nameId={nameId} /> :

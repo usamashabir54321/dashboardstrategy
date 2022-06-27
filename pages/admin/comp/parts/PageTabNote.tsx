@@ -1,10 +1,10 @@
 import { useState,useEffect } from 'react'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default function Part ({nameId,tab}) {
 	const [pageTabNote,setPageTabNote] = useState('');
 	const [updateTabNote,setUpdateTabNote] = useState(false);
-	const [reqPending,setReqPending] = useState(false);
 	useEffect(() => {
 		gettingTabNote();
 	},[]);
@@ -21,16 +21,15 @@ export default function Part ({nameId,tab}) {
 		var data = new FormData(e.target);
 		data.append( 'tab', tab );
 		data.append( 'name_id', nameId );
-		setReqPending(true);
+		Swal.showLoading();
 		axios.post('api/only_post/update_tab_note',data).then(res => {
-			setReqPending(false);
+			Swal.close();
 			setUpdateTabNote(false);
 			setPageTabNote(res.data);
 		});
 	};
 	return (
 		<>
-			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			{
 				updateTabNote ?
 				<form onSubmit={ ( e ) => handleUpdate( e ) } action="" method="post">

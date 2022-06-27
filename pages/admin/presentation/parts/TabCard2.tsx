@@ -7,14 +7,14 @@ import StakeholderComp from './tabCom/StakeholderComp.tsx'
 import KpisComp from './tabCom/KpisComp.tsx'
 import MultiDashboard from './tabCom/MultiDashboard.tsx'
 
-export default function Part ({nextComp,proId}) {
+export default function Part ({nextComp,proId,props}) {
 	const [tabCom,setTabComp] = useState('');
 	function NowComp () {
 		switch(tabCom) {
-			case "organization_chart":   return <OrganChartComp setTabComp={setThisTab} proId={proId} />;
-			case "tows":   return <SwotTowsComp tab="tows" setTabComp={setThisTab} proId={proId} />;
-			case "stakeholders":   return <StakeholderComp setTabComp={setThisTab} proId={proId} />;
-			case "kpis":   return <KpisComp setTabComp={setThisTab} proId={proId} />;
+			case "organization_chart":   return <OrganChartComp setTabComp={setThisTab} proId={proId} props={props} />;
+			case "tows":   return <SwotTowsComp tab="tows" setTabComp={setThisTab} proId={proId} props={props} />;
+			case "stakeholders":   return <StakeholderComp setTabComp={setThisTab} proId={proId} props={props} />;
+			case "kpis":   return <KpisComp setTabComp={setThisTab} proId={proId} props={props} />;
 			default: return '';
 		}
 	}

@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import Swal from 'sweetalert2'
 
-export default function Comp ({projectId,tab,selectTabPage}) {
+export default function Comp ({projectId,tab,selectTabPage,props}) {
 	const [addCat,setAddCat] = useState(false);
 	const [catsArr,setCatsArr] = useState([]);
 	const [catName,setCatName] = useState('');
@@ -15,17 +14,16 @@ export default function Comp ({projectId,tab,selectTabPage}) {
 	const [thisNameId,setThisNameId] = useState('');
 	const [thisNameTitle,setThisNameTitle] = useState('');
 	const [nameId,setNameId] = useState('');
-	const [reqPending,setReqPending] = useState(false);
 	useEffect(() => {
 		getingTabCats();
 	},[]);
 	const getingTabCats = () => {
-		setReqPending(true);
+		props.Swal.showLoading();
 		let data = new FormData();
 		data.append( 'tab', tab );
 		data.append( 'project_id', projectId );
 		axios.post('api/only_post/get_pro_cats',data).then(res => {
-			setCatsArr(res.data);setReqPending(false);
+			setCatsArr(res.data);props.Swal.close();
 		});
 	};
 	const handleSubmitCat = (e) => {
@@ -34,32 +32,32 @@ export default function Comp ({projectId,tab,selectTabPage}) {
 		data.append( 'catName', catName );
 		data.append( 'type', tab );
 		data.append( 'project_id', projectId );
-		setReqPending(true);
+		props.Swal.showLoading();
 		axios.post('api/only_post/add_tab_cat',data).then(res => {
 			setCatName('');
 			setAddCat(false);
 			setCatsArr(res.data);
-			setReqPending(false);
+			props.Swal.close();
 		});
 	}
 	const handDeleteCat = (e,delCatId) => {
 		e.stopPropagation();
-		Swal.fire({
+		props.Swal.fire({
 			title: 'Do you want to delete this item?',
 			confirmButtonText: 'Delete',
 			showCancelButton: true,
 		}).then((result) => {
 			if (result.isConfirmed) {
-				setReqPending(true);
+				props.Swal.showLoading();
 				axios.get('api/getById/del_pro_cats/'+delCatId).then(res => {
-					setCatsArr(res.data);setReqPending(false);
-					Swal.fire('Your item is deleted successfully.', '', 'success')
+					setCatsArr(res.data);props.Swal.close();
+					props.Swal.fire('Your item is deleted successfully.', '', 'success')
 					if (delCatId == catId) {
 						selectTabPage(null,'');setCatNamesArr([]);setCatId('');
 					}
 				});
 			}
-			else Swal.fire('Your item is confirmly saved.', '', 'success')
+			else props.Swal.fire('Your item is confirmly saved.', '', 'success')
 		})
 	}
 	const updateThisCat = (e,idx) => {
@@ -73,12 +71,12 @@ export default function Comp ({projectId,tab,selectTabPage}) {
 		data.append( 'id', thisCatId );
 		data.append( 'name', thisCatName );
 		data.append( 'project_id', projectId );
-		setReqPending(true);
+		props.Swal.showLoading();
 		axios.post('api/only_post/update_tab_cat',data).then(res => {
 			setThisCatId('');
 			setThisCatName('');
 			setCatsArr(res.data);
-			setReqPending(false);
+			props.Swal.close();
 		});
 	}
 	const selectCat = (e,id) => {
@@ -89,7 +87,11 @@ export default function Comp ({projectId,tab,selectTabPage}) {
 		}
 		else {
 			setCatId(id);
-			if(tab == "strategy_house") selectTabPage(id,tab); else axios.get('api/getById/get_cat_names/'+id).then(res => { setCatNamesArr(res.data); });
+			if(tab == "strategy_house") selectTabPage(id,tab);
+			else {
+				props.Swal.showLoading();
+				axios.get('api/getById/get_cat_names/'+id).then(res => { setCatNamesArr(res.data);props.Swal.close(); });
+			}
 		}
 		setAddCatNames(false);
 	}
@@ -103,30 +105,30 @@ export default function Comp ({projectId,tab,selectTabPage}) {
 		let data = new FormData();
 		data.append( 'name', nameTitle );
 		data.append( 'cat_id', catId );
-		setReqPending(true);
+		props.Swal.showLoading();
 		axios.post('api/only_post/add_cat_names',data).then(res => {
 			setNameTitle('');
 			setAddCatNames(false);
 			setCatNamesArr(res.data);
-			setReqPending(false);
+			props.Swal.close();
 		});
 	}
 	const handDeleteName = (e,delNameId) => {
 		e.stopPropagation();
-		Swal.fire({
+		props.Swal.fire({
 			title: 'Do you want to delete this item?',
 			confirmButtonText: 'Delete',
 			showCancelButton: true,
 		}).then((result) => {
 			if (result.isConfirmed) {
-				setReqPending(true);
+				props.Swal.showLoading();
 				axios.get('api/getById/del_cat_name/'+delNameId).then(res => {
-					setCatNamesArr(res.data);setReqPending(false);
-					Swal.fire('Your item is deleted successfully.', '', 'success')
+					setCatNamesArr(res.data);props.Swal.close();
+					props.Swal.fire('Your item is deleted successfully.', '', 'success')
 					if (delNameId == nameId) selectTabPage(null,'');
 				});
 			}
-			else Swal.fire('Your item is confirmly saved.', '', 'success')
+			else props.Swal.fire('Your item is confirmly saved.', '', 'success')
 		})
 	}
 	const updateThisName = (e,idx) => {
@@ -139,17 +141,16 @@ export default function Comp ({projectId,tab,selectTabPage}) {
 		let data = new FormData();
 		data.append( 'id', thisNameId );
 		data.append( 'name', thisNameTitle );
-		setReqPending(true);
+		props.Swal.showLoading();
 		axios.post('api/only_post/update_cat_names',data).then(res => {
 			setThisNameId('')
 			setCatNamesArr(res.data);
-			setReqPending(false);
+			props.Swal.close();
 		});
 	}
 	return (
 		<>
 			{/*MAPPING CATS*/}
-			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			{
 				catsArr.map(function(obj1, idx1){
 			         return (

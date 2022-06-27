@@ -3,7 +3,7 @@ import {useState,useEffect} from 'react'
 import axios from 'axios'
 import TreeNodeSubPart from './subParts/TreeNodeSubPart.tsx'
 
-export default function Comp ({setTabComp,proId}) {
+export default function Comp ({setTabComp,proId,props}) {
 	const adminReducerData = useSelector((state) => state.adminStore);
 	const { auth_u } = adminReducerData;
 	const [dataArr,setDataArr] = useState([]);
@@ -11,11 +11,14 @@ export default function Comp ({setTabComp,proId}) {
 		getData();
 	},[]);
 	const getData = () => {
+		props.Swal.showLoading();
 		var data = new FormData();
 		data.append('project_id',proId);
 		data.append('tab','strategy_house');
 		axios.post('/api/only_post/get_present_pro_data',data).then(res => {
 			setDataArr(res.data);
+			props.Swal.close();
+			if (res.data.length < 1) props.Toast.fire({ icon: 'info', title: 'Empty Data.' }); 
 		});
 	};
 	return (

@@ -1,23 +1,38 @@
 import TreeNode from './parts/TreeNode.tsx'
 import {useState,useEffect} from 'react'
 import axios from 'axios'
+import html2canvas from "html2canvas";
+import jsPdf from "jspdf";
 
-export default function Comp ({nameId}) {
+export default function Comp ({nameId,props}) {
 	const [noEmploye,setNoEmploye] = useState('');
 	const [orders,setOrders] = useState('');
 	const [productivity,setProductivity] = useState('');
 	const [training,setTraining] = useState('');
 	const [selectBox,setSelectBox] = useState('');
-	const [reqPending,setReqPending] = useState(false);
 	useEffect(() => {
-		getOrganChartData();
+		getOrganChartData('get');
 	},[]);
-	function getOrganChartData () {
+	function getOrganChartData (status) {
+		props.Swal.showLoading();
 		axios.get('api/getById/get_organ_chart_data/'+nameId).then(res => {
 			if(res.data.no_employe) setNoEmploye(res.data.no_employe); else setNoEmploye('48');
 			if(res.data.orders) setOrders(res.data.orders); else setOrders('12');
 			if(res.data.productivity) setProductivity(res.data.productivity); else setProductivity('89');
 			if(res.data.training) setTraining(res.data.training); else setTraining('65');
+			if (status == 'update') {
+				setTimeout(() => {
+					var organHdr = document.getElementById("organ_hdr_comp");
+					html2canvas(organHdr).then(canvas => {
+						var hdrImage = canvas.toDataURL('image/png');
+						var data = new FormData();
+						data.append( 'name_id', nameId );
+						data.append( 'canvas_url', hdrImage );
+						axios.post('api/only_post/update_organ_data',data);
+					});
+				},1000);
+			}
+			props.Swal.close();
 		});
 	};
 	const handleUpdate = (e) => {
@@ -25,28 +40,50 @@ export default function Comp ({nameId}) {
 		var form = document.querySelector('#update_form');
 		var data = new FormData(form);
 		data.append( 'name_id', nameId );
-		setReqPending(true);
+		props.Swal.showLoading();
 		axios.post('api/only_post/update_organ_data',data).then(res => {
 			setSelectBox('');
-			getOrganChartData();
-			setReqPending(false);
+			getOrganChartData('update');
+		});
+	};
+	const printPDF = () => {
+		props.Swal.showLoading();
+			/*ORGAN HEADER IMAGE*/
+		var organHdr = document.getElementById("organ_hdr_comp");
+		html2canvas(organHdr).then(canvas => {
+			var hdrImage = canvas.toDataURL('image/png');
+				/*ORGAN TREE CANVAS IMAGE*/
+			var treeCanvas = document.getElementsByTagName("canvas");
+			var treeImg = treeCanvas[0].toDataURL("image/png");
+				 /*CREATING PDF*/
+			const pdf = new jsPdf({ orientation: 'portrait' });
+			const imgProps= pdf.getImageProperties(hdrImage);
+			const treeProps= pdf.getImageProperties(treeImg);
+			const pdfWidth = pdf.internal.pageSize.getWidth();
+			const pdfHeight = pdf.internal.pageSize.getHeight();
+			var imgHeight = imgProps.height * pdfWidth / imgProps.width;
+			var treeHeight = treeProps.height * pdfWidth / treeProps.width;
+			pdf.text(100, 15, 'Organization Chart', 'center');
+			pdf.addImage(hdrImage, 'PNG', 0, 25, pdfWidth, imgHeight);
+			pdf.addImage(treeImg, 'PNG', 0, 70, pdfWidth, treeHeight);
+			pdf.save(`${new Date().toISOString()}.pdf`);
+			props.Swal.close();
 		});
 	};
 	return (
 		<>
-			{reqPending ? <span className="react-loading-skeleton green" style={{position: 'fixed', top: '0px', left: '0px', height: '3px'}}></span> : ''}
 			<div className="card m_t_25">
 				{/*HEADER*/}
 				<div className="d_grid" style={{ gridTemplateColumns: '40% 60%' }}>
 					<div className="grid_item"><h2 className="text_blue">Organizational Chart</h2></div>
 					<div className="grid_item">
 						<div className="input_m_div text_right">
-							<button className="btn_submit cursor_pointer"><span className="file_i"></span> <small>Export</small></button>
+							<button onClick={printPDF} className="btn_submit cursor_pointer"><span className="file_i"></span> <small>Export</small></button>
 						</div>
 					</div>
 				</div>
 				{/*DATA ARRAY MAPPING*/}
-				<div className="d_grid m_t_30" style={{ gridTemplateColumns: '22% 22% 22% 22%' , gap: '8% 3.6%', marginBottom: '8%' }}>
+				<div id="organ_hdr_comp"  className="d_grid m_t_30" style={{ gridTemplateColumns: '22% 22% 22% 22%' , gap: '8% 4%', marginBottom: '30px', padding: '0 20px', }}>
 		         	<div className="grid_item cursor_pointer">
 			         	<div className={`future_forsight_card card text_center ${selectBox == 'change_employe' ? 'selected' : ''}`} onClick={() => setSelectBox('change_employe')}>
 			         		<h1><b>{noEmploye}</b></h1>
@@ -100,7 +137,7 @@ export default function Comp ({nameId}) {
 					</div> : ''
 				}
 				{/*CREATING TREE NODE*/}
-				<div className="m_t_25"><TreeNode nameId={nameId} apiParam="organ_chart_tree"/></div>
+				<div className="m_t_25"><TreeNode nameId={nameId} apiParam="organ_chart_tree" props={props} /></div>
 		    </div>
 		</>
 	)
