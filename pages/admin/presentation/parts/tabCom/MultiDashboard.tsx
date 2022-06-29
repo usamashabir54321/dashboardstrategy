@@ -32,7 +32,7 @@ export default function Comp ({setTabComp,proId,props}) {
 									obj.cat_with_names.map(function (obj2,indx2) {
 										return (
 											<div key={indx2}>
-												<h3 style={{ color:'white',margin: '30px 0px 0px' }}>{obj2.name}</h3>
+												<h4 style={{ color:'white',margin: '30px 0px 0px' }}>{obj2.name}</h4>
 												<MultiMainSubPart nameId={obj2.id} />
 											</div>
 										)

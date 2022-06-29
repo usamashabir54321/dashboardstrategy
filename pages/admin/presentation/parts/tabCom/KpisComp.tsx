@@ -26,14 +26,19 @@ export default function Comp ({setTabComp,proId,props}) {
 				{
 					dataArr.map(function (obj,indx) {
 						return (
-							obj.cat_with_names.map(function (obj2,indx2) {
-								return (
-									<div key={indx2}>
-										<h3 className="text_center" style={{ color:'white',margin: '30px 0px' }}>{obj2.name}</h3>
-										<KpiSubPart nameId={obj2.id} />
-									</div>
-								)
-							})
+							<div key={indx}>
+								<h3 className="text_center" style={{ color:'white',margin: '30px 0px 10px' }}>{obj.name}</h3>
+								{
+									obj.cat_with_names.map(function (obj2,indx2) {
+										return (
+											<div key={indx2}>
+												<h4 style={{ color:'white',margin: '30px 0px' }}>{obj2.name}</h4>
+												<KpiSubPart nameId={obj2.id} />
+											</div>
+										)
+									})
+								}
+							</div>
 						)
 					})
 				}

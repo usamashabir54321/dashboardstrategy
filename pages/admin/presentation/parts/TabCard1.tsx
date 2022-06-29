@@ -19,6 +19,7 @@ export default function Part ({nextComp,proId,props}) {
 	}
 	const setThisTab = (payload) => {
 		setTabComp(payload);
+		document.getElementById('present_main_wrapper').focus();
 	};
 	return (
 		<>

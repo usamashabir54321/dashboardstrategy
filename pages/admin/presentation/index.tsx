@@ -20,6 +20,7 @@ export default function SubPage (props) {
 		if (!getCookie('auth_token')) router.push('/login');
 		else if (!PresentProId) router.push('/admin/view-project');
 		document.body.style.backgroundColor = "#303030";
+		document.getElementById('present_main_wrapper').focus();
 	},[]);
 	function NowComp () {
 		switch(selectComp) {
@@ -36,14 +37,38 @@ export default function SubPage (props) {
 	}
 	const setComp = (payload) => {
 		setNowComp(payload);
+		document.getElementById('present_main_wrapper').focus();
+	};
+	const handleKeyDown = (event) => {
+		if (event.key === 'ArrowLeft') {
+			console.log('ArrowLeft');
+			if (selectComp == 'Startup') router.push('/admin/view-project');
+			else if (selectComp == 'StartPresentation') setNowComp('Startup');
+			else if (selectComp == 'DbsIntro') setNowComp('StartPresentation');
+			else if (selectComp == 'TabCard1') setNowComp('DbsIntro');
+			else if (selectComp == 'TabCard2') setNowComp('TabCard1');
+			else if (selectComp == 'TabCard3') setNowComp('TabCard2');
+			else if (selectComp == 'Desclaimer') setNowComp('TabCard3');
+			else if (selectComp == 'ContactUs') setNowComp('Desclaimer');
+		} else if (event.key === 'ArrowRight') {
+			console.log('ArrowRight');
+			if (selectComp == 'Startup') setNowComp('StartPresentation');
+			else if (selectComp == 'StartPresentation') setNowComp('DbsIntro');
+			else if (selectComp == 'DbsIntro') setNowComp('TabCard1');
+			else if (selectComp == 'TabCard1') setNowComp('TabCard2');
+			else if (selectComp == 'TabCard2') setNowComp('TabCard3');
+			else if (selectComp == 'TabCard3') setNowComp('Desclaimer');
+			else if (selectComp == 'Desclaimer') setNowComp('ContactUs');
+			else if (selectComp == 'ContactUs') setNowComp('ContactUs');
+		}
 	};
 	return (
-		<>
+		<div tabIndex={0} onKeyDown={handleKeyDown} id="present_main_wrapper">
 			<props.Head>
 				<title>Admin Project Presentation | Dashboard Strategy</title>
 				<meta name="Admin Project Presentation" content="Admin Project Presentation,Dashboard Strategy" />
 			</props.Head>
 			{NowComp()}
-		</>
+		</div>
 	)
 };
